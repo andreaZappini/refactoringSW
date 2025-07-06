@@ -1,0 +1,3 @@
+Introduo questo package per rispettare il SINGLE RESPONSABILITY PRINCIPLE e per aumentare la separazione tra logica di presentazione e di
+dominio.
+Ho usato i principi di Polimorfismo di GRASP e la chain of responsability per gestire gli utenti
