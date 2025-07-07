@@ -109,14 +109,14 @@ import printer.FormatterRegister;
         }
 
         private static void visualizzaPianoVisite() {
-            String pianoVisite = GestoreVisite.getInstance().visiteDisponibili();
+            String pianoVisite = FormatterRegister.print(GestoreVisite.getInstance().visiteDisponibili());
             CLI.stampaMessaggio("piano visite: \n\n");    
             CLI.stampaMessaggio(pianoVisite);
         }
 
         private static void prenotaVisita(Fruitore f) {
 
-            String pianoViste = GestoreVisite.getInstance().visitePrenotabili();
+            String pianoViste = FormatterRegister.print(GestoreVisite.getInstance().visitePrenotabili());
             CLI.stampaMessaggio("visite diponibili per la prenotazione: \n\n");
             CLI.stampaMessaggio(pianoViste);
             

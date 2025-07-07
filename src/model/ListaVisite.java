@@ -31,12 +31,4 @@ public class ListaVisite {
     public void setVisite(Elenco<Visita> visite) {
         this.visite = visite;
     }
-
-    public String pulisciVisite() {
-        StringBuffer s = new StringBuffer();
-        for(Visita v : visite.getElenco().values()){
-            s.append(v.toString() + "\n");
-        }
-        return s.toString();
-    }
 }

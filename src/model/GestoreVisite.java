@@ -121,37 +121,27 @@ public class GestoreVisite {
         }
     }
 
-    public String visiteDisponibili(){
-        StringBuffer sb = new StringBuffer();
+    public Elenco<Visita> visiteDisponibili(){
+        Elenco<Visita> visiteDisponibili = new Elenco<>();
         for (Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
             StatiVisita stato = v.getStato();
             if(stato == StatiVisita.VISITA_PROPOSTA||
-                stato == StatiVisita.VISITA_CONFERMATA){
-                sb.append("CODICE" + v.toString() + "\n");
-                sb.append("\t-" + v.getTipo().getTitolo() + "\n");
-                sb.append("\t-" + v.getTipo().getDescrizione() + "\n");
-                sb.append("\t-" + v.getTipo().getPuntoIncontro() + "\n");
-                sb.append("\t-" + v.getDataVisita() + "\n");
-                sb.append("\t-" + v.getTipo().getOraInizio() + "\n");
-                sb.append("\t-" + "biglietto necessario: " + v.getTipo().getBigliettoNecessario() + "\n");
-            }else if(stato == StatiVisita.VISITA_CANCELLATA){
-                sb.append("visita cancellata: " + v.toString() + "\n");
-                sb.append("\t-" + v.getTipo().getTitolo() + "\n");
-                sb.append("\t-" + "data prevista della visita: " + v.getDataVisita() + "\n");
-            }
+                stato == StatiVisita.VISITA_CONFERMATA ||
+                stato == StatiVisita.VISITA_CANCELLATA)
+                visiteDisponibili.aggiungi(v);
         }
-        return sb.toString();
+        return visiteDisponibili;
     }
 
-    public String visitePrenotabili(){
-        StringBuffer sb = new StringBuffer();
+    public Elenco<Visita> visitePrenotabili(){
+        Elenco<Visita> visitePrenotabili = new Elenco<>();
         for (Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
             StatiVisita stato = v.getStato();
             if(stato == StatiVisita.VISITA_PROPOSTA){
-                sb.append(v.toString() + "\n");
+                visitePrenotabili.aggiungi(v);
             }
         }
-        return sb.toString();
+        return visitePrenotabili;
     }
 
     public void rimuoviViistePassateFruitore(){

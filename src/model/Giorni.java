@@ -3,7 +3,6 @@ package model;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
 import java.util.Locale;
 
 public enum Giorni {
@@ -56,12 +55,6 @@ public enum Giorni {
             default:
                 throw new IllegalArgumentException("Giorno non valido: " + giornoDellaSettimana);
         }
-    }
-
-    public static boolean equalsGiorno1(ArrayList<Giorni> giorni, LocalDate giorno, Volontario v) {
-
-
-        return false;
     }
 
     public static boolean equals(Giorni gg, LocalDate d){
