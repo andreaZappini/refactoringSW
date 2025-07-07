@@ -9,4 +9,7 @@ controlla perche non va piu la gestione visite
 
 
 -----------------------------------------------------------------------------------------------------
-trovare un modo per avere il metodo visualizza tolto dalle classi e metterlo nella classe formattazione
+trovare un modo per avere il metodo visualizza tolto dalle classi e metterlo nella classe formattazione --> fatto(package printer)
+implementa logica di transizione tra gli stati -->
+sistema tutti gli errori relativi allo stato -->
+

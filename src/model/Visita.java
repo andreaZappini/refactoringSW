@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+import model.stato.VisitaProponibile;
 import model.stato.StatiVisita;
 
 public class Visita {
@@ -55,8 +56,8 @@ public class Visita {
         return tipo;
     }
 
-    public void cambiaStato(StatiVisita stato) {
-        this.stato = stato;
+    public void aggiornaStato() {
+        (this.stato).gestisciTransizione(this);
     }
 
     public HashMap<Fruitore, Integer> getIscrizioni() {
@@ -87,8 +88,7 @@ public class Visita {
             int numPersonePrecedenti = iscrizioni.get(fruitore);
             iscritti -= numPersonePrecedenti;
             iscrizioni.remove(fruitore);
-            if(stato == StatiVisita.VISITA_COMPLETA)
-                cambiaStato(StatiVisita.VISITA_PROPOSTA);
+            (this.stato).gestisciTransizione(this);
         }else
             throw new IllegalArgumentException("Non sei iscritto a questa visita");
     }

@@ -19,7 +19,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 
-import model.stato.StatiVisita;
+import model.stato.St;
 
 public class XMLUtilities {
     
@@ -69,7 +69,7 @@ public class XMLUtilities {
             Element visitaElem = (Element) visiteNodes.item(j);
 
             LocalDate data = LocalDate.parse(visitaElem.getElementsByTagName("dataVisita").item(0).getTextContent());
-            StatiVisita stato = StatiVisita.valueOf(visitaElem.getElementsByTagName("stato").item(0).getTextContent());
+            St stato = St.valueOf(visitaElem.getElementsByTagName("stato").item(0).getTextContent());
             String tipoElem = visitaElem.getElementsByTagName("tipo").item(0).getTextContent();
             TipoVisita tipo = elencoTV.getElementByKey(tipoElem);
 
@@ -338,7 +338,7 @@ public class XMLUtilities {
         for (int i = 0; i < listaVisiteNodes.getLength(); i++) {
             Element listaVisiteElem = (Element) listaVisiteNodes.item(i);
 
-            StatiVisita stato = StatiVisita.valueOf(listaVisiteElem.getElementsByTagName("stato").item(0).getTextContent());
+            St stato = St.valueOf(listaVisiteElem.getElementsByTagName("stato").item(0).getTextContent());
             LocalDate data = LocalDate.parse(listaVisiteElem.getElementsByTagName("dataVisita").item(0).getTextContent());
             String tipoElem = listaVisiteElem.getElementsByTagName("tipo").item(0).getTextContent();
             TipoVisita tipo = elencoTV.getElementByKey(tipoElem);

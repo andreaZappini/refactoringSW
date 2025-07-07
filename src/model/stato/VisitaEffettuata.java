@@ -10,5 +10,17 @@ public class VisitaEffettuata implements StatiVisita {
         // Ad esempio, potresti aggiornare lo stato della visita o eseguire altre operazioni necessarie
         throw new UnsupportedOperationException("Unimplemented method 'gestisciTransizione'");
     }
+
+    @Override
+    public void setStato(StatiVisita stato) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setStato'");
+    }
+
+    @Override
+    public String getNomeStato() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNomeStato'");
+    }
     
 }

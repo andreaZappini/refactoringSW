@@ -63,7 +63,7 @@ public class GestoreVisite {
             Elenco<Visita> copia = new Elenco<>();
     
             for (Visita v : visiteOriginali.getElenco().values()) {
-                v.cambiaStato(StatiVisita.VISITA_PROPOSTA);
+                v.aggiornaStato();
                 copia.aggiungi(v);
             }
     
@@ -74,62 +74,69 @@ public class GestoreVisite {
         }
     }
 
-
     public void aggiornaStato(){
-
-        for(Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
-            switch(v.getStato()) {
-
-                case VISITA_CANCELLATA:
-                    DatiCondivisi.getVisite().getElementByKey("0").getVisite().rimuovi(v);
-                    break;
-
-                case VISITA_CONFERMATA:
-                    if(v.getDataVisita().isBefore(GestioneTempo.getInstance().getDataCorrente())){
-                        v.cambiaStato(StatiVisita.VISITA_EFFETTUATA);
-                        DatiCondivisi.aggiungiVisitaArchivio(v);
-                    }
-                    break;
-
-                case VISITA_COMPLETA:
-                    if(GestioneTempo.getInstance().getDataCorrente().equals(v.getDataVisita().minusDays(3)))
-                        v.cambiaStato(StatiVisita.VISITA_CONFERMATA);
-                    break;
-
-                case VISITA_EFFETTUATA:
-
-                    break;
-                case VISITA_PROPOSTA:
-                
-                    if(GestioneTempo.getInstance().getDataCorrente().equals(v.getDataVisita().minusDays(3))){
-
-                        if(v.getIscritti() < v.getMinPartecipanti())
-                            v.cambiaStato(StatiVisita.VISITA_CANCELLATA);
-                        
-                        else
-                            v.cambiaStato(StatiVisita.VISITA_CONFERMATA);
-                    }
-                    if(v.getMaxPartecipanti() == v.getIscritti())
-                        v.cambiaStato(StatiVisita.VISITA_COMPLETA);
-                    
-                case VISITA_PROPONIBILE:
-                
-                    // Se la visita è ancora proponibile, non facciamo nulla
-                    break;
-                default:
-                    throw new IllegalStateException("Stato visita non gestito: " + v.getStato());
-                
-            }
-        }
+        for(Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values())
+            v.aggiornaStato();
     }
+
+
+    // public void aggiornaStato(){
+
+    //     for(Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
+    //         switch(v.getStato()) {
+
+    //             case VISITA_CANCELLATA:
+    //                 DatiCondivisi.getVisite().getElementByKey("0").getVisite().rimuovi(v);
+    //                 break;
+
+    //             case VISITA_CONFERMATA:
+    //                 if(v.getDataVisita().isBefore(GestioneTempo.getInstance().getDataCorrente())){
+    //                     v.cambiaStato(St.VISITA_EFFETTUATA);
+    //                     DatiCondivisi.aggiungiVisitaArchivio(v);
+    //                 }
+    //                 break;
+
+    //             case VISITA_COMPLETA:
+    //                 if(GestioneTempo.getInstance().getDataCorrente().equals(v.getDataVisita().minusDays(3)))
+    //                     v.cambiaStato(St.VISITA_CONFERMATA);
+    //                 break;
+
+    //             case VISITA_EFFETTUATA:
+
+    //                 break;
+    //             case VISITA_PROPOSTA:
+                
+    //                 if(GestioneTempo.getInstance().getDataCorrente().equals(v.getDataVisita().minusDays(3))){
+
+    //                     if(v.getIscritti() < v.getMinPartecipanti())
+    //                         v.cambiaStato(St.VISITA_CANCELLATA);
+                        
+    //                     else
+    //                         v.cambiaStato(St.VISITA_CONFERMATA);
+    //                 }
+    //                 if(v.getMaxPartecipanti() == v.getIscritti())
+    //                     v.cambiaStato(St.VISITA_COMPLETA);
+                    
+    //             case VISITA_PROPONIBILE:
+                
+    //                 // Se la visita è ancora proponibile, non facciamo nulla
+    //                 break;
+    //             default:
+    //                 throw new IllegalStateException("Stato visita non gestito: " + v.getStato());
+                
+    //         }
+    //     }
+    // }
+
+
 
     public Elenco<Visita> visiteDisponibili(){
         Elenco<Visita> visiteDisponibili = new Elenco<>();
         for (Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
-            StatiVisita stato = v.getStato();
-            if(stato == StatiVisita.VISITA_PROPOSTA||
-                stato == StatiVisita.VISITA_CONFERMATA ||
-                stato == StatiVisita.VISITA_CANCELLATA)
+            St stato = v.getStato();
+            if(stato == St.VISITA_PROPOSTA||
+                stato == St.VISITA_CONFERMATA ||
+                stato == St.VISITA_CANCELLATA)
                 visiteDisponibili.aggiungi(v);
         }
         return visiteDisponibili;
@@ -138,8 +145,8 @@ public class GestoreVisite {
     public Elenco<Visita> visitePrenotabili(){
         Elenco<Visita> visitePrenotabili = new Elenco<>();
         for (Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
-            StatiVisita stato = v.getStato();
-            if(stato == StatiVisita.VISITA_PROPOSTA){
+            St stato = v.getStato();
+            if(stato == St.VISITA_PROPOSTA){
                 visitePrenotabili.aggiungi(v);
             }
         }
