@@ -1,7 +1,5 @@
 package model;
 
-import model.stato.StatiVisita;
-
 public class GestoreFruitori {
     
     private static final GestoreFruitori instance = new GestoreFruitori();
@@ -37,9 +35,9 @@ public class GestoreFruitori {
         try{
             Visita visita = DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElementByKey(codiceVisita);
                     
-            if(visita.getStato() == VisitaProposta.class){
-            visita.aggiungiIscrizione(fruitore, numPersone);
-            fruitore.aggiungiPrenotazione(visita);
+            if(visita.getStato().isPrenotabile()) {
+                visita.aggiungiIscrizione(fruitore, numPersone);
+                fruitore.aggiungiPrenotazione(visita);
         }
         }catch(IllegalArgumentException e){
             throw e;

@@ -56,6 +56,10 @@ public class Visita {
         return tipo;
     }
 
+    public void setStato(StatiVisita stato) {
+        this.stato = stato;
+    }
+
     public void aggiornaStato() {
         (this.stato).gestisciTransizione(this);
     }

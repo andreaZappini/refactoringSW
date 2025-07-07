@@ -1,25 +1,33 @@
 package model.stato;
 
+import model.DatiCondivisi;
+import model.Fruitore;
+import model.GestioneTempo;
 import model.Visita;
 
 public class VisitaConfermata implements StatiVisita {
 
     @Override
     public void gestisciTransizione(Visita visita) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'gestisciTransizione'");
+        if(visita.getDataVisita().isBefore(GestioneTempo.getInstance().getDataCorrente())) {
+            visita.setStato(new VisitaEffettuata());
+            DatiCondivisi.aggiungiVisitaArchivio(visita);
+        }
     }
 
     @Override
-    public void setStato(StatiVisita stato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setStato'");
+    public String toString() {
+
+        return "CONFERMATA";
+    }
+        
+    @Override
+    public void prenota(Visita visita, Fruitore fruitore, int numPersone){
+        throw new IllegalStateException("Non è possibile prenotare una visita già confermata");
     }
 
     @Override
-    public String getNomeStato() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNomeStato'");
+    public boolean isDisponibile() {
+        return true;
     }
-    
 }

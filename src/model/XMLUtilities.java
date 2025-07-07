@@ -19,7 +19,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 
-import model.stato.St;
+import model.stato.*;
 
 public class XMLUtilities {
     
@@ -48,54 +48,73 @@ public class XMLUtilities {
         return elenco;
     }
 
-   public static Elenco<ListaVisite> leggiListaVisiteXML(File file, Elenco<TipoVisita> elencoTV, Elenco<Fruitore> elencoF) throws Exception {
-    Elenco<ListaVisite> elenco = new Elenco<>();
+    public static Elenco<ListaVisite> leggiListaVisiteXML(File file, Elenco<TipoVisita> elencoTV, Elenco<Fruitore> elencoF) throws Exception {
+        Elenco<ListaVisite> elenco = new Elenco<>();
 
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.parse(file);
-    doc.getDocumentElement().normalize();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(file);
+        doc.getDocumentElement().normalize();
 
-    NodeList listaVisiteNodes = doc.getElementsByTagName("ListaVisite");
+        NodeList listaVisiteNodes = doc.getElementsByTagName("ListaVisite");
 
-    for (int i = 0; i < listaVisiteNodes.getLength(); i++) {
-        Element listaVisiteElem = (Element) listaVisiteNodes.item(i);
+        for (int i = 0; i < listaVisiteNodes.getLength(); i++) {
+            Element listaVisiteElem = (Element) listaVisiteNodes.item(i);
 
-        String chiave = listaVisiteElem.getElementsByTagName("chiave").item(0).getTextContent();
-        ListaVisite listaVisite = new ListaVisite(chiave);
+            String chiave = listaVisiteElem.getElementsByTagName("chiave").item(0).getTextContent();
+            ListaVisite listaVisite = new ListaVisite(chiave);
 
-        NodeList visiteNodes = ((Element) listaVisiteElem.getElementsByTagName("visite").item(0)).getElementsByTagName("visita");
-        for (int j = 0; j < visiteNodes.getLength(); j++) {
-            Element visitaElem = (Element) visiteNodes.item(j);
+            NodeList visiteNodes = ((Element) listaVisiteElem.getElementsByTagName("visite").item(0)).getElementsByTagName("visita");
+            for (int j = 0; j < visiteNodes.getLength(); j++) {
+                Element visitaElem = (Element) visiteNodes.item(j);
 
-            LocalDate data = LocalDate.parse(visitaElem.getElementsByTagName("dataVisita").item(0).getTextContent());
-            St stato = St.valueOf(visitaElem.getElementsByTagName("stato").item(0).getTextContent());
-            String tipoElem = visitaElem.getElementsByTagName("tipo").item(0).getTextContent();
-            TipoVisita tipo = elencoTV.getElementByKey(tipoElem);
+                LocalDate data = LocalDate.parse(visitaElem.getElementsByTagName("dataVisita").item(0).getTextContent());
+                StatiVisita stato = creaStato(visitaElem.getElementsByTagName("stato").item(0).getTextContent());
+                String tipoElem = visitaElem.getElementsByTagName("tipo").item(0).getTextContent();
+                TipoVisita tipo = elencoTV.getElementByKey(tipoElem);
 
-            int iscritti = Integer.parseInt(visitaElem.getElementsByTagName("iscritti").item(0).getTextContent());
-            HashMap<Fruitore, Integer> iscrizioni = new HashMap<>();
+                int iscritti = Integer.parseInt(visitaElem.getElementsByTagName("iscritti").item(0).getTextContent());
+                HashMap<Fruitore, Integer> iscrizioni = new HashMap<>();
 
-            NodeList iscrizioniNodes = ((Element) visitaElem.getElementsByTagName("iscrizioni").item(0)).getElementsByTagName("iscrizione");
-            for (int k = 0; k < iscrizioniNodes.getLength(); k++) {
-                Element iscrizioneElem = (Element) iscrizioniNodes.item(k);
+                NodeList iscrizioniNodes = ((Element) visitaElem.getElementsByTagName("iscrizioni").item(0)).getElementsByTagName("iscrizione");
+                for (int k = 0; k < iscrizioniNodes.getLength(); k++) {
+                    Element iscrizioneElem = (Element) iscrizioniNodes.item(k);
 
-                String fruitoreStr = iscrizioneElem.getElementsByTagName("fruitore").item(0).getTextContent();
-                String numStr = iscrizioneElem.getElementsByTagName("numPersone").item(0).getTextContent();
+                    String fruitoreStr = iscrizioneElem.getElementsByTagName("fruitore").item(0).getTextContent();
+                    String numStr = iscrizioneElem.getElementsByTagName("numPersone").item(0).getTextContent();
 
-                Fruitore f = elencoF.getElementByKey(fruitoreStr);
-                iscrizioni.put(f, Integer.parseInt(numStr));
+                    Fruitore f = elencoF.getElementByKey(fruitoreStr);
+                    iscrizioni.put(f, Integer.parseInt(numStr));
+                }
+
+                Visita visita = new Visita(data, tipo, stato, iscrizioni, iscritti);
+                listaVisite.aggiungiVisita(visita);
             }
 
-            Visita visita = new Visita(data, tipo, stato, iscrizioni, iscritti);
-            listaVisite.aggiungiVisita(visita);
+            elenco.aggiungi(listaVisite);
         }
 
-        elenco.aggiungi(listaVisite);
+        return elenco;
     }
 
-    return elenco;
-}
+    private static StatiVisita creaStato(String stato) {
+        switch (stato) {
+            case "PROPONIBILE":
+                return new VisitaProponibile();
+            case "PROPOSTA":
+                return new VisitaProposta();
+            case "CONFERMATA":
+                return new VisitaConfermata();
+            case "CANCELLATA":
+                return new VisitaCancellata();
+            case "EFFETTUATA":
+                return new VisitaEffettuata();
+            case "COMPLETA":
+                return new VisitaCompleta();
+            default:
+                throw new IllegalArgumentException("Stato di visita sconosciuto: " + stato);
+        }
+    }
 
     
 
@@ -338,7 +357,7 @@ public class XMLUtilities {
         for (int i = 0; i < listaVisiteNodes.getLength(); i++) {
             Element listaVisiteElem = (Element) listaVisiteNodes.item(i);
 
-            St stato = St.valueOf(listaVisiteElem.getElementsByTagName("stato").item(0).getTextContent());
+            StatiVisita stato = creaStato(listaVisiteElem.getElementsByTagName("stato").item(0).getTextContent());
             LocalDate data = LocalDate.parse(listaVisiteElem.getElementsByTagName("dataVisita").item(0).getTextContent());
             String tipoElem = listaVisiteElem.getElementsByTagName("tipo").item(0).getTextContent();
             TipoVisita tipo = elencoTV.getElementByKey(tipoElem);

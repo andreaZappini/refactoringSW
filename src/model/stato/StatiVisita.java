@@ -1,5 +1,6 @@
 package model.stato;
 
+import model.Fruitore;
 import model.Visita;
 
 //classe per implementare il pattern State
@@ -18,7 +19,15 @@ import model.Visita;
 
 public interface StatiVisita {
 
-    void gestisciTransizione(Visita visita);
-    void setStato(StatiVisita stato);
-    String getNomeStato();
+    default void gestisciTransizione(Visita visita){/*non fa nulla di default */};
+    String toString();
+    void prenota(Visita visita, Fruitore fruitore, int numPersone);
+    
+    default boolean isPrenotabile() {
+        return false; 
+    }
+
+    default boolean isDisponibile() {
+        return false;
+    }
 }

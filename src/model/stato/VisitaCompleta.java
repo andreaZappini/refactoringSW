@@ -1,27 +1,27 @@
 package model.stato;
 
+import model.Fruitore;
+import model.GestioneTempo;
 import model.Visita;
 
 public class VisitaCompleta implements StatiVisita {
 
     @Override
     public void gestisciTransizione(Visita visita) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'gestisciTransizione'");
+        if(GestioneTempo.getInstance().getDataCorrente().equals(visita.getDataVisita().minusDays(3)))
+            visita.setStato(new VisitaConfermata());
     }
 
     @Override
-    public void setStato(StatiVisita stato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setStato'");
+    public String toString() {
+       
+        return "COMPLETA";
     }
 
     @Override
-    public String getNomeStato() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNomeStato'");
-    }
+    public void prenota(Visita visita, Fruitore fruitore, int numPersone){
+        throw new IllegalStateException("Non è possibile prenotare una visita completa");
 
-   
+    }
     
 }

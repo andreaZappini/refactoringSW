@@ -1,26 +1,18 @@
 package model.stato;
 
+import model.Fruitore;
 import model.Visita;
 
 public class VisitaProponibile implements StatiVisita {
 
     @Override
-    public void gestisciTransizione(Visita visita) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'gestisciTransizione'");
+    public String toString() {
+
+        return "PROPONIBILE";
     }
 
     @Override
-    public void setStato(StatiVisita stato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setStato'");
+    public void prenota(Visita visita, Fruitore fruitore, int numPersone){
+        throw new IllegalStateException("Non è possibile prenotare una visita proponibile");
     }
-
-    @Override
-    public String getNomeStato() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNomeStato'");
-    }
-
-    
 }

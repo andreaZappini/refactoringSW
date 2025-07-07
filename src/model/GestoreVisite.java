@@ -2,8 +2,6 @@ package model;
 
 import java.time.LocalDate;
 
-import model.stato.StatiVisita;
-
 public class GestoreVisite {
 
     private static final GestoreVisite instance = new GestoreVisite();
@@ -133,11 +131,10 @@ public class GestoreVisite {
     public Elenco<Visita> visiteDisponibili(){
         Elenco<Visita> visiteDisponibili = new Elenco<>();
         for (Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
-            St stato = v.getStato();
-            if(stato == St.VISITA_PROPOSTA||
-                stato == St.VISITA_CONFERMATA ||
-                stato == St.VISITA_CANCELLATA)
+
+            if(v.getStato().isDisponibile()){
                 visiteDisponibili.aggiungi(v);
+            }
         }
         return visiteDisponibili;
     }
@@ -145,8 +142,8 @@ public class GestoreVisite {
     public Elenco<Visita> visitePrenotabili(){
         Elenco<Visita> visitePrenotabili = new Elenco<>();
         for (Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
-            St stato = v.getStato();
-            if(stato == St.VISITA_PROPOSTA){
+
+            if(v.getStato().isPrenotabile()){
                 visitePrenotabili.aggiungi(v);
             }
         }
