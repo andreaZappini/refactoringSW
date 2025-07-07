@@ -10,6 +10,8 @@ public class VisitaCompleta implements StatiVisita {
     public void gestisciTransizione(Visita visita) {
         if(GestioneTempo.getInstance().getDataCorrente().equals(visita.getDataVisita().minusDays(3)))
             visita.setStato(new VisitaConfermata());
+        else if(visita.getIscritti() < visita.getMinPartecipanti())
+            visita.setStato(new VisitaProposta());
     }
 
     @Override
