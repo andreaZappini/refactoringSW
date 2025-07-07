@@ -19,6 +19,8 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.*;
 
+import model.stato.StatiVisita;
+
 public class XMLUtilities {
     
     public static <T> Elenco<T> leggiXML(File file, String contesto, Function<Element, T> parser) throws Exception {

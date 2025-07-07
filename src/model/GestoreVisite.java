@@ -2,6 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
+import model.stato.StatiVisita;
+
 public class GestoreVisite {
 
     private static final GestoreVisite instance = new GestoreVisite();

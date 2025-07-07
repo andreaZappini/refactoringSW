@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+import model.stato.StatiVisita;
+
 public class Visita {
     
     private StatiVisita stato;
@@ -13,7 +15,7 @@ public class Visita {
 
     //costruttore per creazione visita runtime
     public Visita(LocalDate dataVisita, TipoVisita tipo) {
-        this.stato = StatiVisita.VISITA_PROPONIBILE;
+        this.stato = new VisitaProponibile();
         this.dataVisita = dataVisita;   
         this.tipo = tipo;
         this.iscrizioni = new HashMap<Fruitore, Integer>();
