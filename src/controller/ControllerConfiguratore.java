@@ -247,8 +247,7 @@ public class ControllerConfiguratore {
 
     private void cambiaNumeroMassimoIscritti(){
         try {
-            int numeroMassimoIscrittiFruitore = CLI.sceltaInt("nuovo numero massimo di iscritti per fruitore -> ");
-            configuratore.setNumeroMassimoIscrittiFruitore(numeroMassimoIscrittiFruitore);
+            int numeroMassimoIscrittiFruitore = InputValidator.readInt("nuovo numero massimo di iscritti per fruitore -> ");            configuratore.setNumeroMassimoIscrittiFruitore(numeroMassimoIscrittiFruitore);
         } catch (Exception e) {
             CLI.stampaMessaggio(e.toString());
             return;
@@ -270,27 +269,19 @@ public class ControllerConfiguratore {
     public void primaConfigurazione() {
         try {
             String[] datiCorpoDati = CLI.creaCorpoDati();
-            do{
-                if(datiCorpoDati[0] == null || datiCorpoDati[0].isEmpty()){
-                    CLI.stampaMessaggio("devi inserire un valore valido per l'ambito territoriale");
-                    datiCorpoDati[0] = CLI.sceltaString("inserisci l'ambito territoriale: ");
-                }
-                else
-                    DatiCondivisi.setAmbitoTerritoriale(datiCorpoDati[0]);
-            }while(datiCorpoDati[0] == null || datiCorpoDati[0].isEmpty());
-            boolean ok = false;
-            do{
-                try{
-                    DatiCondivisi.setNumeroMassimoIscrittiFruitore(Integer.parseInt(datiCorpoDati[1]));
-                    ok = true;
-                }catch(NumberFormatException e){
-                    CLI.stampaMessaggio("devi inserire un numero intero per il numero massimo di fruitori");
-                    datiCorpoDati[1] = CLI.sceltaString("inserisci il numero massimo di fruitori: ");
-                    ok = false;
-                }
-            }while(!ok);
-        
-            DatiCondivisi.setNumeroMassimoIscrittiFruitore(Integer.parseInt(datiCorpoDati[1]));
+            String ambito = datiCorpoDati[0];
+            if(ambito == null || ambito.isEmpty()) {
+                ambito = InputValidator.readNonEmptyString("inserisci l'ambito territoriale: ");
+            }
+            DatiCondivisi.setAmbitoTerritoriale(ambito);
+
+            int numeroMassimo;
+            try {
+                numeroMassimo = Integer.parseInt(datiCorpoDati[1]);
+            } catch (NumberFormatException e) {
+                numeroMassimo = InputValidator.readInt("inserisci il numero massimo di fruitori: ");
+            }
+            DatiCondivisi.setNumeroMassimoIscrittiFruitore(numeroMassimo);
             creaLuogo();
         } catch (Exception e) {
             CLI.stampaMessaggio(e.toString());
@@ -374,35 +365,21 @@ public class ControllerConfiguratore {
 
             for(int i = 0; i < datiLuogo.length; i++){
                 if(datiLuogo[i] == null || datiLuogo[i].isEmpty()){
-                    do{
-                        datiLuogo[i] = CLI.sceltaString(CREAZIONE_VISITA[i]);
-                    }while(datiLuogo[i] == null || datiLuogo[i].isEmpty());
+                    datiLuogo[i] = InputValidator.readNonEmptyString(CREAZIONE_VISITA[i]);
                 }
                 if(i == 5 || i == 7 || i == 8){
-                    boolean ok = false;
-                    do{
-                        try{
-                            Integer.parseInt(datiLuogo[i]);
-                            ok = true;
-                        }catch(NumberFormatException e){
-                            ok = false;
-                            CLI.stampaMessaggio("devi inserire un numero intero per " + CREAZIONE_VISITA[i]);
-                            datiLuogo[i] = CLI.sceltaString(CREAZIONE_VISITA[i]);
-                        }
-                    }while(!ok);
+                    try{
+                        Integer.parseInt(datiLuogo[i]);
+                    }catch(NumberFormatException e){
+                        datiLuogo[i] = String.valueOf(InputValidator.readInt(CREAZIONE_VISITA[i]));
+                    }
                 }
                 if(i == 4){
-                    boolean ok = false;
-                    do{
-                        try{
-                            Double.parseDouble(datiLuogo[i]);
-                            ok = true;
-                        }catch(NumberFormatException e){
-                            ok = false;
-                            CLI.stampaMessaggio("devi inserire un numero con virgola per " + CREAZIONE_VISITA[i]);
-                            datiLuogo[i] = CLI.sceltaString(CREAZIONE_VISITA[i]);
-                        }
-                    }while(!ok);
+                    try{
+                        Double.parseDouble(datiLuogo[i]);
+                    }catch(NumberFormatException e){
+                        datiLuogo[i] = String.valueOf(InputValidator.readDouble(CREAZIONE_VISITA[i]));
+                    }
                 }
             }
             String titolo = datiLuogo[0];

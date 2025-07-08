@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import model.*;
 import printer.FormatterRegister;
 import view.CLI;
+import view.InputValidator;
 
 public class ControllerExtra {
 
@@ -128,35 +129,21 @@ public class ControllerExtra {
             
             for(int i = 0; i < datiLuogo.length; i++){
                 if(datiLuogo[i] == null || datiLuogo[i].isEmpty()){
-                    do{
-                        datiLuogo[i] = CLI.sceltaString(CREAZIONE_VISITA[i]);
-                    }while(datiLuogo[i] == null || datiLuogo[i].isEmpty());
+                    datiLuogo[i] = InputValidator.readNonEmptyString(CREAZIONE_VISITA[i]);
                 }
                 if(i == 5 || i == 7 || i == 8){
-                    boolean ok = false;
-                    do{
-                        try{
-                            Integer.parseInt(datiLuogo[i]);
-                            ok = true;
-                        }catch(NumberFormatException e){
-                            ok = false;
-                            CLI.stampaMessaggio("devi inserire un numero intero per " + CREAZIONE_VISITA[i]);
-                            datiLuogo[i] = CLI.sceltaString(CREAZIONE_VISITA[i]);
-                        }
-                    }while(!ok);
+                    try{
+                        Integer.parseInt(datiLuogo[i]);
+                    }catch(NumberFormatException e){
+                        datiLuogo[i] = String.valueOf(InputValidator.readInt(CREAZIONE_VISITA[i]));
+                    }
                 }
                 if(i == 4){
-                    boolean ok = false;
-                    do{
-                        try{
-                            Double.parseDouble(datiLuogo[i]);
-                            ok = true;
-                        }catch(NumberFormatException e){
-                            ok = false;
-                            CLI.stampaMessaggio("devi inserire un numero con virgola per " + CREAZIONE_VISITA[i]);
-                            datiLuogo[i] = CLI.sceltaString(CREAZIONE_VISITA[i]);
-                        }
-                    }while(!ok);
+                    try{
+                        Double.parseDouble(datiLuogo[i]);
+                    }catch(NumberFormatException e){
+                        datiLuogo[i] = String.valueOf(InputValidator.readDouble(CREAZIONE_VISITA[i]));
+                    }
                 }
             }
             String titolo = datiLuogo[0];
