@@ -26,7 +26,7 @@ public class TipoVisitaPrinter implements Printable {
         + "Necessità del biglietto: " + t.getBigliettoNecessario() 
         + "\n(numero minimo partecipanti: " + t.getMinPartecipanti()
         + "; numero massimo partecipanti: " + t.getMaxPartecipanti() + ")\n"
-        + "L'elenco delle guide volontarie è:\n" + print(t.getElencoVolontari());
+        + "L'elenco delle guide volontarie è:\n" + FormatterRegister.print(t.getElencoVolontari());
     }
 
     // Additional methods can be added here if needed
