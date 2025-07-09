@@ -27,15 +27,12 @@ public class Controller{
         }else{
 
             RipristinoDati.primoConfiguratore();
-            System.out.println(DatiCondivisi.getElencoUtenti().numeroElementi());
             boolean primoAccesso = true;
             Utente x = null;
             while(primoAccesso){
                 String[] datiUtente = view.login();
                 String username = datiUtente[0];
                 String password = datiUtente[1];
-
-                System.out.println(DatiCondivisi.getElencoUtenti().getElementByKey(username));
               
                 if(!DatiCondivisi.getElencoUtenti().contiene(username)){
                     view.stampaMessaggio("utente non trovato");

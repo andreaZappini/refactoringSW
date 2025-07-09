@@ -19,7 +19,6 @@ public class Main {
 
         FormatterSetup.setup();
         boolean primaConfigurazione = RipristinoDati.datiRipristino();
-        System.out.println(primaConfigurazione);
         if(primaConfigurazione)
             DatiCondivisi.setDataUltimaEsecuzione(LocalDate.of(2025, 4, 30));
         

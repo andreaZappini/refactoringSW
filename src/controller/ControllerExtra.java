@@ -247,7 +247,6 @@ public class ControllerExtra {
             view.stampaMessaggio("Titolo del tipo di visita a cui aggiungere il volontario: ");
             String titolo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
             TipoVisita t = DatiCondivisi.getElencoTipiVisita().getElementByKey(titolo);
-                //System.out.println("visita -> " + t.toString());
             aggiungiVolontario(t);
         }catch (IllegalArgumentException e){
             view.stampaMessaggio("stato tipo visita: " + e.getMessage());

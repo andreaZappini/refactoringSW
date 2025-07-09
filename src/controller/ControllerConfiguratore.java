@@ -167,7 +167,6 @@ public class ControllerConfiguratore {
 
     public void visualizzaStatoVisite() {
         try {
-            System.out.println(DatiCondivisi.getVisite().numeroElementi());
             view.stampaMessaggio("Ecco le visite disponibili:");
             for (ListaVisite lv : DatiCondivisi.getVisite().getElenco().values()) {
                 for (Visita v : lv.getVisite().getElenco().values()) {
@@ -188,7 +187,6 @@ public class ControllerConfiguratore {
             } else {
                 view.stampaMessaggio("disponibilita gia aperta");
             }
-            System.out.println(DatiCondivisi.getRaccoltaDisponibilitaMese2());
         } catch (Exception e) {
            view.stampaMessaggio(e.toString());
             return;
