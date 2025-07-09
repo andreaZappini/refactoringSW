@@ -1,5 +1,5 @@
 package controller;
-import view.CLI;
+import view.IView;
 
 
 import model.*;
@@ -7,13 +7,15 @@ import printer.FormatterRegister;
 
     public class ControllerFruitore {
 
-        private static final String AZIONI_FRUITORE_ACCCESSO =  "\n----------------------------------------------------------------------------------------------"
+        private final IView view;
+
+        private final String AZIONI_FRUITORE_ACCCESSO =  "\n----------------------------------------------------------------------------------------------"
                 + "\nBenvenuto Fruitore! Scegli una delle seguenti alternative: \n\n" +
                 "1. Accedi\n" +
                 "2. Registrati\n" +
                 "3. Esci\n" +
                 "--> ";
-        private static final String AZIONI_FRUITORE =  "\n----------------------------------------------------------------------------------------------"
+        private final String AZIONI_FRUITORE =  "\n----------------------------------------------------------------------------------------------"
                 + "\nBenvenuto Fruitore! Scegli una delle seguenti alternative: \n\n" +
                 "1. visualizza piano visite\n" +
                 "2. Prenota visita\n" +
@@ -21,15 +23,20 @@ import printer.FormatterRegister;
                 "4. Annulla prenotazione\n" +
                 "5. Esci\n" +
                 "--> ";
-        public static void start() throws Exception{
+
+        public ControllerFruitore(IView view) {
+            this.view = view;
+        }
+
+        public void start() throws Exception{
             boolean continua = true;
             while(continua){
-                int scelta = CLI.sceltaInt(AZIONI_FRUITORE_ACCCESSO);
+                int scelta = view.sceltaInt(AZIONI_FRUITORE_ACCCESSO);
                 continua = loginFruitore(scelta);
             }
         }
 
-        private static boolean loginFruitore(int scelta) throws Exception {
+        private boolean loginFruitore(int scelta) throws Exception {
             switch(scelta){
                 case 1:
                     login();
@@ -44,31 +51,31 @@ import printer.FormatterRegister;
             return true;
         }
 
-        private static void login() throws Exception {
-            String[] datiUtente = CLI.login();
+        private void login() throws Exception {
+            String[] datiUtente = view.login();
             String username = datiUtente[0];
             String password = datiUtente[1];
 
             Fruitore f = (Fruitore) DatiCondivisi.getElencoUtenti().getElementByKey(username);
             if(f == null || !(f instanceof Fruitore))
-                CLI.stampaMessaggio("utente non trovato");
+                view.stampaMessaggio("utente non trovato");
             
             else if(!f.controllaPassword(password))
-                CLI.stampaMessaggio("password errata");
+                view.stampaMessaggio("password errata");
 
             else{
-                CLI.stampaMessaggio("accesso consentito");
+                view.stampaMessaggio("accesso consentito");
                 azioniPrenotazione(f);
             }
         }
 
-        private static void signin(){
+        private void signin(){
 
             String username = "";
             String password_1 = "";
             String password_2 = "";
             do{
-                String[] datiUtente = CLI.signin();
+                String[] datiUtente = view.signin();
                 username = datiUtente[0];
                 password_1 = datiUtente[1];
                 password_2 = datiUtente[2];
@@ -76,17 +83,17 @@ import printer.FormatterRegister;
             try{
 
                 if(DatiCondivisi.getElencoUtenti().getElementByKey(username) != null)
-                CLI.stampaMessaggio("utente gia' registrato");
+                view.stampaMessaggio("utente gia' registrato");
             }catch(IllegalArgumentException e){
 
                 GestoreFruitori.getInstance().aggiungiFruitore(username, password_1);
             }
         }
 
-        private static void azioniPrenotazione(Fruitore f) throws Exception {
+        private void azioniPrenotazione(Fruitore f) throws Exception {
             boolean continua = true;
             while(continua){
-                int scelta = CLI.sceltaInt(AZIONI_FRUITORE);
+                int scelta = view.sceltaInt(AZIONI_FRUITORE);
                 switch(scelta){
                     case 1:
                         visualizzaPianoVisite();
@@ -108,39 +115,39 @@ import printer.FormatterRegister;
             }   
         }
 
-        private static void visualizzaPianoVisite() {
+        private void visualizzaPianoVisite() {
             String pianoVisite = FormatterRegister.print(GestoreVisite.getInstance().visiteDisponibili());
-            CLI.stampaMessaggio("piano visite: \n\n");    
-            CLI.stampaMessaggio(pianoVisite);
+            view.stampaMessaggio("piano visite: \n\n");    
+            view.stampaMessaggio(pianoVisite);
         }
 
-        private static void prenotaVisita(Fruitore f) {
+        private void prenotaVisita(Fruitore f) {
 
             String pianoViste = FormatterRegister.print(GestoreVisite.getInstance().visitePrenotabili());
-            CLI.stampaMessaggio("visite diponibili per la prenotazione: \n\n");
-            CLI.stampaMessaggio(pianoViste);
+            view.stampaMessaggio("visite diponibili per la prenotazione: \n\n");
+            view.stampaMessaggio(pianoViste);
             
-            String[] datiPrenotazione = CLI.prenotaVisita();
+            String[] datiPrenotazione = view.prenotaVisita();
             try{
                 GestoreFruitori.getInstance().prenotaVisita(f, datiPrenotazione);
-                CLI.stampaMessaggio("prenotazione effettuata con successo");
+                view.stampaMessaggio("prenotazione effettuata con successo");
             }catch(IllegalArgumentException e){
-                CLI.stampaMessaggio("prenotazione non riuscita" + e.getMessage());
+                view.stampaMessaggio("prenotazione non riuscita" + e.getMessage());
             }
         }
-        private static void visualizzaPrenotazioni(Fruitore f) {
-            CLI.stampaMessaggio("visite prenotate: \n\n");
+        private void visualizzaPrenotazioni(Fruitore f) {
+            view.stampaMessaggio("visite prenotate: \n\n");
             String prenotazioni = FormatterRegister.print(f.getPrenotazioniVisite());
-            CLI.stampaMessaggio(prenotazioni);
+            view.stampaMessaggio(prenotazioni);
         }
-        private static void annullaPrenotazione(Fruitore f) {
-            CLI.stampaMessaggio(FormatterRegister.print(f.getPrenotazioniVisite()));
-            String codiceVisita = CLI.sceltaString("inserire il codice della visita da annullare: ");
+        private void annullaPrenotazione(Fruitore f) {
+            view.stampaMessaggio(FormatterRegister.print(f.getPrenotazioniVisite()));
+            String codiceVisita = view.sceltaString("inserire il codice della visita da annullare: ");
             try{
                 GestoreFruitori.getInstance().annullaPrenotazione(f, codiceVisita);
-                CLI.stampaMessaggio("annullamento effettuato con successo");
+                view.stampaMessaggio("annullamento effettuato con successo");
             }catch(IllegalArgumentException e){
-                CLI.stampaMessaggio("annullamento non riuscito" + e.getMessage());
+                view.stampaMessaggio("annullamento non riuscito" + e.getMessage());
             }
         }
     }

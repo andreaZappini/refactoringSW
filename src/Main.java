@@ -10,6 +10,8 @@ import model.GestioneTempo;
 import model.GestoreVisite;
 import model.RipristinoDati;
 import printer.FormatterSetup;
+import view.CLI;
+import view.IView;
 
 public class Main {
     
@@ -38,9 +40,9 @@ public class Main {
             }, 0, 1, TimeUnit.SECONDS);
         
 
-        Controller.start(primaConfigurazione);
-        // Volontario x = (Volontario)DatiCondivisi.getElencoUtenti().getElementByKey("volo1");
-        // System.err.println(x.getElencoDisponibilita().getElenco().size());
+        IView view = new CLI();
+        Controller controller = new Controller(view);
+        controller.start(primaConfigurazione);
         
         scheduler.shutdown();
     }    

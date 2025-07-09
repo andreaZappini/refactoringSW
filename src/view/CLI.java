@@ -2,15 +2,17 @@ package view;
 
 import java.util.Scanner;
 
-public class CLI {
+public class CLI implements IView {
     
-    private static Scanner in = new Scanner(System.in);
+    private final Scanner in = new Scanner(System.in);
 
-    public static void chiudiScanner(){
+    @Override
+    public void chiudiScanner(){
         in.close();
     }
 
-    public static String[] creaCorpoDati(){
+    @Override
+    public String[] creaCorpoDati(){
 
         String[] infoCorpoDati = new String[2];
 
@@ -27,7 +29,8 @@ public class CLI {
         return infoCorpoDati;
     }
 
-    public static String[] signin(){
+    @Override
+    public String[] signin(){
         String[] datiUtente = new String[3];
 
         try{
@@ -48,7 +51,8 @@ public class CLI {
     }
         
      //aggiungi metodo sign in
-    public static String[] login(){
+    @Override
+    public String[] login(){
 
         String[] datiUtente = new String[2];
 
@@ -66,7 +70,8 @@ public class CLI {
         return datiUtente;
     }
     
-    public static String[] nuovoInserimento(){
+    @Override
+    public String[] nuovoInserimento(){
 
         String[] datiUtente = new String[2];
 
@@ -81,11 +86,13 @@ public class CLI {
         return datiUtente;
     }
 
-    public static void stampaMessaggio(String msg){
+    @Override
+    public void stampaMessaggio(String msg){
         System.out.println(msg);
     }
 
-    public static String cambiaPassword(){
+    @Override
+    public String cambiaPassword(){
         String password = null;
         try{
             System.out.printf("Indicare la nuova password: ");
@@ -96,8 +103,9 @@ public class CLI {
         	return null;
         }
     }
-
-    public static int sceltaInt(String msg){
+    
+    @Override
+    public int sceltaInt(String msg){
         
         int scelta = 0;
 
@@ -110,7 +118,8 @@ public class CLI {
         return scelta;
     }
 
-    public static String sceltaString(String msg){
+    @Override
+    public String sceltaString(String msg){
         
         String scelta = null;
 
@@ -123,7 +132,8 @@ public class CLI {
         return scelta;
     }
 
-    public static String[] messaggioCreazione(String[] msg){
+    @Override
+    public String[] messaggioCreazione(String[] msg){
         String[] res = new String[msg.length];
         for(int i = 0; i < msg.length; i++){
             System.out.printf(msg[i]);
@@ -132,7 +142,8 @@ public class CLI {
         return res;
     }
 
-    public static String[] creaUtente(String str) {
+    @Override
+    public String[] creaUtente(String str) {
         
         
         String[] datiUtente = new String[2];
@@ -151,7 +162,8 @@ public class CLI {
         return datiUtente;
     }
 
-    public static String[] prenotaVisita(){
+    @Override    
+    public String[] prenotaVisita(){
         String[] datiVisita = new String[2];
 
         try{

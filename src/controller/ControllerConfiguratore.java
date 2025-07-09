@@ -12,6 +12,8 @@ public class ControllerConfiguratore {
     private Configuratore configuratore;
     private boolean chiudiApp = true;
 
+    private final IView view;
+
     private static final String AZIONI_CONFIGURATORE = 
         "\n----------------------------------------------------------------------------------------------"
         + "\nBenvenuto Configuratore! Scegli una delle seguenti alternative: \n\n" +
@@ -49,20 +51,21 @@ public class ControllerConfiguratore {
         "- Numero massimo di partecipanti: "
     };
 
-    public ControllerConfiguratore(Configuratore conf) {
+    public ControllerConfiguratore(Configuratore conf, IView view) {
         this.configuratore = conf;
+        this.view = view;
     }
 
     public boolean start() {
         try {
             boolean continua = true;
             while (continua) {
-                int scelta = CLI.sceltaInt(AZIONI_CONFIGURATORE);
+                int scelta = view.sceltaInt(AZIONI_CONFIGURATORE);
                 continua = azioniConfiguratore(scelta);
             }
             return chiudiApp;
         } catch (Exception e) {
-           CLI.stampaMessaggio(e.toString());
+           view.stampaMessaggio(e.toString());
             return false;
         }
     }
@@ -84,7 +87,7 @@ public class ControllerConfiguratore {
                 visualizzaVolontari();
                 break;
             case 5:
-                CLI.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+                view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
                 break;
             case 6:
                 visualizzaVisiteLuogo();
@@ -94,10 +97,10 @@ public class ControllerConfiguratore {
                 break;
             case 8:
                 if(DatiCondivisi.getRaccoltaDisponibilitaMese1() == DatiCondivisi.StatiRaccoltaDisponibilita.CHIUSA){
-                    ControllerExtra controllerExtra = new ControllerExtra(configuratore);
+                    ControllerExtra controllerExtra = new ControllerExtra(configuratore, view);
                     controllerExtra.start();
                 } else {
-                    CLI.stampaMessaggio("impossibile accedere a questa funzionalita" +
+                    view.stampaMessaggio("impossibile accedere a questa funzionalita" +
                     "(non è possibile apportare modifiche con la raccolta disponibilita aperta)");
                 }
                 break;
@@ -127,22 +130,22 @@ public class ControllerConfiguratore {
     }
 
     private void visualizzaArchivio(){
-        CLI.stampaMessaggio("Ecco l'archivio delle visite:");
-        CLI.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getArchivio()));
+        view.stampaMessaggio("Ecco l'archivio delle visite:");
+        view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getArchivio()));
     }
 
     private void chiudiDiponibilitaMese1(){
         try {
             if(DatiCondivisi.getRaccoltaDisponibilitaMese1() == DatiCondivisi.StatiRaccoltaDisponibilita.APERTA){
                 
-                CLI.stampaMessaggio("chiusura disponibilita per il mese successivo al prossimo avvenuta con successo");
+                view.stampaMessaggio("chiusura disponibilita per il mese successivo al prossimo avvenuta con successo");
                 DatiCondivisi.setIntervalloPianoVisite(GestoreVisite.getInstance().intervallo());
                 DatiCondivisi.chiudiRaccoltaDisponibilitaMese1();
             } else {
-                CLI.stampaMessaggio("disponibilita gia chiusa");
+                view.stampaMessaggio("disponibilita gia chiusa");
             }
         } catch (Exception e) {
-           CLI.stampaMessaggio(e.toString());
+           view.stampaMessaggio(e.toString());
             return;
         }
     }
@@ -150,14 +153,14 @@ public class ControllerConfiguratore {
     private void creaPianoVisite(){
         try{
             if(DatiCondivisi.getRaccoltaDisponibilitaMese1() == DatiCondivisi.StatiRaccoltaDisponibilita.CHIUSA){
-                CLI.stampaMessaggio("creazione piano visite avvenuta con successo");
+                view.stampaMessaggio("creazione piano visite avvenuta con successo");
                 LocalDate[] intervallo = DatiCondivisi.getIntervalloPianoVisite();
                 GestoreVisite.getInstance().creaPianoViste(intervallo[0], intervallo[1]);
             } else {
-                CLI.stampaMessaggio("ancora possibile la raccolta delle disponibilita da perte dei volontari");
+                view.stampaMessaggio("ancora possibile la raccolta delle disponibilita da perte dei volontari");
             }
         }catch(Exception e){
-            CLI.stampaMessaggio(e.getMessage());
+            view.stampaMessaggio(e.getMessage());
             return;
         }
     }
@@ -165,14 +168,14 @@ public class ControllerConfiguratore {
     public void visualizzaStatoVisite() {
         try {
             System.out.println(DatiCondivisi.getVisite().numeroElementi());
-            CLI.stampaMessaggio("Ecco le visite disponibili:");
+            view.stampaMessaggio("Ecco le visite disponibili:");
             for (ListaVisite lv : DatiCondivisi.getVisite().getElenco().values()) {
                 for (Visita v : lv.getVisite().getElenco().values()) {
                     System.out.println("    Visita -> " + v.getDataVisita() + ", " + v.getTipo() + ", Stato: " + v.getStato());
                 }
             }
         } catch (IllegalArgumentException e) {
-            CLI.stampaMessaggio(e.getMessage());
+            view.stampaMessaggio(e.getMessage());
             return;
         }
     }
@@ -180,26 +183,26 @@ public class ControllerConfiguratore {
     private void apriDipsonibilitaMese2(){
         try {
             if(DatiCondivisi.getRaccoltaDisponibilitaMese2() == DatiCondivisi.StatiRaccoltaDisponibilita.CHIUSA){
-                CLI.stampaMessaggio("apertura raccolta disponibilita per il mese successivo al prossimo avvenuta con successo");
+                view.stampaMessaggio("apertura raccolta disponibilita per il mese successivo al prossimo avvenuta con successo");
                 DatiCondivisi.apriRaccoltaDisponibilitaMese2();
             } else {
-                CLI.stampaMessaggio("disponibilita gia aperta");
+                view.stampaMessaggio("disponibilita gia aperta");
             }
             System.out.println(DatiCondivisi.getRaccoltaDisponibilitaMese2());
         } catch (Exception e) {
-           CLI.stampaMessaggio(e.toString());
+           view.stampaMessaggio(e.toString());
             return;
         }
     }
 
     private void visualizzaVolontari() {
         try {
-            CLI.stampaMessaggio("Ecco i volontari disponibili:");
+            view.stampaMessaggio("Ecco i volontari disponibili:");
             for(Volontario v : DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class).getElenco().values()){
-                CLI.stampaMessaggio(FormatterRegister.print(v));
+                view.stampaMessaggio(FormatterRegister.print(v));
             }
         } catch (Exception e) {
-           CLI.stampaMessaggio(e.toString());
+           view.stampaMessaggio(e.toString());
             return;
         }
     }
@@ -208,25 +211,25 @@ public class ControllerConfiguratore {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             LocalDate data = GestioneTempo.getInstance().getDataCorrente();
-            CLI.stampaMessaggio(data.format(formatter));
+            view.stampaMessaggio(data.format(formatter));
             LocalDate[] intervallo = GestioneTempo.getInstance().intervalloDate(3);
-            CLI.stampaMessaggio("intervallo da " + intervallo[0].format(formatter) + " a " + intervallo[1].format(formatter));
-            CLI.stampaMessaggio("scegli le date da precludere(solo il numero del giorno per il prossimo mese)");
+            view.stampaMessaggio("intervallo da " + intervallo[0].format(formatter) + " a " + intervallo[1].format(formatter));
+            view.stampaMessaggio("scegli le date da precludere(solo il numero del giorno per il prossimo mese)");
             String s = "null";
             while(!s.equals("x")){
-                s = CLI.sceltaString("scegli un giorno: (x per uscire)");
+                s = view.sceltaString("scegli un giorno: (x per uscire)");
                 if(!s.equals("x")){
                     int giorno = Integer.parseInt(s);
                     LocalDate dataGiorno = GestioneTempo.contieneGiorno(intervallo[0],intervallo[1],giorno);
                     if(dataGiorno != null){
                         configuratore.aggiungiDatePrecluse(dataGiorno);
                     } else {
-                        CLI.stampaMessaggio("giorno non valido");
+                        view.stampaMessaggio("giorno non valido");
                     }
                 }
             }
         } catch (Exception e) {
-           CLI.stampaMessaggio(e.toString());
+           view.stampaMessaggio(e.toString());
             return;
         }
     }
@@ -235,11 +238,11 @@ public class ControllerConfiguratore {
         boolean ok = false;
         while(!ok){
             try {
-                String[] dati = CLI.creaUtente("configuratore");
+                String[] dati = view.creaUtente("configuratore");
                 configuratore.creaConfiguratore(dati);
                 ok = true;
             } catch (Exception e) {
-                CLI.stampaMessaggio(e.getMessage());
+                view.stampaMessaggio(e.getMessage());
                 ok = false;
             }
         }
@@ -249,26 +252,26 @@ public class ControllerConfiguratore {
         try {
             int numeroMassimoIscrittiFruitore = InputValidator.readInt("nuovo numero massimo di iscritti per fruitore -> ");            configuratore.setNumeroMassimoIscrittiFruitore(numeroMassimoIscrittiFruitore);
         } catch (Exception e) {
-            CLI.stampaMessaggio(e.toString());
+            view.stampaMessaggio(e.toString());
             return;
         }
     }
 
     private void visualizzaVisiteLuogo() {
         try {
-            CLI.stampaMessaggio("Ecco i luoghi disponibili:");
-            CLI.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
-            String scelta = CLI.sceltaString("Scegli il luogo -> ");
-            CLI.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi().getElementByKey(scelta)));
+            view.stampaMessaggio("Ecco i luoghi disponibili:");
+            view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+            String scelta = view.sceltaString("Scegli il luogo -> ");
+            view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi().getElementByKey(scelta)));
         } catch (Exception e) {
-           CLI.stampaMessaggio(e.toString());
+           view.stampaMessaggio(e.toString());
             return;
         }
     }
 
     public void primaConfigurazione() {
         try {
-            String[] datiCorpoDati = CLI.creaCorpoDati();
+            String[] datiCorpoDati = view.creaCorpoDati();
             String ambito = datiCorpoDati[0];
             if(ambito == null || ambito.isEmpty()) {
                 ambito = InputValidator.readNonEmptyString("inserisci l'ambito territoriale: ");
@@ -284,7 +287,7 @@ public class ControllerConfiguratore {
             DatiCondivisi.setNumeroMassimoIscrittiFruitore(numeroMassimo);
             creaLuogo();
         } catch (Exception e) {
-            CLI.stampaMessaggio(e.toString());
+            view.stampaMessaggio(e.toString());
             return;
         }
     }
@@ -292,31 +295,31 @@ public class ControllerConfiguratore {
     private void creaLuogo(){
         try {
             if(DatiCondivisi.getElencoTipiVisita().getElenco().size() == 0){
-                CLI.stampaMessaggio("prima deve esistere almeno un tipo di visita");
+                view.stampaMessaggio("prima deve esistere almeno un tipo di visita");
                 creaTipoVisita();
             }
-            CLI.stampaMessaggio("creazione di un nuovo luogo visitabile\n\n");
-            String[] datiLuogo = CLI.messaggioCreazione(CREAZIONE_LUOGO);
+            view.stampaMessaggio("creazione di un nuovo luogo visitabile\n\n");
+            String[] datiLuogo = view.messaggioCreazione(CREAZIONE_LUOGO);
             Luogo l = configuratore.creaLuogo(datiLuogo);
             String s = null;
             do {
-                CLI.stampaMessaggio("scegli un tipo di visita: (x per uscire)");
-                s = CLI.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
+                view.stampaMessaggio("scegli un tipo di visita: (x per uscire)");
+                s = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
                 if(!s.equals("x")){
                     try{
                         l.getElencoVisite().aggiungi(DatiCondivisi.getElencoTipiVisita().getElementByKey(s));
                         DatiCondivisi.getElencoTipiVisita().getElementByKey(s).aggiungiLuogo(l);
                     }catch(IllegalArgumentException e){
-                        CLI.stampaMessaggio(e.getMessage());
+                        view.stampaMessaggio(e.getMessage());
                     }
                 }
                 if(l.getElencoVisite().numeroElementi() == 0){
-                    CLI.stampaMessaggio("deve esserci almeno un tipo di visita");
+                    view.stampaMessaggio("deve esserci almeno un tipo di visita");
                     s = "";
                 }
             } while(!s.equals("x") || l.getElencoVisite().numeroElementi() == 0);
         } catch (Exception e) {
-           CLI.stampaMessaggio(e.toString());
+           view.stampaMessaggio(e.toString());
             return;
         }
     }
@@ -324,41 +327,41 @@ public class ControllerConfiguratore {
     private void creaTipoVisita(){
         try {
             if(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class).getElenco().size() == 0){
-                CLI.stampaMessaggio("prima deve esserci almeno un volontario");
+                view.stampaMessaggio("prima deve esserci almeno un volontario");
                 creaVolontario();
             }
-            CLI.stampaMessaggio("creazione di un nuovo tipo di visita\n\n");
-            String[] datiLuogo = CLI.messaggioCreazione(CREAZIONE_VISITA);
+            view.stampaMessaggio("creazione di un nuovo tipo di visita\n\n");
+            String[] datiLuogo = view.messaggioCreazione(CREAZIONE_VISITA);
             ArrayList<Giorni> giorniDisponibili = new ArrayList<>();
             String s = null;
             do {
-                s = CLI.sceltaString("inserisci un giorno: (x per uscire)");
+                s = view.sceltaString("inserisci un giorno: (x per uscire)");
                 if(!s.equals("x")){
                     try{
                         giorniDisponibili.add(Giorni.fromString(s.toLowerCase()));
                     } catch (IllegalArgumentException e) {
-                        CLI.stampaMessaggio(e.getMessage());
+                        view.stampaMessaggio(e.getMessage());
                     }
                 }
                 if(giorniDisponibili.isEmpty()){
-                    CLI.stampaMessaggio("deve esserci almeno un giorno");
+                    view.stampaMessaggio("deve esserci almeno un giorno");
                     s = "";
                 }
             } while(!s.equals("x") || giorniDisponibili.isEmpty());
             Elenco<Volontario> elencoV = new Elenco<>();
             s = null;
             do {
-                CLI.stampaMessaggio("scegli volontario: (x per uscire)");
-                s = CLI.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
+                view.stampaMessaggio("scegli volontario: (x per uscire)");
+                s = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
                 if(!s.equals("x")){
                     try{
                         elencoV.aggiungi((Volontario)DatiCondivisi.getElencoUtenti().getElementByKey(s));
                     }catch (IllegalArgumentException e) {
-                        CLI.stampaMessaggio(e.getMessage());
+                        view.stampaMessaggio(e.getMessage());
                     }
                 }
                 if(elencoV.numeroElementi() == 0){
-                    CLI.stampaMessaggio("deve esserci almeno un volontario");
+                    view.stampaMessaggio("deve esserci almeno un volontario");
                     s = "";
                 }
             } while(!s.equals("x") || elencoV.numeroElementi() == 0);
@@ -394,17 +397,17 @@ public class ControllerConfiguratore {
 
             if(minPartecipanti < 0){
                 minPartecipanti = 1;
-                CLI.stampaMessaggio("numero minimo di partecipanti non può essere negativo, impostato a 1");
+                view.stampaMessaggio("numero minimo di partecipanti non può essere negativo, impostato a 1");
             }
 
             if(maxPartecipanti < minPartecipanti){
                 maxPartecipanti = minPartecipanti + 1;
-                CLI.stampaMessaggio("numero massimo di partecipanti non può essere minore del minimo, impostato a " + maxPartecipanti);
+                view.stampaMessaggio("numero massimo di partecipanti non può essere minore del minimo, impostato a " + maxPartecipanti);
             }
 
             if(!bigliettoNecessario.equalsIgnoreCase("s") && !bigliettoNecessario.equalsIgnoreCase("n")){
                 bigliettoNecessario = "N";
-                CLI.stampaMessaggio("biglietto necessario deve essere S o N, impostato a N");
+                view.stampaMessaggio("biglietto necessario deve essere S o N, impostato a N");
             }
            
             configuratore.creaTipoVisita(titolo, descrizione, puntoIncontro, periodoAnno, giorniDisponibili, oraInizio, durata, bigliettoNecessario, minPartecipanti, maxPartecipanti);
@@ -414,7 +417,7 @@ public class ControllerConfiguratore {
                 v.aggiungiVolontario(volo);
             }
         } catch (Exception e) {
-            CLI.stampaMessaggio(e.toString());
+            view.stampaMessaggio(e.toString());
             return;
         }
     }
@@ -423,11 +426,11 @@ public class ControllerConfiguratore {
         boolean ok = false;
         while(!ok){
             try {
-                String[] dati = CLI.creaUtente("volontario");
+                String[] dati = view.creaUtente("volontario");
                 configuratore.creaVolontario(dati);
                 ok = true;
             } catch (Exception e) {
-               CLI.stampaMessaggio(e.getMessage());
+               view.stampaMessaggio(e.getMessage());
                 ok = false;
             }
         }

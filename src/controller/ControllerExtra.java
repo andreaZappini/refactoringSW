@@ -4,15 +4,18 @@ import java.util.ArrayList;
 
 import model.*;
 import printer.FormatterRegister;
-import view.CLI;
+import view.IView;
 import view.InputValidator;
 
 public class ControllerExtra {
 
+    private final IView view;
+
     private Configuratore configuratore;
 
-    public ControllerExtra(Configuratore configuratore) {
+    public ControllerExtra(Configuratore configuratore, IView view) {
         this.configuratore = configuratore;
+        this.view = view;
     }
 
     private static final String AZIONI_EXTRA = 
@@ -48,7 +51,7 @@ public class ControllerExtra {
     public void start() {
         boolean continua = true;
         while(continua){
-            int scelta = CLI.sceltaInt(AZIONI_EXTRA);
+            int scelta = view.sceltaInt(AZIONI_EXTRA);
             continua = azioniExtraConfiguratore(scelta);
         }
     }
@@ -86,38 +89,38 @@ public class ControllerExtra {
 
     private void rimuoviVolontario(){
         try{            
-            CLI.stampaMessaggio("Volontario da rimuovere: ");
-            String username = CLI.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
+            view.stampaMessaggio("Volontario da rimuovere: ");
+            String username = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
             Volontario v = (Volontario)DatiCondivisi.getElencoUtenti().getElementByKey(username);
             configuratore.rimuoviVolontario(v);
         }catch(IllegalArgumentException e){
-            CLI.stampaMessaggio("stato volontario: " + e.getMessage());
+            view.stampaMessaggio("stato volontario: " + e.getMessage());
             return;
         }
     }
 
     private void rimuoviLuogo() {
         try{
-            CLI.stampaMessaggio("Luogo da rimuovere: ");
-            String codiceLuogo = CLI.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+            view.stampaMessaggio("Luogo da rimuovere: ");
+            String codiceLuogo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
             Luogo l = DatiCondivisi.getElencoLuoghi().getElementByKey(codiceLuogo);
             configuratore.rimuoviLuogo(l);
         }catch(IllegalArgumentException e){
-            CLI.stampaMessaggio("stato luogo: " + e.getMessage());
+            view.stampaMessaggio("stato luogo: " + e.getMessage());
             return;
         }
     }
     private void rimuoviTipoVisitaDaLuogo() {
         try{
-            CLI.stampaMessaggio("che luogo scegli a cui rimuovere il tipo di visita: ");
-            String codiceLuogo = CLI.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+            view.stampaMessaggio("che luogo scegli a cui rimuovere il tipo di visita: ");
+            String codiceLuogo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
             Luogo l = DatiCondivisi.getElencoLuoghi().getElementByKey(codiceLuogo);
-            CLI.stampaMessaggio("che tipo di visita vuoi rimuovere: "); 
-            String titolo = CLI.sceltaString(FormatterRegister.print(l.getElencoVisite()));
+            view.stampaMessaggio("che tipo di visita vuoi rimuovere: "); 
+            String titolo = view.sceltaString(FormatterRegister.print(l.getElencoVisite()));
             TipoVisita t = l.getElencoVisite().getElementByKey(titolo);
             configuratore.rimuoviTipoVisitaDaLuogo(l, t);
         }catch(IllegalArgumentException e){
-            CLI.stampaMessaggio(e.getMessage());
+            view.stampaMessaggio(e.getMessage());
             return;
         }
     }
@@ -125,7 +128,7 @@ public class ControllerExtra {
     private void aggiungiTipoVisita(){
 
         try{
-            String[] datiLuogo = CLI.messaggioCreazione(CREAZIONE_VISITA);
+            String[] datiLuogo = view.messaggioCreazione(CREAZIONE_VISITA);
             
             for(int i = 0; i < datiLuogo.length; i++){
                 if(datiLuogo[i] == null || datiLuogo[i].isEmpty()){
@@ -158,31 +161,31 @@ public class ControllerExtra {
                         
             if(minPartecipanti < 0){
                 minPartecipanti = 1;
-                CLI.stampaMessaggio("numero minimo di partecipanti non può essere negativo, impostato a 1");
+                view.stampaMessaggio("numero minimo di partecipanti non può essere negativo, impostato a 1");
             }
 
             if(maxPartecipanti < minPartecipanti){
                 maxPartecipanti = minPartecipanti + 1;
-                CLI.stampaMessaggio("numero massimo di partecipanti non può essere minore del minimo, impostato a " + maxPartecipanti);
+                view.stampaMessaggio("numero massimo di partecipanti non può essere minore del minimo, impostato a " + maxPartecipanti);
             }
 
             if(!bigliettoNecessario.equalsIgnoreCase("s") && !bigliettoNecessario.equalsIgnoreCase("n")){
                 bigliettoNecessario = "N";
-                CLI.stampaMessaggio("biglietto necessario deve essere S o N, impostato a N");
+                view.stampaMessaggio("biglietto necessario deve essere S o N, impostato a N");
             }
             ArrayList<Giorni> giorniDisponibili = new ArrayList<>();
             String s = null;
             do {
-                s = CLI.sceltaString("inserisci un giorno: (x per uscire)");
+                s = view.sceltaString("inserisci un giorno: (x per uscire)");
                 if(!s.equals("x")){
                     try{
                         giorniDisponibili.add(Giorni.fromString(s.toLowerCase()));
                     } catch (IllegalArgumentException e) {
-                        CLI.stampaMessaggio(e.getMessage());
+                        view.stampaMessaggio(e.getMessage());
                     }
                 }
                 if(giorniDisponibili.isEmpty()){
-                    CLI.stampaMessaggio("deve esserci almeno un giorno");
+                    view.stampaMessaggio("deve esserci almeno un giorno");
                     s = "";
                 }
             } while(!s.equals("x") || giorniDisponibili.isEmpty());
@@ -191,31 +194,31 @@ public class ControllerExtra {
             TipoVisita t = DatiCondivisi.getElencoTipiVisita().getElementByKey(titolo);
             aggiungiVolontario(t);
         }catch(IllegalArgumentException e){
-            CLI.stampaMessaggio(e.getMessage());
+            view.stampaMessaggio(e.getMessage());
             return;
         }
     }
 
     private void aggiungiLuogo() {
         try{
-            String[] datiLuogo = CLI.messaggioCreazione(CREAZIONE_LUOGO);
+            String[] datiLuogo = view.messaggioCreazione(CREAZIONE_LUOGO);
             Luogo l = configuratore.creaLuogo(datiLuogo);
     
             aggiungiVisita(l);
         }catch(IllegalArgumentException e){
-            CLI.stampaMessaggio(e.getMessage());
+            view.stampaMessaggio(e.getMessage());
             return;
         }
     }
 
     private void aggiungiTipoVisitaLuogo(){
         try{
-            CLI.stampaMessaggio("Luogo a cui aggiungere il tipo di visita: ");
-            String codiceLuogo = CLI.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+            view.stampaMessaggio("Luogo a cui aggiungere il tipo di visita: ");
+            String codiceLuogo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
             Luogo l = DatiCondivisi.getElencoLuoghi().getElementByKey(codiceLuogo);
             aggiungiVisita(l);
         }catch(IllegalArgumentException e){
-            CLI.stampaMessaggio("stato luogo: " + e.getMessage());
+            view.stampaMessaggio("stato luogo: " + e.getMessage());
             return;
         }
     }
@@ -224,8 +227,8 @@ public class ControllerExtra {
         try{
             String s = "";
             do{
-                CLI.stampaMessaggio("scegli un tipo di visita: (x per uscire)");
-                s = CLI.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
+                view.stampaMessaggio("scegli un tipo di visita: (x per uscire)");
+                s = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
                 if(s.equals("x"))
                     continue;
                 TipoVisita t = DatiCondivisi.getElencoTipiVisita().getElementByKey(s);
@@ -234,20 +237,20 @@ public class ControllerExtra {
                 aggiungiVolontario(t);
             }while(!s.equals("x"));
         }catch(IllegalArgumentException e){
-            CLI.stampaMessaggio("stato tipo visita: " + e.getMessage());
+            view.stampaMessaggio("stato tipo visita: " + e.getMessage());
             return;
         }
     }
 
     private void aggiungiVolontarioTipoVisita(){
         try{
-            CLI.stampaMessaggio("Titolo del tipo di visita a cui aggiungere il volontario: ");
-            String titolo = CLI.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
+            view.stampaMessaggio("Titolo del tipo di visita a cui aggiungere il volontario: ");
+            String titolo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
             TipoVisita t = DatiCondivisi.getElencoTipiVisita().getElementByKey(titolo);
                 //System.out.println("visita -> " + t.toString());
             aggiungiVolontario(t);
         }catch (IllegalArgumentException e){
-            CLI.stampaMessaggio("stato tipo visita: " + e.getMessage());
+            view.stampaMessaggio("stato tipo visita: " + e.getMessage());
             return;
         }
 
@@ -258,11 +261,11 @@ public class ControllerExtra {
         try{
             do{
                 Volontario v = null;
-                CLI.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
-                s = CLI.sceltaString("aggiungi volontario esistente(e) / aggiungi volontario nuovo(n) / esci(x): ");
+                view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
+                s = view.sceltaString("aggiungi volontario esistente(e) / aggiungi volontario nuovo(n) / esci(x): ");
     
                 if(s.equals("e")){
-                    String volontario = CLI.sceltaString("nome del volontasrio da aggiungere: ");
+                    String volontario = view.sceltaString("nome del volontasrio da aggiungere: ");
                     v = (Volontario)DatiCondivisi.getElencoUtenti().getElementByKey(volontario);
                 }
                 else if(s.equals("n"))
@@ -272,7 +275,7 @@ public class ControllerExtra {
                     continue;
                 
                 else{
-                    CLI.stampaMessaggio("scelta non valida");
+                    view.stampaMessaggio("scelta non valida");
                     continue;
                 }
                 if(v != null){
@@ -281,7 +284,7 @@ public class ControllerExtra {
                 }
             }while(!s.equals("x"));
         }catch(IllegalArgumentException e){
-            CLI.stampaMessaggio(e.getMessage());
+            view.stampaMessaggio(e.getMessage());
             return;
         }
     }
@@ -289,12 +292,12 @@ public class ControllerExtra {
     private Volontario creaVolontario(){
 
         try{
-            String[] dati = CLI.creaUtente("volontario");
+            String[] dati = view.creaUtente("volontario");
             configuratore.creaVolontario(dati);
     
             return (Volontario)DatiCondivisi.getElencoUtenti().getElementByKey(dati[0]);
         }catch(Exception e){
-            CLI.stampaMessaggio(e.getMessage());
+            view.stampaMessaggio(e.getMessage());
             return null;
         }
     }

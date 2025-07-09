@@ -1,18 +1,24 @@
 package controller;
 
 import model.*;
-import view.CLI;
+import view.IView;
 
 public class Controller{
     
-    private static final String CATEGORIE = "\n----------------------------------------------------------------------------------------------"
+    private final String CATEGORIE = "\n----------------------------------------------------------------------------------------------"
             + "\nBenvenuto! Scegli una delle seguenti alternative: \n\n" +
             "1. Configuratore/Volontario\n" +
             "2. Fruitore\n" +
             "--> ";
-    private static boolean working;
+    private boolean working;
 
-    public static void start(boolean primaConfigurazione) throws Exception{
+    private final IView view;
+
+    public Controller(IView view) {
+        this.view = view;
+    }
+
+    public void start(boolean primaConfigurazione) throws Exception{
         
         if(!primaConfigurazione){
 
@@ -25,83 +31,83 @@ public class Controller{
             boolean primoAccesso = true;
             Utente x = null;
             while(primoAccesso){
-                String[] datiUtente = CLI.login();
+                String[] datiUtente = view.login();
                 String username = datiUtente[0];
                 String password = datiUtente[1];
 
                 System.out.println(DatiCondivisi.getElencoUtenti().getElementByKey(username));
               
                 if(!DatiCondivisi.getElencoUtenti().contiene(username)){
-                    CLI.stampaMessaggio("utente non trovato");
+                    view.stampaMessaggio("utente non trovato");
                 }else{
                     x = DatiCondivisi.getElencoUtenti().getElementByKey(username);
                     if(x.controllaPassword(password)){
-                        CLI.stampaMessaggio("accesso consentito");
+                        view.stampaMessaggio("accesso consentito");
                         x.getPrimoAccesso();
-                        CLI.stampaMessaggio("PRIMO ACCESSO -> cambia password: ");
-                        String nuovaPassword = CLI.cambiaPassword();
+                        view.stampaMessaggio("PRIMO ACCESSO -> cambia password: ");
+                        String nuovaPassword = view.cambiaPassword();
                         x.setPassword(nuovaPassword);
                         x.setPrimoAccesso();
                         primoAccesso = false;
                     }else{
-                        CLI.stampaMessaggio("password errata");
+                        view.stampaMessaggio("password errata");
                     }
                 }
             }
-            new ControllerConfiguratore((Configuratore)x).primaConfigurazione();
+            new ControllerConfiguratore((Configuratore)x, view).primaConfigurazione();
         }
 
         working = true;
         while(working){
 
-            int classeUtente = CLI.sceltaInt(CATEGORIE);
+            int classeUtente = view.sceltaInt(CATEGORIE);
             switch(classeUtente){
                 case 1:
                     loginConfiguratoreVolontario();
                     break;
                 case 2:
-                    ControllerFruitore.start();
+                    new ControllerFruitore(view).start();;
                     break;
             }
         }
         RipristinoDati.salvataggioDati();
     }
 
-    private static boolean loginConfiguratoreVolontario() throws Exception{
+    private boolean loginConfiguratoreVolontario() throws Exception{
         Utente x;
             while(true){
-                String[] datiUtente = CLI.login();
+                String[] datiUtente = view.login();
                 String username = datiUtente[0];
                 String password = datiUtente[1];
 
 
                 if(!DatiCondivisi.getElencoUtenti().contiene(username)){
-                    CLI.stampaMessaggio("utente non trovato");
+                    view.stampaMessaggio("utente non trovato");
                 }else{
                     x = DatiCondivisi.getElencoUtenti().getElementByKey(username);
                     if(x.controllaPassword(password)){
-                        CLI.stampaMessaggio("accesso consentito");
+                        view.stampaMessaggio("accesso consentito");
                         if(x.getPrimoAccesso()){
-                            CLI.stampaMessaggio("PRIMO ACCESSO -> cambia password: ");
-                            String nuovaPassword = CLI.cambiaPassword();
+                            view.stampaMessaggio("PRIMO ACCESSO -> cambia password: ");
+                            String nuovaPassword = view.cambiaPassword();
                             x.setPassword(nuovaPassword);
                             x.setPrimoAccesso();
                         }
                         break;
                     }else{
-                        CLI.stampaMessaggio("password errata");
+                        view.stampaMessaggio("password errata");
                     }
                 }
             }
             switch(x.getClass().getSimpleName()){
                 case "Configuratore":
                     Configuratore config = (Configuratore)x;
-                    ControllerConfiguratore cc = new ControllerConfiguratore(config);
+                    ControllerConfiguratore cc = new ControllerConfiguratore(config, view);
                     working = cc.start();    
                     break;
                 case "Volontario":
                     Volontario vol = (Volontario)x;
-                    ControllerVolontario cv = new ControllerVolontario(vol);
+                    ControllerVolontario cv = new ControllerVolontario(vol, view);
                     cv.start();
                     break;
                 default:
