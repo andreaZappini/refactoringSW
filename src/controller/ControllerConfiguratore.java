@@ -170,7 +170,7 @@ public class ControllerConfiguratore {
             view.stampaMessaggio("Ecco le visite disponibili:");
             for (ListaVisite lv : DatiCondivisi.getVisite().getElenco().values()) {
                 for (Visita v : lv.getVisite().getElenco().values()) {
-                    System.out.println("    Visita -> " + v.getDataVisita() + ", " + v.getTipo() + ", Stato: " + v.getStato());
+                    view.stampaMessaggio(FormatterRegister.print(v));
                 }
             }
         } catch (IllegalArgumentException e) {

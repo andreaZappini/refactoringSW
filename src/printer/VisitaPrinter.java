@@ -85,6 +85,7 @@ public class VisitaPrinter implements Printable {
         StringBuilder sb = new StringBuilder();
         sb.append("Visita Proponibile: " + visita.getTipo().getTitolo() + "\n");
         sb.append("Data: " + visita.getDataVisita() + "\n");
+        sb.append("stato: " + visita.getStato().toString() + "\n");
 
         return sb.toString();
     }
