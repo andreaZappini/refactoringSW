@@ -6,14 +6,6 @@
     </ListaVisite>
     <ListaVisite>
         <chiave>1</chiave>
-        <visite>
-            <visita>
-                <dataVisita>2718-07-20</dataVisita>
-                <stato>PROPONIBILE</stato>
-                <tipo>t</tipo>
-                <iscritti>0</iscritti>
-                <iscrizioni/>
-            </visita>
-        </visite>
+        <visite/>
     </ListaVisite>
 </Visite>

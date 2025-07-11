@@ -51,7 +51,7 @@ public class Controller{
                     }
                 }
             }
-            new ControllerConfiguratore((Configuratore)x, view).primaConfigurazione();
+            new ConfiguratoreService((Configuratore)x, view).primaConfigurazione();
         }
 
         working = true;

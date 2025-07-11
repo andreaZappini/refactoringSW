@@ -77,57 +77,6 @@ public class GestoreVisite {
             v.aggiornaStato();
     }
 
-
-    // public void aggiornaStato(){
-
-    //     for(Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {
-    //         switch(v.getStato()) {
-
-    //             case VISITA_CANCELLATA:
-    //                 DatiCondivisi.getVisite().getElementByKey("0").getVisite().rimuovi(v);
-    //                 break;
-
-    //             case VISITA_CONFERMATA:
-    //                 if(v.getDataVisita().isBefore(GestioneTempo.getInstance().getDataCorrente())){
-    //                     v.cambiaStato(St.VISITA_EFFETTUATA);
-    //                     DatiCondivisi.aggiungiVisitaArchivio(v);
-    //                 }
-    //                 break;
-
-    //             case VISITA_COMPLETA:
-    //                 if(GestioneTempo.getInstance().getDataCorrente().equals(v.getDataVisita().minusDays(3)))
-    //                     v.cambiaStato(St.VISITA_CONFERMATA);
-    //                 break;
-
-    //             case VISITA_EFFETTUATA:
-
-    //                 break;
-    //             case VISITA_PROPOSTA:
-                
-    //                 if(GestioneTempo.getInstance().getDataCorrente().equals(v.getDataVisita().minusDays(3))){
-
-    //                     if(v.getIscritti() < v.getMinPartecipanti())
-    //                         v.cambiaStato(St.VISITA_CANCELLATA);
-                        
-    //                     else
-    //                         v.cambiaStato(St.VISITA_CONFERMATA);
-    //                 }
-    //                 if(v.getMaxPartecipanti() == v.getIscritti())
-    //                     v.cambiaStato(St.VISITA_COMPLETA);
-                    
-    //             case VISITA_PROPONIBILE:
-                
-    //                 // Se la visita è ancora proponibile, non facciamo nulla
-    //                 break;
-    //             default:
-    //                 throw new IllegalStateException("Stato visita non gestito: " + v.getStato());
-                
-    //         }
-    //     }
-    // }
-
-
-
     public Elenco<Visita> visiteDisponibili(){
         Elenco<Visita> visiteDisponibili = new Elenco<>();
         for (Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()) {

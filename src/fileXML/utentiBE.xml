@@ -5,15 +5,26 @@
         <password>1</password>
         <primoAccesso>false</primoAccesso>
     </Configuratore>
+    <Fruitore>
+        <username>andrea</username>
+        <password>1</password>
+        <primoAccesso>false</primoAccesso>
+    </Fruitore>
     <Volontario>
         <elencoTipiVisita>
             <elemento>t</elemento>
         </elencoTipiVisita>
         <elencoDisponibilita>
+            <elemento>2729-04-20</elemento>
             <elemento>2718-07-20</elemento>
         </elencoDisponibilita>
         <username>volo1</username>
         <password>1</password>
         <primoAccesso>false</primoAccesso>
     </Volontario>
+    <Configuratore>
+        <username>c2</username>
+        <password>2</password>
+        <primoAccesso>true</primoAccesso>
+    </Configuratore>
 </Utente>

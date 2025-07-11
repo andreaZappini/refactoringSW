@@ -13,4 +13,6 @@ trovare un modo per avere il metodo visualizza tolto dalle classi e metterlo nel
 implementa logica di transizione tra gli stati --> fatto(vedi se bisogna aggiungere altro)
 sistema tutti gli errori relativi allo stato --> sistemato errori segnaliati controlla bug -->
 controlla che non sia possibile disdire una prenotazione di una visita confermata
+controlla perche non si aggiorna lo stato, guarda ultima task di codex -->
+impedire di applicare un cast tra i diversi tipi di utente
 

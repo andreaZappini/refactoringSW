@@ -24,7 +24,6 @@ public class Elenco<T> {
         this.elenco.putAll(elenco.getElenco());
     }
 
-    //vedele se funge -> si funge
     @SuppressWarnings("hiding")
     public <T extends Utente> Elenco<T> getClassiUtente(Class<T> tipo) {
         Elenco<T> elencoUtenti = new Elenco<>();
@@ -53,10 +52,6 @@ public class Elenco<T> {
         return this.elenco.containsKey(chiave);
     }
 
-    // public String toStringElenco() {
-    //     return this.elenco.toString();
-    // }
-
     public T getElementByKey(String chiave) {
         if(contiene(chiave)) {
             return this.elenco.get(chiave);
@@ -64,15 +59,6 @@ public class Elenco<T> {
             throw new IllegalArgumentException("Elemento non trovato!");
         }
     }
-
-    // public String visualizza() {
-    //     StringBuffer s = new StringBuffer();
-    //     for (String key : this.elenco.keySet()) {
-    //         s.append("\t" + "- " + this.elenco.get(key).toString());
-    //         s.append("\n");
-    //     }
-    //     return s.toString();
-    // }
     
     public int numeroElementi() {
     	return this.elenco.size();
