@@ -33,6 +33,8 @@ public class Main {
         String oggi = GestioneTempo.getInstance().getDataCorrente().format(formatter);
         System.out.println("Data simulata: " + oggi);
 
+        GestioneTempo.getInstance().buchiTemporali();
+
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
             scheduler.scheduleAtFixedRate(() -> {
             GestioneTempo.getInstance().passaggioTempo();

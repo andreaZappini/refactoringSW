@@ -4,17 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import model.Configuratore;
-import model.DatiCondivisi;
-import model.Elenco;
-import model.GestioneTempo;
-import model.GestoreVisite;
-import model.Giorni;
-import model.ListaVisite;
-import model.Luogo;
-import model.TipoVisita;
-import model.Visita;
-import model.Volontario;
+import model.*;
 import printer.FormatterRegister;
 import view.IView;
 import view.InputValidator;
@@ -85,12 +75,10 @@ public class ConfiguratoreService {
 
     public void visualizzaStatoVisite() {
         try {
-            view.stampaMessaggio("Ecco le visite disponibili:");
+            view.stampaMessaggio("Ecco le visite disponibili:\n");
             for (ListaVisite lv : DatiCondivisi.getVisite().getElenco().values()) {
-                System.out.println(lv.getVisite().numeroElementi());
                 for (Visita v : lv.getVisite().getElenco().values()) {
                     view.stampaMessaggio(FormatterRegister.print(v));
-                    System.out.println("Stato: " + v.getStato().toString());
                 }
             }
         } catch (IllegalArgumentException e) {

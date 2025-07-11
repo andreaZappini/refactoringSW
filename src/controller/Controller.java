@@ -23,7 +23,6 @@ public class Controller{
         if(!primaConfigurazione){
 
             RipristinoDati.datiCondivisi();
-            GestioneTempo.getInstance().buchiTemporali();
         }else{
 
             RipristinoDati.primoConfiguratore();

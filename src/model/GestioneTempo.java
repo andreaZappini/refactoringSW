@@ -8,7 +8,7 @@ public class GestioneTempo {
 
     private static final LocalDate DATA_INIZIALE = LocalDate.of(2025, 5, 11);
     private static final Instant TEMPO_REALE_INIZIALE = Instant.parse("2025-05-11T00:00:00Z");
-    private static final long SECONDI_PER_GIORNO_SIMULATO = 20;
+    private static final long SECONDI_PER_GIORNO_SIMULATO = 5;
 
     // Singleton
     private static final GestioneTempo instance = new GestioneTempo();
@@ -83,6 +83,7 @@ public class GestioneTempo {
     }
 
     public void passaggioTempo() {
+        System.err.println("Passaggio del tempo");
         LocalDate dataCorrente = getDataCorrente();
         LocalDate inizioUltimoPeriodo = mesePartenza.atDay(16);
     
@@ -92,6 +93,7 @@ public class GestioneTempo {
             mesiTrascorsi++;
         }
         if (mesiTrascorsi > 0) {
+            System.out.println("Mesi trascorsi");
             mesePartenza = mesePartenza.plusMonths(mesiTrascorsi);
             aggiornaDatePrecluseMese(mesiTrascorsi);
             GestoreVisite.getInstance().aggiornaVisiteMese(mesiTrascorsi);
@@ -100,7 +102,7 @@ public class GestioneTempo {
             DatiCondivisi.chiudiRaccoltaDisponibilitaMese2();
         }
         GestoreVisite.getInstance().aggiornaStato();
-        
+        GestoreVisite.getInstance().rimuoviVisitePassateFruitore();
     }
 
     
