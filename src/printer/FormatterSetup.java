@@ -7,7 +7,7 @@ import model.Utente;
 import model.Visita;
 public class FormatterSetup {
     public static void setup(){
-        // Register printers for each model class
+        // Register printers per ogni classe del model
         FormatterRegister.registerPrinter(Utente.class, new UtentePrinter());
         /*
          * qui chiamo il costruttore di UtentePrinter che a sua volta contiene una mappa per le classi derivate di Utente

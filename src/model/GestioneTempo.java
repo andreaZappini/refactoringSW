@@ -34,6 +34,7 @@ public class GestioneTempo {
             conteggio++;
             inizio = inizio.plusMonths(1);
         }
+        System.out.println(conteggio + " mesi trascorsi dall'ultima esecuzione");
         if (conteggio > 0) {
             DatiCondivisi.apriRaccoltaDisponibilitaMese1();
             DatiCondivisi.chiudiRaccoltaDisponibilitaMese2();
@@ -55,22 +56,15 @@ public class GestioneTempo {
     }
 
     private void aggiornaDatePrecluseMese(int mesi){
+        //System.out.println("Aggiorno date precluse per " + mesi + " mesi");
         if (mesi > 5) mesi = 5;
     
         for (int step = 0; step < mesi; step++) {
-
+            //System.out.println("Aggiorno mese " + (step + 1));
             for (int i = 1; i <= 3; i++) {
+                System.out.println("Aggiorno mese " + i + " per step " + (step + 1));
                 ListaDate sorgente = DatiCondivisi.getDatePrecluse().getElementByKey(String.valueOf(i));
                 ListaDate destinazione = DatiCondivisi.getDatePrecluse().getElementByKey(String.valueOf(i - 1));
-    
-                if (sorgente == null) {
-                    sorgente = new ListaDate(String.valueOf(i));
-                    DatiCondivisi.aggiungiListaDate(sorgente);
-                }
-                if (destinazione == null) {
-                    destinazione = new ListaDate(String.valueOf(i - 1));
-                    DatiCondivisi.aggiungiListaDate(destinazione);
-                }
     
                 destinazione.getDate().clear();
                 destinazione.getDate().addAll(sorgente.getDate());
@@ -83,7 +77,7 @@ public class GestioneTempo {
     }
 
     public void passaggioTempo() {
-        System.err.println("Passaggio del tempo");
+        //System.err.println("Passaggio del tempo");
         LocalDate dataCorrente = getDataCorrente();
         LocalDate inizioUltimoPeriodo = mesePartenza.atDay(16);
     
@@ -92,8 +86,9 @@ public class GestioneTempo {
         while (!dataCorrente.isBefore(inizioUltimoPeriodo.plusMonths(mesiTrascorsi + 1))) {
             mesiTrascorsi++;
         }
+        //System.out.println("Mesi trascorsi: " + mesiTrascorsi);
         if (mesiTrascorsi > 0) {
-            System.out.println("Mesi trascorsi");
+            //System.out.println("Mesi trascorsi");
             mesePartenza = mesePartenza.plusMonths(mesiTrascorsi);
             aggiornaDatePrecluseMese(mesiTrascorsi);
             GestoreVisite.getInstance().aggiornaVisiteMese(mesiTrascorsi);

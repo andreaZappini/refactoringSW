@@ -2,25 +2,18 @@
 <Visite>
     <ListaVisite>
         <chiave>0</chiave>
+        <visite/>
+    </ListaVisite>
+    <ListaVisite>
+        <chiave>1</chiave>
         <visite>
             <visita>
-                <dataVisita>4955-07-05</dataVisita>
-                <stato>PROPOSTA</stato>
-                <tipo>t</tipo>
-                <iscritti>0</iscritti>
-                <iscrizioni/>
-            </visita>
-            <visita>
-                <dataVisita>4957-08-13</dataVisita>
-                <stato>PROPOSTA</stato>
+                <dataVisita>4990-06-12</dataVisita>
+                <stato>PROPONIBILE</stato>
                 <tipo>t</tipo>
                 <iscritti>0</iscritti>
                 <iscrizioni/>
             </visita>
         </visite>
-    </ListaVisite>
-    <ListaVisite>
-        <chiave>1</chiave>
-        <visite/>
     </ListaVisite>
 </Visite>

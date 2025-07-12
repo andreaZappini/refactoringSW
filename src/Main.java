@@ -21,6 +21,10 @@ public class Main {
         boolean primaConfigurazione = RipristinoDati.datiRipristino();
         if(primaConfigurazione)
             DatiCondivisi.setDataUltimaEsecuzione(LocalDate.of(2025, 4, 30));
+
+        System.out.println("Data simulata attuale: " + GestioneTempo.getInstance().getDataCorrente());
+        System.out.println("Data ultima esecuzione: " + DatiCondivisi.getDataUltimaEsecuzione());
+
         
         
         GestoreVisite.getInstance();
@@ -36,9 +40,10 @@ public class Main {
         GestioneTempo.getInstance().buchiTemporali();
 
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-            scheduler.scheduleAtFixedRate(() -> {
-            GestioneTempo.getInstance().passaggioTempo();
-            }, 0, 1, TimeUnit.SECONDS);
+
+        scheduler.scheduleAtFixedRate(() -> {
+        GestioneTempo.getInstance().passaggioTempo();
+        }, 0, 1, TimeUnit.SECONDS);
         
 
         IView view = new CLI();
