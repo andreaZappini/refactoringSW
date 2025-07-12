@@ -41,6 +41,7 @@ public class VisitaPrinter implements Printable {
         sb.append("Descrizione: " + visita.getTipo().getDescrizione() + "\n");
         sb.append("Numero di iscritti: " + visita.getIscritti() + "\n");
         sb.append("Biglietto necessario: " + visita.getTipo().getBigliettoNecessario() + "\n");
+        sb.append("Codice: " + visita.toString() + "\n");
 
         return sb.toString();
     }
@@ -53,6 +54,7 @@ public class VisitaPrinter implements Printable {
         sb.append("Descrizione: " + visita.getTipo().getDescrizione() + "\n");
         sb.append("Numero di iscritti: " + visita.getIscritti() + "\n");
         sb.append("Biglietto necessario: " + visita.getTipo().getBigliettoNecessario() + "\n");
+        sb.append("Codice: " + visita.toString() + "\n");
 
         return sb.toString();
     }
@@ -61,6 +63,7 @@ public class VisitaPrinter implements Printable {
         StringBuilder sb = new StringBuilder();
         sb.append("Visita Cancellata: " + visita.getTipo().getTitolo() + "\n");
         sb.append("Data: " + visita.getDataVisita() + "\n");
+        sb.append("Codice: " + visita.toString() + "\n");
 
         return sb.toString();
     }
@@ -69,6 +72,7 @@ public class VisitaPrinter implements Printable {
         StringBuilder sb = new StringBuilder();
         sb.append("Visita Effettuata: " + visita.getTipo().getTitolo() + "\n");
         sb.append("Data: " + visita.getDataVisita() + "\n");
+        sb.append("Codice: " + visita.toString() + "\n");
 
         return sb.toString();
     }
@@ -77,6 +81,7 @@ public class VisitaPrinter implements Printable {
         StringBuilder sb = new StringBuilder();
         sb.append("Visita Confermata: " + visita.getTipo().getTitolo() + "\n");
         sb.append("Data: " + visita.getDataVisita() + "\n");
+        sb.append("Codice: " + visita.toString() + "\n");
 
         return sb.toString();
     }
@@ -86,6 +91,7 @@ public class VisitaPrinter implements Printable {
         sb.append("Visita Proponibile: " + visita.getTipo().getTitolo() + "\n");
         sb.append("Data: " + visita.getDataVisita() + "\n");
         sb.append("stato: " + visita.getStato().toString() + "\n");
+        sb.append("Codice: " + visita.toString() + "\n");
 
         return sb.toString();
     }

@@ -51,7 +51,7 @@ public class GestoreFruitori {
         try{
             Visita v = DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElementByKey(c);
 
-            v.rimuoviPrenotaione(f);
+            v.rimuoviPrenotazione(f);
             f.rimuoviPrenotazione(v);
         }catch(IllegalArgumentException e){
             throw e;

@@ -17,7 +17,7 @@
             <elemento>volo1</elemento>
         </elencoVolontari>
         <elencoLuoghi>
-            <elemento>p</elemento>
+            <elemento>poi</elemento>
         </elencoLuoghi>
     </TipoVisita>
 </TipiVisita>

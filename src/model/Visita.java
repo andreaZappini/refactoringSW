@@ -62,7 +62,7 @@ public class Visita {
     }
 
     public void aggiornaStato() {
-        (this.stato).gestisciTransizione(this);
+        stato.gestisciTransizione(this);
     }
 
     public HashMap<Fruitore, Integer> getIscrizioni() {
@@ -84,16 +84,17 @@ public class Visita {
             } else {
                 iscrizioni.put(fruitore, numPersone);
             }
+            stato.gestisciTransizione(this);
         }else
             throw new IllegalArgumentException("Numero di iscritti superato");
     }
 
-    public void rimuoviPrenotaione(Fruitore fruitore) {
+    public void rimuoviPrenotazione(Fruitore fruitore) {
         if(iscrizioni.containsKey(fruitore)){
             int numPersonePrecedenti = iscrizioni.get(fruitore);
             iscritti -= numPersonePrecedenti;
             iscrizioni.remove(fruitore);
-            (this.stato).gestisciTransizione(this);
+            stato.gestisciTransizione(this);
         }else
             throw new IllegalArgumentException("Non sei iscritto a questa visita");
     }

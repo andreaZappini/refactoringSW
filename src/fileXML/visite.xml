@@ -2,15 +2,7 @@
 <Visite>
     <ListaVisite>
         <chiave>0</chiave>
-        <visite>
-            <visita>
-                <dataVisita>4990-12-12</dataVisita>
-                <stato>CONFERMATA</stato>
-                <tipo>t</tipo>
-                <iscritti>9</iscritti>
-                <iscrizioni/>
-            </visita>
-        </visite>
+        <visite/>
     </ListaVisite>
     <ListaVisite>
         <chiave>1</chiave>
