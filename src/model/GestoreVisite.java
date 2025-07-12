@@ -2,8 +2,6 @@ package model;
 
 import java.time.LocalDate;
 
-import printer.FormatterRegister;
-
 public class GestoreVisite {
 
     private static final GestoreVisite instance = new GestoreVisite();
@@ -64,9 +62,7 @@ public class GestoreVisite {
             Elenco<Visita> copia = new Elenco<>();
     
             for (Visita v : visiteOriginali.getElenco().values()) {
-                FormatterRegister.print(v);
                 v.aggiornaStato();
-                FormatterRegister.print(v);
                 copia.aggiungi(v);
             }
     
@@ -77,7 +73,7 @@ public class GestoreVisite {
         }
     }
 
-    public void aggiornaStato(){
+    public void aggiornaStati(){
         for(Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values())
             v.aggiornaStato();
     }

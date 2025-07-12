@@ -81,7 +81,7 @@ public class GestioneTempo {
         LocalDate dataCorrente = getDataCorrente();
         LocalDate inizioUltimoPeriodo = mesePartenza.atDay(16);
     
-        // Trova quanti "intervalli 15→15" sono passati
+        // Trova quanti "intervalli 16→15" sono passati
         int mesiTrascorsi = 0;
         while (!dataCorrente.isBefore(inizioUltimoPeriodo.plusMonths(mesiTrascorsi + 1))) {
             mesiTrascorsi++;
@@ -96,8 +96,6 @@ public class GestioneTempo {
             DatiCondivisi.apriRaccoltaDisponibilitaMese1();
             DatiCondivisi.chiudiRaccoltaDisponibilitaMese2();
         }
-        GestoreVisite.getInstance().aggiornaStato();
-        GestoreVisite.getInstance().rimuoviVisitePassateFruitore();
     }
 
     

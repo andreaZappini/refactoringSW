@@ -43,6 +43,8 @@ public class Main {
 
         scheduler.scheduleAtFixedRate(() -> {
         GestioneTempo.getInstance().passaggioTempo();
+        GestoreVisite.getInstance().aggiornaStati();
+        GestoreVisite.getInstance().rimuoviVisitePassateFruitore();
         }, 0, 1, TimeUnit.SECONDS);
         
 
