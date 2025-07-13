@@ -35,6 +35,7 @@ public class FruitoreService {
             }else{
                 view.stampaMessaggio("accesso consentito");
                 fruitore = f;
+                System.out.println("fruitore: " + fruitore.toString());
                 return f;
             }
         }catch(ClassCastException e){

@@ -11,7 +11,7 @@
         <oraInizio>5.0</oraInizio>
         <durata>6</durata>
         <bigliettoNecessario>S</bigliettoNecessario>
-        <minPartecipanti>8</minPartecipanti>
+        <minPartecipanti>2</minPartecipanti>
         <maxPartecipanti>9</maxPartecipanti>
         <elencoVolontari>
             <elemento>volo1</elemento>
