@@ -26,10 +26,16 @@ public class TipoVisitaPrinter implements Printable {
         + "Necessità del biglietto: " + t.getBigliettoNecessario() 
         + "\n(numero minimo partecipanti: " + t.getMinPartecipanti()
         + "; numero massimo partecipanti: " + t.getMaxPartecipanti() + ")\n"
-        + "L'elenco delle guide volontarie è:\n" + FormatterRegister.print(t.getElencoVolontari());
+        + "L'elenco delle guide volontarie è:\n" + FormatterRegister.printCorto(t.getElencoVolontari());
     }
 
-    // Additional methods can be added here if needed
+        @Override
+    public String printCorto(Object object) {
+
+        TipoVisita t = (TipoVisita) object;
+    	
+    	return t.getTitolo();
+    }
     
 
 }

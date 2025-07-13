@@ -166,7 +166,7 @@ public class ConfiguratoreService {
     public void visualizzaVisiteLuogo() {
         try {
             view.stampaMessaggio("Ecco i luoghi disponibili:");
-            view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+            view.stampaMessaggio(FormatterRegister.printCorto(DatiCondivisi.getElencoLuoghi()));
             String scelta = view.sceltaString("Scegli il luogo -> ");
             view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi().getElementByKey(scelta)));
         } catch (Exception e) {

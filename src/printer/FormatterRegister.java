@@ -24,5 +24,17 @@ public class FormatterRegister {
         throw new IllegalArgumentException("Nessun printer registrato per la classe: " + object.getClass().getName());
     }
 
+    public static String printCorto(Object object) {
+        
+        Class<?> clazz = object.getClass();
+        while(clazz != null){
+            Printable printer = printers.get(clazz);
+            if(printer != null) {
+                return printer.printCorto(object);
+            }
+            clazz = clazz.getSuperclass();
+        }
+        throw new IllegalArgumentException("Nessun printer registrato per la classe: " + object.getClass().getName());
+    }
 }
 

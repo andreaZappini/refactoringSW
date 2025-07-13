@@ -69,7 +69,7 @@ public class ControllerConfiguratore {
                 action.visualizzaVolontari();
                 break;
             case 5:
-                view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+                view.stampaMessaggio(FormatterRegister.printCorto(DatiCondivisi.getElencoLuoghi()));
                 break;
             case 6:
                 action.visualizzaVisiteLuogo();
