@@ -2,7 +2,20 @@
 <Visite>
     <ListaVisite>
         <chiave>0</chiave>
-        <visite/>
+        <visite>
+            <visita>
+                <dataVisita>5028-10-18</dataVisita>
+                <stato>PROPOSTA</stato>
+                <tipo>t</tipo>
+                <iscritti>5</iscritti>
+                <iscrizioni>
+                    <iscrizione>
+                        <fruitore>ivo</fruitore>
+                        <numPersone>5</numPersone>
+                    </iscrizione>
+                </iscrizioni>
+            </visita>
+        </visite>
     </ListaVisite>
     <ListaVisite>
         <chiave>1</chiave>
