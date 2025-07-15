@@ -24,7 +24,6 @@ public class GestioneTempo {
         LocalDate ultimaEsecuzione = DatiCondivisi.getDataUltimaEsecuzione();
         LocalDate oggi = getDataCorrente();
     
-        // Trova il primo giorno 16 dopo o uguale all’ultima esecuzione
         LocalDate inizio = ultimaEsecuzione.getDayOfMonth() < 16
             ? ultimaEsecuzione.withDayOfMonth(16)
             : ultimaEsecuzione.withDayOfMonth(16).plusMonths(1);
@@ -56,11 +55,11 @@ public class GestioneTempo {
     }
 
     private void aggiornaDatePrecluseMese(int mesi){
-        //System.out.println("Aggiorno date precluse per " + mesi + " mesi");
+
         if (mesi > 5) mesi = 5;
     
         for (int step = 0; step < mesi; step++) {
-            //System.out.println("Aggiorno mese " + (step + 1));
+
             for (int i = 1; i <= 3; i++) {
                 System.out.println("Aggiorno mese " + i + " per step " + (step + 1));
                 ListaDate sorgente = DatiCondivisi.getDatePrecluse().getElementByKey(String.valueOf(i));
@@ -70,25 +69,24 @@ public class GestioneTempo {
                 destinazione.getDate().addAll(sorgente.getDate());
             }
     
-            // Svuota "3"
+
             ListaDate meseTre = DatiCondivisi.getDatePrecluse().getElementByKey("3");
             if (meseTre != null) meseTre.getDate().clear();
         }
     }
 
     public void passaggioTempo() {
-        //System.err.println("Passaggio del tempo");
+
         LocalDate dataCorrente = getDataCorrente();
         LocalDate inizioUltimoPeriodo = mesePartenza.atDay(16);
     
-        // Trova quanti "intervalli 16→15" sono passati
         int mesiTrascorsi = 0;
         while (!dataCorrente.isBefore(inizioUltimoPeriodo.plusMonths(mesiTrascorsi + 1))) {
             mesiTrascorsi++;
         }
-        //System.out.println("Mesi trascorsi: " + mesiTrascorsi);
+
         if (mesiTrascorsi > 0) {
-            //System.out.println("Mesi trascorsi");
+
             mesePartenza = mesePartenza.plusMonths(mesiTrascorsi);
             aggiornaDatePrecluseMese(mesiTrascorsi);
             GestoreVisite.getInstance().aggiornaVisiteMese(mesiTrascorsi);

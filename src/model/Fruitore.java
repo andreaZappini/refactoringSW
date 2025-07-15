@@ -21,15 +21,4 @@ public class Fruitore extends Utente{
     public void rimuoviPrenotazione(Visita visita) {
         prenotazioniVisite.rimuovi(visita);
     }
-
-    // public String getVisiteProposte() {
-    //     StringBuffer sb = new StringBuffer();
-    //     for(Visita visita : prenotazioniVisite.getElenco().values()) {
-    //         if(visita.getStato() == StatiVisita.VISITA_PROPOSTA) {
-    //             sb.append(visita.toString());
-    //             sb.append("\n");
-    //         }
-    //     }
-    //     return sb.toString();
-    // }
 }

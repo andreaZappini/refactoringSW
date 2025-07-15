@@ -109,11 +109,6 @@ public class DatiCondivisi {
         DatiCondivisi.ambitoTerritoriale = ambitoTerritoriale;
     }
 
-    // public static void setDatePrecluseMese(String mese, ArrayList<LocalDate> date) {
-    //     datePrecluse.getElementByKey(mese).getDate().clear();
-    //     datePrecluse.getElementByKey(mese).aggiungiDate(date);
-    // }
-
     public static String getAmbitoTerritoriale() {
         return ambitoTerritoriale;
     }

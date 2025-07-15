@@ -11,10 +11,9 @@ public class Visita {
     private StatiVisita stato;
     LocalDate dataVisita;
     private TipoVisita tipo;
-    private HashMap<Fruitore, Integer> iscrizioni; //HashMap<Cliente, PersoneIscritte>
+    private HashMap<Fruitore, Integer> iscrizioni; 
     private int iscritti;
 
-    //costruttore per creazione visita runtime
     public Visita(LocalDate dataVisita, TipoVisita tipo) {
         this.stato = new VisitaProponibile();
         this.dataVisita = dataVisita;   
@@ -23,7 +22,6 @@ public class Visita {
         this.iscritti = 0;
     }
 
-    //costruttore per lettura xml
     public Visita(LocalDate dataVisita, TipoVisita tipo, StatiVisita stato, HashMap<Fruitore, Integer> iscrizioni, int iscritti) {
         this.stato = stato;
         this.dataVisita = dataVisita;   

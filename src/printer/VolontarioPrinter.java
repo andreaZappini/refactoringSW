@@ -15,8 +15,5 @@ public class VolontarioPrinter implements Printable {
             sb.append(" - " + tipo + "\n");
         }
         return sb.toString();
-    }
-
-    // Additional methods can be added here if needed
-    
+    }    
 }

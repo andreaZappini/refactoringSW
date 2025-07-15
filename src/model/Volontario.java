@@ -49,16 +49,7 @@ public class Volontario extends Utente {
     public void aggiungiDisponibilita(LocalDate data){
         this.elencoDisponibilita.aggiungi(data);
     }
-
-    // public String visualizzaVolo() {
-    //     StringBuffer s = new StringBuffer();
-    //     for(TipoVisita t : elencoTipiVisita.getElenco().values()) {
-    //         s.append(t.toString());
-    //         s.append("\n");
-    //     }
-    //     return super.toString() + "\n" + "Elenco visite: " + s.toString();
-    // }
-
+    
     public void rimuoviTipoVisita(TipoVisita t) {
         this.elencoTipiVisita.rimuovi(t);
         if(this.elencoTipiVisita.vuoto()){

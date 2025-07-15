@@ -20,7 +20,7 @@ public class GestoreVisite {
             if(DatiCondivisi.getDatePrecluse().contiene(giorno.toString())) 
                 continue;
 
-            ciclotipoVisita: //label per uscire dal ciclo dei tipi di visita
+            ciclotipoVisita:
             for(TipoVisita tipo : DatiCondivisi.getElencoTipiVisita().getElenco().values()){
                 
                 for(Volontario volo : tipo.getElencoVolontari().getElenco().values()){
@@ -32,7 +32,7 @@ public class GestoreVisite {
                     if(cond1 && cond2){
                         Visita visita = new Visita(giorno, tipo);
                         DatiCondivisi.aggiungiVisitaMese1(visita);
-                        break ciclotipoVisita; // Esce dal ciclo dei tipi di visita se trova una visita valida
+                        break ciclotipoVisita; 
                     }
                 }
             }

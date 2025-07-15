@@ -46,18 +46,6 @@ public class Luogo{
         return this.codiceLuogo;
     }
 
-    // public String toStringLuogo(){
-    //     StringBuffer s = new StringBuffer();
-    //     s.append(this.codiceLuogo+" ("+this.collocazioneGeografica+") \n"
-    //     		+ "["+this.descrizione+"]\nTipi di visita associati: \n"
-    //     		+this.visite.visualizza()+"\n");
-    // 	return s.toString();
-    // }
-
-    // public String visualizzaVisite(){
-    //     return this.visite.visualizza();
-    // }
-
     public void rimuoviDaElencoTipiVisita(TipoVisita t){
 
         this.visite.rimuovi(t);

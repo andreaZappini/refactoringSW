@@ -30,7 +30,6 @@ public class XMLUtilities {
         Document doc = builder.parse(file);
         doc.getDocumentElement().normalize();
     
-        //NodeList lista = doc.getElementsByTagName(contesto);
         NodeList lista = doc.getDocumentElement().getChildNodes();
 
     
@@ -139,20 +138,17 @@ public class XMLUtilities {
     }
     
     public static <T> void scriviXML(File file, Elenco<T> elencoOggetti, String rootElementName) throws Exception {
-        // Crea il documento XML
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.newDocument();
     
-        // Elemento radice
         Element rootElement = doc.createElement(rootElementName);
         doc.appendChild(rootElement);
     
-        // Cicla sugli oggetti nell’elenco
         for (String key : elencoOggetti.getElenco().keySet()) {
             T oggetto = elencoOggetti.getElementByKey(key);
     
-            // Crea un elemento per l’oggetto
             Element objectElement = doc.createElement(oggetto.getClass().getSimpleName());
     
             if (oggetto instanceof LocalDate) {
@@ -182,7 +178,6 @@ public class XMLUtilities {
             rootElement.appendChild(objectElement);
         }
     
-        // Salva su file
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -213,7 +208,6 @@ public class XMLUtilities {
     
                 Element campoElement = doc.createElement(field.getName());
     
-                // 🔹 Caso 1: ArrayList (es. giorniDisponibili)
                 if (valoreCampo instanceof Collection<?>) {
                     for (Object item : (Collection<?>) valoreCampo) {
                         Element itemElement = doc.createElement("elemento");
@@ -221,7 +215,6 @@ public class XMLUtilities {
                         campoElement.appendChild(itemElement);
                     }
     
-                // 🔹 Caso 2: Elenco<T>
                 } else if (valoreCampo instanceof Elenco<?>) {
                     Elenco<?> elenco = (Elenco<?>) valoreCampo;
                     for (String key : elenco.getElenco().keySet()) {
@@ -233,7 +226,6 @@ public class XMLUtilities {
                     campoElement.appendChild(doc.createTextNode(valoreCampo.toString()));
                 }else if (valoreCampo instanceof LocalDate) {
                     campoElement.appendChild(doc.createTextNode(((LocalDate) valoreCampo).toString()));
-                // 🔹 Caso 3: campo semplice
                 } else {
                     campoElement.appendChild(doc.createTextNode(valoreCampo.toString()));
                 }
@@ -249,28 +241,23 @@ public class XMLUtilities {
     
         ListaVisite listaVisite = (ListaVisite) oggetto;
     
-        // Scrive la chiave
         Element chiaveElement = doc.createElement("chiave");
         chiaveElement.setTextContent(listaVisite.getChiave());
         parentElement.appendChild(chiaveElement);
     
-        // Scrive la lista delle visite
         Element visiteElement = doc.createElement("visite");
     
         for (Visita visita : listaVisite.getVisite().getElenco().values()) {
             Element visitaElement = doc.createElement("visita");
     
-            // Scrive dataVisita
             Element dataElement = doc.createElement("dataVisita");
             dataElement.setTextContent(visita.getDataVisita().toString());
             visitaElement.appendChild(dataElement);
     
-            // Scrive stato
             Element statoElement = doc.createElement("stato");
             statoElement.setTextContent(visita.getStato().toString());
             visitaElement.appendChild(statoElement);
     
-            // Scrive tipoVisita usando scriviOggettoXML
             Element tipoElement = doc.createElement("tipo");
             tipoElement.setTextContent(visita.getTipo().toString());
             visitaElement.appendChild(tipoElement);
@@ -295,8 +282,6 @@ public class XMLUtilities {
             }
             visitaElement.appendChild(iscrizioniElement);
             
-    
-            // Aggiunge la visita al nodo <visite>
             visiteElement.appendChild(visitaElement);
         }
     
@@ -324,7 +309,7 @@ public class XMLUtilities {
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // Formattazione con indentazione
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes"); 
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
         DOMSource source = new DOMSource(doc);
@@ -340,9 +325,10 @@ public class XMLUtilities {
             if (child.getNodeType() == Node.TEXT_NODE && child.getNodeValue().trim().isEmpty()) {
                 doc.removeChild(child);
             } else if (child.getNodeType() == Node.ELEMENT_NODE) {
-                rimuoviNodiVuoti(child); // Ricorsione per eliminare spazi all'interno dei tag
+                rimuoviNodiVuoti(child); 
             }
         }
+
     }
 
     public static Elenco<Visita> leggiArchivioXML(File file, Elenco<TipoVisita> elencoTV, Elenco<Fruitore> elencoF) throws Exception {
@@ -388,23 +374,19 @@ public class XMLUtilities {
         DocumentBuilder builder = factory.newDocumentBuilder();
         Document doc = builder.newDocument();
     
-        // Scrive la lista delle visite
         Element visiteElement = doc.createElement("visite");
     
         for (Visita visita : archivio.getElenco().values()) {
             Element visitaElement = doc.createElement("visita");
     
-            // Scrive dataVisita
             Element dataElement = doc.createElement("dataVisita");
             dataElement.setTextContent(visita.getDataVisita().toString());
             visitaElement.appendChild(dataElement);
     
-            // Scrive stato
             Element statoElement = doc.createElement("stato");
             statoElement.setTextContent(visita.getStato().toString());
             visitaElement.appendChild(statoElement);
     
-            // Scrive tipoVisita usando scriviOggettoXML
             Element tipoElement = doc.createElement("tipo");
             tipoElement.setTextContent(visita.getTipo().toString());
             visitaElement.appendChild(tipoElement);
@@ -430,7 +412,6 @@ public class XMLUtilities {
             visitaElement.appendChild(iscrizioniElement);
             
     
-            // Aggiunge la visita al nodo <visite>
             visiteElement.appendChild(visitaElement);
         }
 

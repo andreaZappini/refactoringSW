@@ -207,7 +207,6 @@ public class RipristinoDati {
         String chiave = elemento.getElementsByTagName("chiave").item(0).getTextContent();
         ListaDate listaDate = new ListaDate(chiave);
     
-        // Prendi il nodo <date>
         NodeList dateNodes = elemento.getElementsByTagName("date");
         if (dateNodes.getLength() > 0) {
             Element dateElement = (Element) dateNodes.item(0);
