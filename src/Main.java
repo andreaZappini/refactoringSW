@@ -22,11 +22,6 @@ public class Main {
         if(primaConfigurazione)
             DatiCondivisi.setDataUltimaEsecuzione(LocalDate.of(2025, 4, 30));
 
-        System.out.println("Data simulata attuale: " + GestioneTempo.getInstance().getDataCorrente());
-        System.out.println("Data ultima esecuzione: " + DatiCondivisi.getDataUltimaEsecuzione());
-
-        
-        
         GestoreVisite.getInstance();
         GestioneTempo.getInstance();
 
@@ -35,7 +30,7 @@ public class Main {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         String oggi = GestioneTempo.getInstance().getDataCorrente().format(formatter);
-        System.out.println("Data simulata: " + oggi);
+        System.out.println("Data odierna: " + oggi);
 
         GestioneTempo.getInstance().buchiTemporali();
 

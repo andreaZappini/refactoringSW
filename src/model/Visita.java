@@ -55,7 +55,6 @@ public class Visita {
     }
 
     public void setStato(StatiVisita stato) {
-        System.out.println("Cambio stato visita");
         this.stato = stato;
     }
 

@@ -8,7 +8,8 @@
       "args": [
         "-cp", "lib/*:src",
         "-d", "bin",
-        "src/test/VisitaArchivioTest.java"
+        "src/test/VisitaArchivioTest.java",
+        "src/test/UserFactoryTest.java"
       ],
       "group": "build",
       "problemMatcher": []

@@ -33,7 +33,6 @@ public class GestioneTempo {
             conteggio++;
             inizio = inizio.plusMonths(1);
         }
-        System.out.println(conteggio + " mesi trascorsi dall'ultima esecuzione");
         if (conteggio > 0) {
             DatiCondivisi.apriRaccoltaDisponibilitaMese1();
             DatiCondivisi.chiudiRaccoltaDisponibilitaMese2();
@@ -61,7 +60,6 @@ public class GestioneTempo {
         for (int step = 0; step < mesi; step++) {
 
             for (int i = 1; i <= 3; i++) {
-                System.out.println("Aggiorno mese " + i + " per step " + (step + 1));
                 ListaDate sorgente = DatiCondivisi.getDatePrecluse().getElementByKey(String.valueOf(i));
                 ListaDate destinazione = DatiCondivisi.getDatePrecluse().getElementByKey(String.valueOf(i - 1));
     

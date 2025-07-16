@@ -55,7 +55,6 @@ public class GestoreVisite {
     }
 
     public void aggiornaVisiteMese(int mesi){
-        System.out.println("aggiornaVisiteMese");
         for(int step = 0; step < mesi; step++){
     
             Elenco<Visita> visiteOriginali = DatiCondivisi.getVisite().getElementByKey("1").getVisite();
