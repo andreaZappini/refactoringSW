@@ -2,17 +2,22 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Compila Test",
+      "label": "Compila solo test",
       "type": "shell",
       "command": "javac",
       "args": [
-        "-cp", "lib/*:src",
-        "-d", "bin",
-        "parteB/src/test/VisitaArchivioTest.java",
-        "parteB/src/test/UserFactoryTest.java"
+        "-cp",
+        "lib/junit4.jar:lib/hamcrest-core.jar:bin",
+        "-d",
+        "bin",
+        "${workspaceFolder}/src/test/*.java"
       ],
-      "group": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
       "problemMatcher": []
     }
   ]
 }
+
