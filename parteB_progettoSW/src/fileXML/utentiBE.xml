@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Utente>
+    <Configuratore>
+        <username>c</username>
+        <password>1</password>
+        <primoAccesso>false</primoAccesso>
+    </Configuratore>
+    <Fruitore>
+        <username>ivo</username>
+        <password>ivo72</password>
+        <primoAccesso>false</primoAccesso>
+    </Fruitore>
+    <Fruitore>
+        <username>andrea</username>
+        <password>1</password>
+        <primoAccesso>false</primoAccesso>
+    </Fruitore>
+    <Volontario>
+        <elencoTipiVisita>
+            <elemento>t</elemento>
+        </elencoTipiVisita>
+        <elencoDisponibilita>
+            <elemento>4992-02-11</elemento>
+            <elemento>4995-09-12</elemento>
+            <elemento>5368-03-12</elemento>
+            <elemento>5029-10-10</elemento>
+            <elemento>4995-12-12</elemento>
+            <elemento>5031-03-12</elemento>
+            <elemento>5028-10-18</elemento>
+            <elemento>5031-06-11</elemento>
+        </elencoDisponibilita>
+        <username>volo1</username>
+        <password>1</password>
+        <primoAccesso>false</primoAccesso>
+    </Volontario>
+    <Configuratore>
+        <username>pippo</username>
+        <password>pippo</password>
+        <primoAccesso>true</primoAccesso>
+    </Configuratore>
+</Utente>
