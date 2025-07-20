@@ -24,9 +24,9 @@ public class FruitoreService {
         String[] datiUtente = view.login();
         String username = datiUtente[0];
         String password = datiUtente[1];
-        Utente u = DatiCondivisi.getElencoUtenti().getElementByKey(username);
+        Utente u = null;
         try{
-
+            u = DatiCondivisi.getElencoUtenti().getElementByKey(username);
             Fruitore f = (Fruitore) u;
             if(f == null){
                 view.stampaMessaggio("utente non trovato");
@@ -41,6 +41,8 @@ public class FruitoreService {
             }
         }catch(ClassCastException e){
             view.stampaMessaggio("impossibile accedere qui perchè " + username + " è un " + u.getClass().getSimpleName());
+        }catch(IllegalArgumentException e){
+            view.stampaMessaggio("utente non trovato");
         }
         return null;
     }
@@ -86,7 +88,7 @@ public class FruitoreService {
             GestoreFruitori.getInstance().annullaPrenotazione(fruitore, codiceVisita, id);
             view.stampaMessaggio("annullamento effettuato con successo");
         }catch(IllegalArgumentException e){
-            view.stampaMessaggio("annullamento non riuscito" + e.getMessage());
+            view.stampaMessaggio("annullamento non riuscito: " + e.getMessage());
         }
     }
 

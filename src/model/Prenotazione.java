@@ -35,4 +35,9 @@ public class Prenotazione {
     public String toString() {
         return codice;
     }
+
+    public boolean CodiceEquals(String id) {
+        return this.codice.trim().equals(id.trim());
+    }
+
 }

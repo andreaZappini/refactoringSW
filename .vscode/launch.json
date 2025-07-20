@@ -8,7 +8,8 @@
       "mainClass": "org.junit.runner.JUnitCore",
       "args": [
         "test.UserFactoryTest",
-        "test.VisitaArchivioTest"
+        "test.VisitaArchivioTest",
+        "test.VisitaAnnullaPrenotazioneTest"
       ],
       "vmArgs": "-cp bin:lib/junit4.jar:lib/hamcrest-core.jar",
       "cwd": "${workspaceFolder}"

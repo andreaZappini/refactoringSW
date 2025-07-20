@@ -108,9 +108,10 @@ public class Visita {
     public void rimuoviPrenotazione(Fruitore fruitore, String id) {
         boolean removed = false;
         Prenotazione p = prenotazioni.get(fruitore);
-        if(p.getCodice() == id) {
+        if(p.CodiceEquals(id)) {
             iscritti -= p.getNumPartecipanti();
             prenotazioni.remove(fruitore);
+            removed = true;
         } else {
             throw new IllegalArgumentException("Prenotazione non trovata");
         }

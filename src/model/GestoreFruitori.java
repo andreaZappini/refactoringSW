@@ -56,7 +56,7 @@ public class GestoreFruitori {
                 throw new IllegalArgumentException("Visita non annullabile");
 
             Prenotazione p = v.getPrenotazioni().get(f);
-            if(p.getCodice().equals(id)) {
+            if(p.CodiceEquals(id)) {
                 v.rimuoviPrenotazione(f, id);
                 f.rimuoviPrenotazione(v);
             } else {
