@@ -2,6 +2,7 @@ package printer;
 
 import model.Elenco;
 import model.Luogo;
+import model.Prenotazione;
 import model.TipoVisita;
 import model.Utente;
 import model.Visita;
@@ -18,7 +19,7 @@ public class FormatterSetup {
         FormatterRegister.registerPrinter(Luogo.class, new LuogoPrinter());
         FormatterRegister.registerPrinter(TipoVisita.class, new TipoVisitaPrinter());
         FormatterRegister.registerPrinter(Elenco.class, new ElencoPrinter());
-
+        FormatterRegister.registerPrinter(Prenotazione.class, new PrenotazionePrinter());
         
     }
 }

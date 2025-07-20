@@ -20,7 +20,7 @@ public class GestoreFruitori {
         return (p1 != null && p1.equals(p2));
     }
 
-    public void prenotaVisita(Fruitore fruitore, String[] datiPrenotazione) {
+    public String prenotaVisita(Fruitore fruitore, String[] datiPrenotazione) {
 
         String codiceVisita = datiPrenotazione[0];
         int numPersone = Integer.parseInt(datiPrenotazione[1]);
@@ -33,9 +33,13 @@ public class GestoreFruitori {
             Visita visita = DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElementByKey(codiceVisita);
                     
             if(visita.getStato().isPrenotabile()) {
-                visita.aggiungiIscrizione(fruitore, numPersone);
+                Prenotazione p = new Prenotazione(fruitore, numPersone);
+                visita.aggiungiPrenotazione(p);
                 fruitore.aggiungiPrenotazione(visita);
-        }
+                return p.getCodice();
+            } else {
+                throw new IllegalArgumentException("Visita non prenotabile");
+            }
         }catch(IllegalArgumentException e){
             throw e;
         }
@@ -43,14 +47,14 @@ public class GestoreFruitori {
 
     }
 
-    public void annullaPrenotazione(Fruitore f, String c){
+    public void annullaPrenotazione(Fruitore f, String c, String id) {
 
         try{
             Visita v = DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElementByKey(c);
 
             if(v.getStato().isNotAnnullabile())
                 throw new IllegalArgumentException("Visita non annullabile");
-
+            
             v.rimuoviPrenotazione(f);
             f.rimuoviPrenotazione(v);
         }catch(IllegalArgumentException e){

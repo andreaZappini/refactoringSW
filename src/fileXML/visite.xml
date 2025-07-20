@@ -6,6 +6,14 @@
     </ListaVisite>
     <ListaVisite>
         <chiave>1</chiave>
-        <visite/>
+        <visite>
+            <visita>
+                <dataVisita>5374-11-10</dataVisita>
+                <stato>PROPONIBILE</stato>
+                <tipo>t</tipo>
+                <iscritti>0</iscritti>
+                <iscrizioni/>
+            </visita>
+        </visite>
     </ListaVisite>
 </Visite>

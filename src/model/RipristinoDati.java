@@ -166,7 +166,8 @@ public class RipristinoDati {
         DatiCondivisi.setArchivioVisite(archivio);
 
         for(Visita v : DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElenco().values()){
-            for(Fruitore f : v.getIscrizioni().keySet()) {
+            for(Prenotazione p : v.getPrenotazioni()) {
+                Fruitore f = p.getFruitore();
                 if(fruitori.contiene(f.toString())) {
                     f.aggiungiPrenotazione(v);
                 } else {
@@ -176,7 +177,8 @@ public class RipristinoDati {
         }
 
         for(Visita v : DatiCondivisi.getArchivio().getElenco().values()){
-            for(Fruitore f : v.getIscrizioni().keySet()) {
+            for(Prenotazione p : v.getPrenotazioni()) {
+                Fruitore f = p.getFruitore();
                 if(fruitori.contiene(f.toString())) {
                     f.aggiungiPrenotazione(v);
                 } else {

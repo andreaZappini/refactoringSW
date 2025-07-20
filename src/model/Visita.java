@@ -1,34 +1,40 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
 import model.stato.VisitaProponibile;
 import model.stato.StatiVisita;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Visita {
     
     private StatiVisita stato;
     LocalDate dataVisita;
     private TipoVisita tipo;
-    private HashMap<Fruitore, Integer> iscrizioni; 
+    private HashMap<Fruitore, Prenotazione> prenotazioni; 
     private int iscritti;
 
     public Visita(LocalDate dataVisita, TipoVisita tipo) {
         this.stato = new VisitaProponibile();
         this.dataVisita = dataVisita;   
         this.tipo = tipo;
-        this.iscrizioni = new HashMap<Fruitore, Integer>();
+        this.prenotazioni = new HashMap<>();
         this.iscritti = 0;
     }
 
-    public Visita(LocalDate dataVisita, TipoVisita tipo, StatiVisita stato, HashMap<Fruitore, Integer> iscrizioni, int iscritti) {
+    public Visita(LocalDate dataVisita, TipoVisita tipo, StatiVisita stato, HashMap<Fruitore, Prenotazione> prenotazioni, int iscritti) {
         this.stato = stato;
         this.dataVisita = dataVisita;   
         this.tipo = tipo;
-        this.iscrizioni = iscrizioni;
+        this.prenotazioni = prenotazioni;
         this.iscritti = iscritti;
-    }   
+    }  
+    
+    public Volontario getVolontario() {
+        return tipo.getVolontario();
+    }
 
     public StatiVisita getStato() {
         return stato;
@@ -62,8 +68,18 @@ public class Visita {
         stato.gestisciTransizione(this);
     }
 
-    public HashMap<Fruitore, Integer> getIscrizioni() {
-        return iscrizioni;
+    public HashMap<Fruitore, Prenotazione> getPrenotazioni() {
+        return prenotazioni;
+    }
+
+    public List<Prenotazione> getPrenotazioniPerFruitore(Fruitore fruitore) {
+        List<Prenotazione> res = new ArrayList<>();
+        for(Prenotazione p : prenotazioni.values()) {
+            if(p.getFruitore().equals(fruitore)) {
+                res.add(p);
+            }
+        }
+        return res;
     }
 
     @Override
@@ -71,29 +87,31 @@ public class Visita {
         return this.tipo.toString() + "-" + this.dataVisita.toString();
     }
 
-    public void aggiungiIscrizione(Fruitore fruitore, int numPersone) {
+    public void aggiungiPrenotazione(Prenotazione prenotazione) {
+        int numPersone = prenotazione.getNumPartecipanti();
 
         if(numPersone <= 0)
             throw new IllegalArgumentException("Numero di partecipanti non valido");
 
         if(this.iscritti + numPersone <= this.tipo.getMaxPartecipanti()){
             iscritti += numPersone;
-            if(iscrizioni.containsKey(fruitore)){
-                int numPersonePrecedenti = iscrizioni.get(fruitore);
-                iscrizioni.put(fruitore, numPersonePrecedenti + numPersone);
-            } else {
-                iscrizioni.put(fruitore, numPersone);
-            }
+            prenotazioni.add(prenotazione);
             stato.gestisciTransizione(this);
         }else
             throw new IllegalArgumentException("Numero di iscritti superato");
     }
 
     public void rimuoviPrenotazione(Fruitore fruitore) {
-        if(iscrizioni.containsKey(fruitore)){
-            int numPersonePrecedenti = iscrizioni.get(fruitore);
-            iscritti -= numPersonePrecedenti;
-            iscrizioni.remove(fruitore);
+        boolean removed = false;
+        for (int i = prenotazioni.size() - 1; i >= 0; i--) {
+            Prenotazione p = prenotazioni.get(i);
+            if(p.getFruitore().equals(fruitore)) {
+                iscritti -= p.getNumPartecipanti();
+                prenotazioni.remove(i);
+                removed = true;
+            }
+        }
+        if(removed) {
             stato.gestisciTransizione(this);
         }else
             throw new IllegalArgumentException("Non sei iscritto a questa visita");

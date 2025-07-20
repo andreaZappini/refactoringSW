@@ -6,8 +6,9 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -73,7 +74,7 @@ public class XMLUtilities {
                 TipoVisita tipo = elencoTV.getElementByKey(tipoElem);
 
                 int iscritti = Integer.parseInt(visitaElem.getElementsByTagName("iscritti").item(0).getTextContent());
-                HashMap<Fruitore, Integer> iscrizioni = new HashMap<>();
+                List<Prenotazione> prenotazioni = new ArrayList<>();
 
                 NodeList iscrizioniNodes = ((Element) visitaElem.getElementsByTagName("iscrizioni").item(0)).getElementsByTagName("iscrizione");
                 for (int k = 0; k < iscrizioniNodes.getLength(); k++) {
@@ -81,12 +82,17 @@ public class XMLUtilities {
 
                     String fruitoreStr = iscrizioneElem.getElementsByTagName("fruitore").item(0).getTextContent();
                     String numStr = iscrizioneElem.getElementsByTagName("numPersone").item(0).getTextContent();
+                    NodeList codiceNode = iscrizioneElem.getElementsByTagName("codice");
+                    String codice = codiceNode.getLength() > 0 ? codiceNode.item(0).getTextContent() : null;
 
                     Fruitore f = elencoF.getElementByKey(fruitoreStr);
-                    iscrizioni.put(f, Integer.parseInt(numStr));
+                    if(codice == null)
+                        prenotazioni.add(new Prenotazione(f, Integer.parseInt(numStr)));
+                    else
+                        prenotazioni.add(new Prenotazione(codice, f, Integer.parseInt(numStr)));
                 }
 
-                Visita visita = new Visita(data, tipo, stato, iscrizioni, iscritti);
+                Visita visita = new Visita(data, tipo, stato, prenotazioni, iscritti);                
                 listaVisite.aggiungiVisita(visita);
             }
 
@@ -267,16 +273,21 @@ public class XMLUtilities {
             visitaElement.appendChild(iscrittiElement);
 
             Element iscrizioniElement = doc.createElement("iscrizioni");
-            for (Fruitore fruitore : visita.getIscrizioni().keySet()) {
+            for (Prenotazione p : visita.getPrenotazioni()) {
                 Element iscrizioneElement = doc.createElement("iscrizione");
 
                 Element fruitorElement = doc.createElement("fruitore");
-                fruitorElement.setTextContent(fruitore.toString());
+                fruitorElement.setTextContent(p.getFruitore().toString());
                 iscrizioneElement.appendChild(fruitorElement);
 
                 Element numPersoneElement = doc.createElement("numPersone");
-                numPersoneElement.setTextContent(String.valueOf(visita.getIscrizioni().get(fruitore)));
+                numPersoneElement.setTextContent(String.valueOf(p.getNumPartecipanti()));
                 iscrizioneElement.appendChild(numPersoneElement);
+
+                Element codiceElement = doc.createElement("codice");
+                codiceElement.setTextContent(p.getCodice());
+                iscrizioneElement.appendChild(codiceElement);
+
 
                 iscrizioniElement.appendChild(iscrizioneElement);
             }
@@ -347,21 +358,26 @@ public class XMLUtilities {
             LocalDate data = LocalDate.parse(listaVisiteElem.getElementsByTagName("dataVisita").item(0).getTextContent());
             String tipoElem = listaVisiteElem.getElementsByTagName("tipo").item(0).getTextContent();
             TipoVisita tipo = elencoTV.getElementByKey(tipoElem);
-            HashMap<Fruitore, Integer> iscrizioni = new HashMap<>();
+            List<Prenotazione> prenotazioni = new ArrayList<>();
             NodeList iscrizioniNodes = ((Element) listaVisiteElem.getElementsByTagName("iscrizioni").item(0)).getElementsByTagName("iscrizione");
             for (int j = 0; j < iscrizioniNodes.getLength(); j++) {
                 Element iscrizioneElem = (Element) iscrizioniNodes.item(j);
 
                 String fruitoreStr = iscrizioneElem.getElementsByTagName("fruitore").item(0).getTextContent();
                 String numStr = iscrizioneElem.getElementsByTagName("numPersone").item(0).getTextContent();
+                NodeList codiceNode = iscrizioneElem.getElementsByTagName("codice");
+                String codice = codiceNode.getLength() > 0 ? codiceNode.item(0).getTextContent() : null;
 
                 Fruitore f = elencoF.getElementByKey(fruitoreStr);
                 if (f != null) {
-                    iscrizioni.put(f, Integer.parseInt(numStr));
+                    if(codice == null)
+                        prenotazioni.add(new Prenotazione(f, Integer.parseInt(numStr)));
+                    else
+                        prenotazioni.add(new Prenotazione(codice, f, Integer.parseInt(numStr)));
                 }
             }
             int iscritti = Integer.parseInt(listaVisiteElem.getElementsByTagName("iscritti").item(0).getTextContent());
-            Visita visita = new Visita(data, tipo, stato, iscrizioni, iscritti);
+            Visita visita = new Visita(data, tipo, stato, prenotazioni, iscritti);
             archivio.aggiungi(visita);
             }
         
@@ -396,16 +412,20 @@ public class XMLUtilities {
             visitaElement.appendChild(iscrittiElement);
 
             Element iscrizioniElement = doc.createElement("iscrizioni");
-            for (Fruitore fruitore : visita.getIscrizioni().keySet()) {
+            for (Prenotazione p : visita.getPrenotazioni()) {
                 Element iscrizioneElement = doc.createElement("iscrizione");
 
                 Element fruitorElement = doc.createElement("fruitore");
-                fruitorElement.setTextContent(fruitore.toString());
+                fruitorElement.setTextContent(p.getFruitore().toString());
                 iscrizioneElement.appendChild(fruitorElement);
 
                 Element numPersoneElement = doc.createElement("numPersone");
-                numPersoneElement.setTextContent(String.valueOf(visita.getIscrizioni().get(fruitore)));
+                numPersoneElement.setTextContent(String.valueOf(p.getNumPartecipanti()));
                 iscrizioneElement.appendChild(numPersoneElement);
+
+                Element codiceElement = doc.createElement("codice");
+                codiceElement.setTextContent(p.getCodice());
+                iscrizioneElement.appendChild(codiceElement);
 
                 iscrizioniElement.appendChild(iscrizioneElement);
             }

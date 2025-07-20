@@ -38,6 +38,8 @@ public class ControllerVolontario {
                 action.esprimiDisponibilita();
                 break;
             case 3:
+                action.visualizzaVisiteConfermate();
+            case 4:
                 return false;
             default:
                 view.stampaMessaggio("Scelta non valida");

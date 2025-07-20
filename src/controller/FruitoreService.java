@@ -5,6 +5,8 @@ import model.Fruitore;
 import model.GestoreFruitori;
 import model.GestoreVisite;
 import model.Utente;
+import model.Visita;
+import model.Prenotazione;
 import printer.FormatterRegister;
 import view.IView;
 
@@ -57,8 +59,8 @@ public class FruitoreService {
         
         String[] datiPrenotazione = view.prenotaVisita();
         try{
-            GestoreFruitori.getInstance().prenotaVisita(fruitore, datiPrenotazione);
-            view.stampaMessaggio("prenotazione effettuata con successo");
+            String codice = GestoreFruitori.getInstance().prenotaVisita(fruitore, datiPrenotazione);
+            view.stampaMessaggio("prenotazione effettuata con successo. Codice: " + codice);
         }catch(IllegalArgumentException e){
             view.stampaMessaggio("prenotazione non riuscita" + e.getMessage());
         }
@@ -66,15 +68,22 @@ public class FruitoreService {
     
     public void visualizzaPrenotazioni() {
         view.stampaMessaggio("visite prenotate: \n\n");
-        String prenotazioni = FormatterRegister.print(fruitore.getPrenotazioniVisite());
-        view.stampaMessaggio(prenotazioni);
+        StringBuilder sb = new StringBuilder();
+        for(Visita v : fruitore.getPrenotazioniVisite().getElenco().values()) {
+            sb.append(FormatterRegister.print(v));
+            for(Prenotazione p : v.getPrenotazioniPerFruitore(fruitore)) {
+                sb.append("  Codice prenotazione: ").append(p.getCodice()).append("\n");
+            }
+        }
+        view.stampaMessaggio(sb.toString());
     }
 
     public void annullaPrenotazione() {
         view.stampaMessaggio(FormatterRegister.print(fruitore.getPrenotazioniVisite()));
         String codiceVisita = view.sceltaString("inserire il codice della visita da annullare: ");
+        String id = view.sceltaString("inserire il codice univoco della prenotazione da annullare: ");
         try{
-            GestoreFruitori.getInstance().annullaPrenotazione(fruitore, codiceVisita);
+            GestoreFruitori.getInstance().annullaPrenotazione(fruitore, codiceVisita, id);
             view.stampaMessaggio("annullamento effettuato con successo");
         }catch(IllegalArgumentException e){
             view.stampaMessaggio("annullamento non riuscito" + e.getMessage());
