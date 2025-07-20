@@ -24,6 +24,8 @@ public class GestoreFruitori {
 
         String codiceVisita = datiPrenotazione[0];
         int numPersone = Integer.parseInt(datiPrenotazione[1]);
+        if(numPersone <= 0)
+            throw new IllegalArgumentException("Numero di partecipanti non valido");
         if(numPersone > DatiCondivisi.getNumeroMassimoIscrittiFruitore())
             throw new IllegalArgumentException("Numero di persone superiore al massimo consentito");
 
@@ -45,6 +47,9 @@ public class GestoreFruitori {
 
         try{
             Visita v = DatiCondivisi.getVisite().getElementByKey("0").getVisite().getElementByKey(c);
+
+            if(v.getStato().isNotAnnullabile())
+                throw new IllegalArgumentException("Visita non annullabile");
 
             v.rimuoviPrenotazione(f);
             f.rimuoviPrenotazione(v);

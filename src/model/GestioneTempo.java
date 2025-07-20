@@ -16,7 +16,9 @@ public class GestioneTempo {
     private GestioneTempo() {
         this.mesePartenza = YearMonth.from(getDataCorrente());
         for(int i = 0; i < 4; i++) {
-            DatiCondivisi.aggiungiListaDate(new ListaDate(String.valueOf(i)));
+            String key = String.valueOf(i);
+            if(!DatiCondivisi.getDatePrecluse().contiene(key))
+                DatiCondivisi.aggiungiListaDate(new ListaDate(key));
         }
     }
 
@@ -37,6 +39,7 @@ public class GestioneTempo {
             DatiCondivisi.apriRaccoltaDisponibilitaMese1();
             DatiCondivisi.chiudiRaccoltaDisponibilitaMese2();
         }
+        System.out.println("Conteggio mesi trascorsi: " + conteggio);
         aggiornaDatePrecluseMese(conteggio);
         GestoreVisite.getInstance().aggiornaVisiteMese(conteggio);
         DatiCondivisi.setDataUltimaEsecuzione(getDataCorrente());
@@ -55,10 +58,15 @@ public class GestioneTempo {
 
     private void aggiornaDatePrecluseMese(int mesi){
 
+        System.out.println("zero" + DatiCondivisi.getDatePrecluse().getElementByKey("0").getDate().size());
+        System.out.println("uno" + DatiCondivisi.getDatePrecluse().getElementByKey("1").getDate().size());
+        System.out.println("due" + DatiCondivisi.getDatePrecluse().getElementByKey("2").getDate().size());
+        System.out.println("tre" + DatiCondivisi.getDatePrecluse().getElementByKey("3").getDate().size());
+
         if (mesi > 5) mesi = 5;
     
         for (int step = 0; step < mesi; step++) {
-
+            System.out.println("Aggiornamento date precluse per " + (step + 1) + " mese/i.");
             for (int i = 1; i <= 3; i++) {
                 ListaDate sorgente = DatiCondivisi.getDatePrecluse().getElementByKey(String.valueOf(i));
                 ListaDate destinazione = DatiCondivisi.getDatePrecluse().getElementByKey(String.valueOf(i - 1));
@@ -66,11 +74,26 @@ public class GestioneTempo {
                 destinazione.getDate().clear();
                 destinazione.getDate().addAll(sorgente.getDate());
             }
+
+            // ListaDate meseZero = DatiCondivisi.getDatePrecluse().getElementByKey("0");
+            // ListaDate meseUno = DatiCondivisi.getDatePrecluse().getElementByKey("1");
+            // ListaDate meseDue = DatiCondivisi.getDatePrecluse().getElementByKey("2");
+            // ListaDate meseTre = DatiCondivisi.getDatePrecluse().getElementByKey("3");
+
+            // meseZero.getDate().addAll(meseUno.getDate());
+            // meseUno.getDate().addAll(meseDue.getDate());
+            // meseDue.getDate().addAll(meseTre.getDate());
+            // meseTre.getDate().clear();
     
 
             ListaDate meseTre = DatiCondivisi.getDatePrecluse().getElementByKey("3");
             if (meseTre != null) meseTre.getDate().clear();
         }
+
+        System.out.println("zero" + DatiCondivisi.getDatePrecluse().getElementByKey("0").getDate().size());
+        System.out.println("uno" + DatiCondivisi.getDatePrecluse().getElementByKey("1").getDate().size());
+        System.out.println("due" + DatiCondivisi.getDatePrecluse().getElementByKey("2").getDate().size());
+        System.out.println("tre" + DatiCondivisi.getDatePrecluse().getElementByKey("3").getDate().size());
     }
 
     public void passaggioTempo() {

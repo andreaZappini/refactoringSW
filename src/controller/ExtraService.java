@@ -43,7 +43,7 @@ public class ExtraService {
     public void rimuoviVolontario(){
         try{            
             view.stampaMessaggio("Volontario da rimuovere: ");
-            String username = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
+            String username = view.sceltaString(FormatterRegister.printCorto(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
             Volontario v = (Volontario)DatiCondivisi.getElencoUtenti().getElementByKey(username);
             configuratore.rimuoviVolontario(v);
         }catch(IllegalArgumentException e){
@@ -55,7 +55,7 @@ public class ExtraService {
     public void rimuoviLuogo() {
         try{
             view.stampaMessaggio("Luogo da rimuovere: ");
-            String codiceLuogo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+            String codiceLuogo = view.sceltaString(FormatterRegister.printCorto(DatiCondivisi.getElencoLuoghi()));
             Luogo l = DatiCondivisi.getElencoLuoghi().getElementByKey(codiceLuogo);
             configuratore.rimuoviLuogo(l);
         }catch(IllegalArgumentException e){
@@ -66,10 +66,10 @@ public class ExtraService {
     public void rimuoviTipoVisitaDaLuogo() {
         try{
             view.stampaMessaggio("che luogo scegli a cui rimuovere il tipo di visita: ");
-            String codiceLuogo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+            String codiceLuogo = view.sceltaString(FormatterRegister.printCorto(DatiCondivisi.getElencoLuoghi()));
             Luogo l = DatiCondivisi.getElencoLuoghi().getElementByKey(codiceLuogo);
             view.stampaMessaggio("che tipo di visita vuoi rimuovere: "); 
-            String titolo = view.sceltaString(FormatterRegister.print(l.getElencoVisite()));
+            String titolo = view.sceltaString(FormatterRegister.printCorto(l.getElencoVisite()));
             TipoVisita t = l.getElencoVisite().getElementByKey(titolo);
             configuratore.rimuoviTipoVisitaDaLuogo(l, t);
         }catch(IllegalArgumentException e){
@@ -167,7 +167,7 @@ public class ExtraService {
     public void aggiungiTipoVisitaLuogo(){
         try{
             view.stampaMessaggio("Luogo a cui aggiungere il tipo di visita: ");
-            String codiceLuogo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoLuoghi()));
+            String codiceLuogo = view.sceltaString(FormatterRegister.printCorto(DatiCondivisi.getElencoLuoghi()));
             Luogo l = DatiCondivisi.getElencoLuoghi().getElementByKey(codiceLuogo);
             aggiungiVisita(l);
         }catch(IllegalArgumentException e){
@@ -181,9 +181,9 @@ public class ExtraService {
             String s = "";
             do{
                 view.stampaMessaggio("scegli un tipo di visita: (x per uscire)");
-                s = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
+                s = view.sceltaString(FormatterRegister.printCorto(DatiCondivisi.getElencoTipiVisita()));
                 if(s.equals("x"))
-                    continue;
+                    break;
                 TipoVisita t = DatiCondivisi.getElencoTipiVisita().getElementByKey(s);
                 t.aggiungiLuogo(l);
                 l.aggiungiAElencoVisite(t);
@@ -198,7 +198,7 @@ public class ExtraService {
     public void aggiungiVolontarioTipoVisita(){
         try{
             view.stampaMessaggio("Titolo del tipo di visita a cui aggiungere il volontario: ");
-            String titolo = view.sceltaString(FormatterRegister.print(DatiCondivisi.getElencoTipiVisita()));
+            String titolo = view.sceltaString(FormatterRegister.printCorto(DatiCondivisi.getElencoTipiVisita()));
             TipoVisita t = DatiCondivisi.getElencoTipiVisita().getElementByKey(titolo);
             aggiungiVolontario(t);
         }catch (IllegalArgumentException e){
@@ -210,10 +210,11 @@ public class ExtraService {
 
     public void aggiungiVolontario(TipoVisita t){
         String s = "";
+        boolean aggiunto = false;
         try{
             do{
                 Volontario v = null;
-                view.stampaMessaggio(FormatterRegister.print(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
+                view.stampaMessaggio(FormatterRegister.printCorto(DatiCondivisi.getElencoUtenti().getClassiUtente(Volontario.class)));
                 s = view.sceltaString("aggiungi volontario esistente(e) / aggiungi volontario nuovo(n) / esci(x): ");
     
                 if(s.equals("e")){
@@ -223,8 +224,10 @@ public class ExtraService {
                 else if(s.equals("n"))
                     v = creaVolontario();
     
-                else if(s.equals("x"))
-                    continue;
+                else if(s.equals("x")){
+                    if(!aggiunto)
+                        view.stampaMessaggio("deve esserci almeno un volontario");
+                }
                 
                 else{
                     view.stampaMessaggio("scelta non valida");
@@ -233,8 +236,9 @@ public class ExtraService {
                 if(v != null){
                     t.aggiungiVolontario(v);
                     v.aggiungiVisitaVolontario(t);
+                    aggiunto = true;
                 }
-            }while(!s.equals("x"));
+            }while(!s.equals("x") || !aggiunto);
         }catch(IllegalArgumentException e){
             view.stampaMessaggio(e.getMessage());
             return;

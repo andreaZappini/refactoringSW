@@ -19,6 +19,15 @@
         <elencoTipiVisita>
             <elemento>t</elemento>
         </elencoTipiVisita>
+        <elencoDisponibilita/>
+        <username>volo2</username>
+        <password>2</password>
+        <primoAccesso>true</primoAccesso>
+    </Volontario>
+    <Volontario>
+        <elencoTipiVisita>
+            <elemento>t</elemento>
+        </elencoTipiVisita>
         <elencoDisponibilita>
             <elemento>4992-02-11</elemento>
             <elemento>4995-09-12</elemento>

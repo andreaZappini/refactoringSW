@@ -14,4 +14,8 @@ public interface StatiVisita {
     default boolean isDisponibile() {
         return false;
     }
+
+    default boolean isNotAnnullabile() {
+        return true;
+    }
 }

@@ -20,9 +20,11 @@
         <minPartecipanti>2</minPartecipanti>
         <maxPartecipanti>9</maxPartecipanti>
         <elencoVolontari>
+            <elemento>volo2</elemento>
             <elemento>volo1</elemento>
         </elencoVolontari>
         <elencoLuoghi>
+            <elemento>a</elemento>
             <elemento>poi</elemento>
         </elencoLuoghi>
     </TipoVisita>

@@ -17,7 +17,7 @@ public class ListaDate {
     }
 
     public ArrayList<LocalDate> getDate() {
-        return date;
+        return this.date;
     }
 
     @Override

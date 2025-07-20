@@ -20,11 +20,7 @@ public class Controller{
 
     public void start(boolean primaConfigurazione) throws Exception{
         
-        if(!primaConfigurazione){
-
-            RipristinoDati.datiCondivisi();
-            System.out.println(DatiCondivisi.getDatePrecluse().getElementByKey("0").getDate().size());
-        }else{
+        if(primaConfigurazione){
 
             RipristinoDati.primoConfiguratore();
             boolean primoAccesso = true;

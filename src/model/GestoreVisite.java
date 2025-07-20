@@ -7,8 +7,10 @@ public class GestoreVisite {
     private static final GestoreVisite instance = new GestoreVisite();
 
     private GestoreVisite() {
-        DatiCondivisi.aggiungiVisita(new ListaVisite("0"));
-        DatiCondivisi.aggiungiVisita(new ListaVisite("1"));
+        if(!DatiCondivisi.getVisite().contiene("0"))
+            DatiCondivisi.aggiungiVisita(new ListaVisite("0"));
+        if(!DatiCondivisi.getVisite().contiene("1"))
+            DatiCondivisi.aggiungiVisita(new ListaVisite("1"));
     }
     public static GestoreVisite getInstance() {
         return instance;

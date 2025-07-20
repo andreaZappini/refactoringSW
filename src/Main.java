@@ -21,6 +21,8 @@ public class Main {
         boolean primaConfigurazione = RipristinoDati.datiRipristino();
         if(primaConfigurazione)
             DatiCondivisi.setDataUltimaEsecuzione(LocalDate.of(2025, 4, 30));
+        else
+            RipristinoDati.datiCondivisi();
 
         GestoreVisite.getInstance();
         GestioneTempo.getInstance();

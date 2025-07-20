@@ -20,4 +20,8 @@ public class VisitaCompleta implements StatiVisita {
         return "COMPLETA";
     }
 
+    @Override
+    public boolean isPrenotabile() {
+        return false;
+    }
 }

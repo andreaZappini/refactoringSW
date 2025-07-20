@@ -73,6 +73,9 @@ public class Visita {
 
     public void aggiungiIscrizione(Fruitore fruitore, int numPersone) {
 
+        if(numPersone <= 0)
+            throw new IllegalArgumentException("Numero di partecipanti non valido");
+
         if(this.iscritti + numPersone <= this.tipo.getMaxPartecipanti()){
             iscritti += numPersone;
             if(iscrizioni.containsKey(fruitore)){

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Luoghi>
     <Luogo>
+        <codiceLuogo>a</codiceLuogo>
+        <descrizione>a</descrizione>
+        <collocazioneGeografica>a</collocazioneGeografica>
+        <visite>
+            <elemento>t</elemento>
+        </visite>
+    </Luogo>
+    <Luogo>
         <codiceLuogo>poi</codiceLuogo>
         <descrizione>o</descrizione>
         <collocazioneGeografica>i</collocazioneGeografica>

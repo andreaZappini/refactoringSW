@@ -84,14 +84,22 @@ public class Configuratore extends Utente{
     }
 
     public void rimuoviLuogo(Luogo l){
-        DatiCondivisi.rimuoviLuogo(l);
-        for(TipoVisita t : l.getElencoVisite().getElenco().values()){
-            t.rimuoviLuogo(l);
-            for(Volontario v : t.getElencoVolontari().getElenco().values()){
+        for(TipoVisita t : new ArrayList<>(l.getElencoVisite().getElenco().values())){
+
+            for(Volontario v : new ArrayList<>(t.getElencoVolontari().getElenco().values())){                
                 v.rimuoviTipoVisita(t);
                 t.rimuoviVolontario(v);
             }
+            for(Luogo luogo : new ArrayList<>(t.getElencoLuoghi().getElenco().values())){
+                luogo.rimuoviDaElencoTipiVisita(t);
+                t.getElencoLuoghi().getElenco().remove(luogo.toString());
+            }
+
+            if(DatiCondivisi.getElencoTipiVisita().contiene(t.toString()))
+                DatiCondivisi.rimuoviTipoVisita(t);
         }
+        if(DatiCondivisi.getElencoLuoghi().contiene(l.toString()))
+            DatiCondivisi.rimuoviLuogo(l);
     }
 
     public void rimuoviVolontario(Volontario v) {

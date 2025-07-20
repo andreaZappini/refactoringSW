@@ -34,4 +34,10 @@ public class VisitaProposta implements StatiVisita {
     public boolean isDisponibile() {
         return true;
     }
+
+
+    @Override
+    public boolean isNotAnnullabile() {
+        return false;  
+    }
 }
