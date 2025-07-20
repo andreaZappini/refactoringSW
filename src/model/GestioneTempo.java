@@ -8,7 +8,7 @@ public class GestioneTempo {
 
     private static final LocalDate DATA_INIZIALE = LocalDate.of(2025, 5, 11);
     private static final Instant TEMPO_REALE_INIZIALE = Instant.parse("2025-05-11T00:00:00Z");
-    private static final long SECONDI_PER_GIORNO_SIMULATO = 5;
+    private static final long SECONDI_PER_GIORNO_SIMULATO = 86400; // 24 ore * 60 minuti * 60 secondi
 
     // Singleton
     private static final GestioneTempo instance = new GestioneTempo();

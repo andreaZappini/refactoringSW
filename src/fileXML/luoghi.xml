@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Luoghi>
     <Luogo>
-        <codiceLuogo>a</codiceLuogo>
-        <descrizione>a</descrizione>
-        <collocazioneGeografica>a</collocazioneGeografica>
+        <codiceLuogo>dente del gigante</codiceLuogo>
+        <descrizione>cima secondaria del bianco</descrizione>
+        <collocazioneGeografica>monte bianco</collocazioneGeografica>
         <visite>
-            <elemento>t</elemento>
-        </visite>
-    </Luogo>
-    <Luogo>
-        <codiceLuogo>poi</codiceLuogo>
-        <descrizione>o</descrizione>
-        <collocazioneGeografica>i</collocazioneGeografica>
-        <visite>
-            <elemento>t</elemento>
+            <elemento>esplorando le cime del bianco</elemento>
         </visite>
     </Luogo>
 </Luoghi>

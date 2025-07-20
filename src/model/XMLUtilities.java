@@ -6,9 +6,8 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.function.Function;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -74,7 +73,7 @@ public class XMLUtilities {
                 TipoVisita tipo = elencoTV.getElementByKey(tipoElem);
 
                 int iscritti = Integer.parseInt(visitaElem.getElementsByTagName("iscritti").item(0).getTextContent());
-                List<Prenotazione> prenotazioni = new ArrayList<>();
+                HashMap<Fruitore, Prenotazione> prenotazioni = new HashMap<>();
 
                 NodeList iscrizioniNodes = ((Element) visitaElem.getElementsByTagName("iscrizioni").item(0)).getElementsByTagName("iscrizione");
                 for (int k = 0; k < iscrizioniNodes.getLength(); k++) {
@@ -87,9 +86,9 @@ public class XMLUtilities {
 
                     Fruitore f = elencoF.getElementByKey(fruitoreStr);
                     if(codice == null)
-                        prenotazioni.add(new Prenotazione(f, Integer.parseInt(numStr)));
+                        prenotazioni.put(f, new Prenotazione(f, Integer.parseInt(numStr)));
                     else
-                        prenotazioni.add(new Prenotazione(codice, f, Integer.parseInt(numStr)));
+                        prenotazioni.put(f, new Prenotazione(codice, f, Integer.parseInt(numStr)));
                 }
 
                 Visita visita = new Visita(data, tipo, stato, prenotazioni, iscritti);                
@@ -273,7 +272,7 @@ public class XMLUtilities {
             visitaElement.appendChild(iscrittiElement);
 
             Element iscrizioniElement = doc.createElement("iscrizioni");
-            for (Prenotazione p : visita.getPrenotazioni()) {
+            for (Prenotazione p : visita.getPrenotazioni().values()) {
                 Element iscrizioneElement = doc.createElement("iscrizione");
 
                 Element fruitorElement = doc.createElement("fruitore");
@@ -358,7 +357,7 @@ public class XMLUtilities {
             LocalDate data = LocalDate.parse(listaVisiteElem.getElementsByTagName("dataVisita").item(0).getTextContent());
             String tipoElem = listaVisiteElem.getElementsByTagName("tipo").item(0).getTextContent();
             TipoVisita tipo = elencoTV.getElementByKey(tipoElem);
-            List<Prenotazione> prenotazioni = new ArrayList<>();
+            HashMap<Fruitore, Prenotazione> prenotazioni = new HashMap<>();
             NodeList iscrizioniNodes = ((Element) listaVisiteElem.getElementsByTagName("iscrizioni").item(0)).getElementsByTagName("iscrizione");
             for (int j = 0; j < iscrizioniNodes.getLength(); j++) {
                 Element iscrizioneElem = (Element) iscrizioniNodes.item(j);
@@ -371,9 +370,9 @@ public class XMLUtilities {
                 Fruitore f = elencoF.getElementByKey(fruitoreStr);
                 if (f != null) {
                     if(codice == null)
-                        prenotazioni.add(new Prenotazione(f, Integer.parseInt(numStr)));
+                        prenotazioni.put(f, new Prenotazione(f, Integer.parseInt(numStr)));
                     else
-                        prenotazioni.add(new Prenotazione(codice, f, Integer.parseInt(numStr)));
+                        prenotazioni.put(f, new Prenotazione(codice, f, Integer.parseInt(numStr)));
                 }
             }
             int iscritti = Integer.parseInt(listaVisiteElem.getElementsByTagName("iscritti").item(0).getTextContent());
@@ -412,7 +411,7 @@ public class XMLUtilities {
             visitaElement.appendChild(iscrittiElement);
 
             Element iscrizioniElement = doc.createElement("iscrizioni");
-            for (Prenotazione p : visita.getPrenotazioni()) {
+            for (Prenotazione p : visita.getPrenotazioni().values()) {
                 Element iscrizioneElement = doc.createElement("iscrizione");
 
                 Element fruitorElement = doc.createElement("fruitore");

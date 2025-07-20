@@ -3,12 +3,11 @@ package controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import model.DatiCondivisi;
 import model.GestoreVisite;
-import model.ListaVisite;
+import model.Prenotazione;
 import model.Visita;
 import model.Volontario;
-import model.stato.VisitaConfermata;
+
 import printer.FormatterRegister;
 import view.IView;
 
@@ -62,11 +61,13 @@ public class VolontarioService {
     }
 
     public void visualizzaVisiteConfermate() {
-        ListaVisite lv = DatiCondivisi.getVisite().getElementByKey("0");
-        for (Visita v : lv.getVisite().getElenco().values()) {
-                if (volontario.equals(v.getVolontario()) && v.getStato() instanceof VisitaConfermata) {
-                    view.stampaMessaggio("Codice: " + v.toString() + " - partecipanti: " + v.getIscritti());
-                }
+
+        for(Visita v : volontario.visiteConfermate().getElenco().values()) {
+            view.stampaMessaggio(FormatterRegister.print(v));
+            view.stampaMessaggio("Partecipanti: " + v.getIscritti());
+            for(Prenotazione p : v.getPrenotazioni().values()) {
+                view.stampaMessaggio(FormatterRegister.print(p));
             }
+        }
     }
 }

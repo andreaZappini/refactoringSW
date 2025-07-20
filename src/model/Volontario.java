@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import model.stato.VisitaConfermata;
+
 public class Volontario extends Utente {
 
     private Elenco<TipoVisita> elencoTipiVisita;
@@ -74,5 +76,19 @@ public class Volontario extends Utente {
             }
         }
         return date;
+    }
+
+    public Elenco<Visita> visiteConfermate() {
+        Elenco<Visita> visiteConfermate = new Elenco<>();
+        ListaVisite lv = DatiCondivisi.getVisite().getElementByKey("0");
+        for (Visita v : lv.getVisite().getElenco().values()) {
+            if(v.getTipo().getElencoVolontari().contiene(this.toString()) && 
+            this.elencoDisponibilita.contiene(v.getDataVisita().toString()) &&
+             v.getStato() instanceof VisitaConfermata) {
+                visiteConfermate.aggiungi(v);
+            }
+            
+        }
+        return visiteConfermate;
     }
 }

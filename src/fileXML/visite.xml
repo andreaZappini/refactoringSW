@@ -2,15 +2,37 @@
 <Visite>
     <ListaVisite>
         <chiave>0</chiave>
-        <visite/>
+        <visite>
+            <visita>
+                <dataVisita>2025-09-24</dataVisita>
+                <stato>COMPLETA</stato>
+                <tipo>esplorando le cime del bianco</tipo>
+                <iscritti>8</iscritti>
+                <iscrizioni/>
+            </visita>
+            <visita>
+                <dataVisita>2025-09-25</dataVisita>
+                <stato>PROPOSTA</stato>
+                <tipo>esplorando le cime del bianco</tipo>
+                <iscritti>4</iscritti>
+                <iscrizioni/>
+            </visita>
+            <visita>
+                <dataVisita>2025-09-26</dataVisita>
+                <stato>PROPOSTA</stato>
+                <tipo>esplorando le cime del bianco</tipo>
+                <iscritti>4</iscritti>
+                <iscrizioni/>
+            </visita>
+        </visite>
     </ListaVisite>
     <ListaVisite>
         <chiave>1</chiave>
         <visite>
             <visita>
-                <dataVisita>5374-11-10</dataVisita>
+                <dataVisita>2025-09-13</dataVisita>
                 <stato>PROPONIBILE</stato>
-                <tipo>t</tipo>
+                <tipo>esplorando le cime del bianco</tipo>
                 <iscritti>0</iscritti>
                 <iscrizioni/>
             </visita>

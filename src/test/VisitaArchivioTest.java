@@ -40,7 +40,7 @@ public class VisitaArchivioTest {
     @Test
     public void propostaDiventaEffettuataEArchiviata() {
         LocalDate dataPassata = GestioneTempo.getInstance().getDataCorrente().minusDays(1);
-        Visita visita = new Visita(dataPassata, tipo, new VisitaConfermata(), new java.util.ArrayList<>(), 0);
+        Visita visita = new Visita(dataPassata, tipo, new VisitaConfermata(), new java.util.HashMap<>(), 0);
         visita.aggiornaStato();
 
         assertTrue(visita.getStato() instanceof VisitaEffettuata);

@@ -32,9 +32,9 @@ public class Visita {
         this.iscritti = iscritti;
     }  
     
-    public Volontario getVolontario() {
-        return tipo.getVolontario();
-    }
+    // public Volontario getVolontario() {
+    //     return tipo.getVolontario();
+    // }
 
     public StatiVisita getStato() {
         return stato;
@@ -87,7 +87,7 @@ public class Visita {
         return this.tipo.toString() + "-" + this.dataVisita.toString();
     }
 
-    public void aggiungiPrenotazione(Prenotazione prenotazione) {
+    public void aggiungiPrenotazione(Fruitore f, Prenotazione prenotazione) {
         int numPersone = prenotazione.getNumPartecipanti();
 
         if(numPersone <= 0)
@@ -95,21 +95,24 @@ public class Visita {
 
         if(this.iscritti + numPersone <= this.tipo.getMaxPartecipanti()){
             iscritti += numPersone;
-            prenotazioni.add(prenotazione);
+            try{
+                prenotazioni.put(f,prenotazione);
+            }catch(IllegalArgumentException e){
+                throw new IllegalArgumentException("Prenotazione già esistente");
+            }
             stato.gestisciTransizione(this);
         }else
             throw new IllegalArgumentException("Numero di iscritti superato");
     }
 
-    public void rimuoviPrenotazione(Fruitore fruitore) {
+    public void rimuoviPrenotazione(Fruitore fruitore, String id) {
         boolean removed = false;
-        for (int i = prenotazioni.size() - 1; i >= 0; i--) {
-            Prenotazione p = prenotazioni.get(i);
-            if(p.getFruitore().equals(fruitore)) {
-                iscritti -= p.getNumPartecipanti();
-                prenotazioni.remove(i);
-                removed = true;
-            }
+        Prenotazione p = prenotazioni.get(fruitore);
+        if(p.getCodice() == id) {
+            iscritti -= p.getNumPartecipanti();
+            prenotazioni.remove(fruitore);
+        } else {
+            throw new IllegalArgumentException("Prenotazione non trovata");
         }
         if(removed) {
             stato.gestisciTransizione(this);
