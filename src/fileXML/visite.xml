@@ -8,21 +8,49 @@
                 <stato>COMPLETA</stato>
                 <tipo>esplorando le cime del bianco</tipo>
                 <iscritti>8</iscritti>
-                <iscrizioni/>
+                <iscrizioni>
+                    <iscrizione>
+                        <fruitore>Anna</fruitore>
+                        <numPersone>4</numPersone>
+                        <codice>a1</codice>
+                    </iscrizione>
+                    <iscrizione>
+                        <fruitore>Luigi</fruitore>
+                        <numPersone>4</numPersone>
+                        <codice>a2</codice>
+                    </iscrizione>
+                </iscrizioni>
             </visita>
             <visita>
                 <dataVisita>2025-09-25</dataVisita>
                 <stato>PROPOSTA</stato>
                 <tipo>esplorando le cime del bianco</tipo>
                 <iscritti>4</iscritti>
-                <iscrizioni/>
+                <iscrizioni>
+                    <iscrizione>
+                        <fruitore>Luigi</fruitore>
+                        <numPersone>4</numPersone>
+                        <codice>a2</codice>
+                    </iscrizione>
+                </iscrizioni>
             </visita>
             <visita>
                 <dataVisita>2025-09-26</dataVisita>
                 <stato>PROPOSTA</stato>
                 <tipo>esplorando le cime del bianco</tipo>
                 <iscritti>4</iscritti>
-                <iscrizioni/>
+                <iscrizioni>
+                    <iscrizione>
+                        <fruitore>Mario</fruitore>
+                        <numPersone>2</numPersone>
+                        <codice>a3</codice>
+                    </iscrizione>
+                    <iscrizione>
+                        <fruitore>Anna</fruitore>
+                        <numPersone>2</numPersone>
+                        <codice>a4</codice>
+                    </iscrizione>
+                </iscrizioni>
             </visita>
         </visite>
     </ListaVisite>

@@ -12,7 +12,8 @@ public class ControllerVolontario {
                 + "\nBenvenuto Volontario! Scegli una delle seguenti alternative: \n\n" +
                 "1. Visualizzare tutti i tipi di visita a cui sei associato\n" +
                 "2. Esprimere le disponibilità in termini di date\n" +
-                "3. Logout\n" +
+                "3. Visualizzare le visite confermate\n" +
+                "4. Logout\n" +
                 "--> ";
 
 
@@ -39,6 +40,7 @@ public class ControllerVolontario {
                 break;
             case 3:
                 action.visualizzaVisiteConfermate();
+                break;
             case 4:
                 return false;
             default:
@@ -46,7 +48,4 @@ public class ControllerVolontario {
         }
         return true;
     }
-
-    
-
 }
