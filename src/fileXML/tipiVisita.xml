@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <TipiVisita>
     <TipoVisita>
-        <titolo>esplorando le cime del bianco</titolo>
-        <descrizione>gita sulle vette secondarie del monte bianco</descrizione>
-        <puntoIncontro>rifugio bel vedere</puntoIncontro>
-        <periodoAnno>inverno</periodoAnno>
+        <titolo>t</titolo>
+        <descrizione>t</descrizione>
+        <puntoIncontro>t</puntoIncontro>
+        <periodoAnno>t</periodoAnno>
         <giorniDisponibili>
             <elemento>SABATO</elemento>
         </giorniDisponibili>
-        <oraInizio>10.0</oraInizio>
-        <durata>240</durata>
-        <bigliettoNecessario>N</bigliettoNecessario>
-        <minPartecipanti>4</minPartecipanti>
-        <maxPartecipanti>8</maxPartecipanti>
+        <oraInizio>5.0</oraInizio>
+        <durata>6</durata>
+        <bigliettoNecessario>S</bigliettoNecessario>
+        <minPartecipanti>8</minPartecipanti>
+        <maxPartecipanti>9</maxPartecipanti>
         <elencoVolontari>
             <elemento>volo1</elemento>
         </elencoVolontari>
         <elencoLuoghi>
-            <elemento>dente del gigante</elemento>
+            <elemento>p</elemento>
         </elencoLuoghi>
     </TipoVisita>
 </TipiVisita>

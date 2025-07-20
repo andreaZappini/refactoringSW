@@ -7,17 +7,19 @@
     </Configuratore>
     <Volontario>
         <elencoTipiVisita>
-            <elemento>esplorando le cime del bianco</elemento>
+            <elemento>t</elemento>
         </elencoTipiVisita>
         <elencoDisponibilita>
-            <elemento>2025-09-25</elemento>
-            <elemento>2025-09-13</elemento>
-            <elemento>2025-09-24</elemento>
-            <elemento>2025-09-26</elemento>
+            <elemento>2025-07-22</elemento>
+            <elemento>2025-07-23</elemento>
+            <elemento>2025-07-21</elemento>
+            <elemento>2025-07-26</elemento>
+            <elemento>2025-07-24</elemento>
+            <elemento>2025-07-25</elemento>
         </elencoDisponibilita>
         <username>volo1</username>
         <password>1</password>
-        <primoAccesso>false</primoAccesso>
+        <primoAccesso>true</primoAccesso>
     </Volontario>
     <Fruitore>
         <username>Luigi</username>

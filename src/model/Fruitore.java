@@ -11,6 +11,11 @@ public class Fruitore extends Utente{
     }
 
     public Elenco<Visita> getPrenotazioniVisite() {
+        for(Visita v : prenotazioniVisite.getElenco().values()) 
+            if(v.getStato() instanceof model.stato.VisitaCancellata) 
+                prenotazioniVisite.rimuovi(v);
+
+        
         return prenotazioniVisite;
     }
 

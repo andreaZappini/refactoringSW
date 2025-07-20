@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <datiDiConfigurazione>
   <primaConfigurazione>false</primaConfigurazione>
-  <ambitoTerritoriale>monte bianco</ambitoTerritoriale>
+  <ambitoTerritoriale>montagna</ambitoTerritoriale>
   <numeroMassimoIscritti>6</numeroMassimoIscritti>
-  <raccoltaDisponibilitaMese1>CHIUSA</raccoltaDisponibilitaMese1>
+  <raccoltaDisponibilitaMese1>APERTA</raccoltaDisponibilitaMese1>
   <raccoltaDisponibilitaMese2>CHIUSA</raccoltaDisponibilitaMese2>
-  <dataUltimaEsecuzione>2025-07-20</dataUltimaEsecuzione>
+  <dataUltimaEsecuzione>2025-07-21</dataUltimaEsecuzione>
 </datiDiConfigurazione>
