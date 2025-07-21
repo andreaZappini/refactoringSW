@@ -5,7 +5,7 @@
         <visite>
             <visita>
                 <dataVisita>2025-07-24</dataVisita>
-                <stato>COMPLETA</stato>
+                <stato>CONFERMATA</stato>
                 <tipo>t</tipo>
                 <iscritti>9</iscritti>
                 <iscrizioni>
@@ -38,24 +38,6 @@
                         <fruitore>Luigi</fruitore>
                         <numPersone>2</numPersone>
                         <codice>a8</codice>
-                    </iscrizione>
-                </iscrizioni>
-            </visita>
-            <visita>
-                <dataVisita>2025-07-21</dataVisita>
-                <stato>CANCELLATA</stato>
-                <tipo>t</tipo>
-                <iscritti>2</iscritti>
-                <iscrizioni>
-                    <iscrizione>
-                        <fruitore>Anna</fruitore>
-                        <numPersone>2</numPersone>
-                        <codice>a1</codice>
-                    </iscrizione>
-                    <iscrizione>
-                        <fruitore>Luigi</fruitore>
-                        <numPersone>2</numPersone>
-                        <codice>a9</codice>
                     </iscrizione>
                 </iscrizioni>
             </visita>

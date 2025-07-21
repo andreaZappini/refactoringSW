@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Fruitore extends Utente{
 
     private Elenco<Visita> prenotazioniVisite;
@@ -11,12 +13,21 @@ public class Fruitore extends Utente{
     }
 
     public Elenco<Visita> getPrenotazioniVisite() {
-        for(Visita v : prenotazioniVisite.getElenco().values()) 
-            if(v.getStato() instanceof model.stato.VisitaCancellata) 
-                prenotazioniVisite.rimuovi(v);
 
+        rimuoviCancellate();
         
         return prenotazioniVisite;
+    }
+
+    private void rimuoviCancellate() {
+
+        ArrayList<Visita> daRimuovere = new ArrayList<>();
+        for(Visita v : prenotazioniVisite.getElenco().values()) 
+            if(v.getStato() instanceof model.stato.VisitaCancellata) 
+                daRimuovere.add(v);
+
+        for(Visita v : daRimuovere)
+            prenotazioniVisite.rimuovi(v);
     }
 
     public void aggiungiPrenotazione(Visita visita) {

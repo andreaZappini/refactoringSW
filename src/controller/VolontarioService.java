@@ -47,7 +47,11 @@ public class VolontarioService {
                     try {
                         LocalDate dataGiorno = LocalDate.parse(s);
                         if(dataGiorno != null){
-                            volontario.aggiungiDisponibilita(dataGiorno);
+                            if(!date.contains(dataGiorno))
+                                view.stampaMessaggio("Data non disponibile, si prega di riprovare");
+                            else{
+                                volontario.aggiungiDisponibilita(dataGiorno);
+                            }
                         }else{
                             view.stampaMessaggio("giorno non valido");
                         }

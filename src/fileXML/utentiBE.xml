@@ -19,7 +19,7 @@
         </elencoDisponibilita>
         <username>volo1</username>
         <password>1</password>
-        <primoAccesso>true</primoAccesso>
+        <primoAccesso>false</primoAccesso>
     </Volontario>
     <Fruitore>
         <username>Luigi</username>
