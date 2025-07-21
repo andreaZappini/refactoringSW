@@ -10,12 +10,6 @@ public class GestoreFruitori {
         return instance;
     }
 
-
-    public void aggiungiFruitore(String nome, String password) {
-        UserFactory.creaFruitore(nome, password);
-    }
-
-
     public boolean verificaPSW(String p1, String p2) {
         return (p1 != null && p1.equals(p2));
     }

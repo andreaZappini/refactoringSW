@@ -8,6 +8,7 @@ import model.Utente;
 import model.Visita;
 import printer.FormatterRegister;
 import model.Prenotazione;
+import model.UserFactory;
 import view.IView;
 
 public class FruitoreService {
@@ -109,7 +110,7 @@ public class FruitoreService {
             view.stampaMessaggio("utente gia' registrato");
         }catch(IllegalArgumentException e){
 
-            GestoreFruitori.getInstance().aggiungiFruitore(username, password_1);
+            UserFactory.creaFruitore(username, password_1);
         }
     }
     

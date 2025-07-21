@@ -146,7 +146,9 @@ public class ConfiguratoreService {
         while(!ok){
             try {
                 String[] dati = view.creaUtente("configuratore");
-                configuratore.creaConfiguratore(dati);
+                String username = dati[0];
+                String password = dati[1];
+                UserFactory.creaConfiguratore(username, password);
                 ok = true;
             } catch (Exception e) {
                 view.stampaMessaggio(e.getMessage());
@@ -334,7 +336,9 @@ public class ConfiguratoreService {
         while(!ok){
             try {
                 String[] dati = view.creaUtente("volontario");
-                configuratore.creaVolontario(dati);
+                String username = dati[0];
+                String password = dati[1];
+                UserFactory.creaVolontario(username, password);
                 ok = true;
             } catch (Exception e) {
                view.stampaMessaggio(e.getMessage());

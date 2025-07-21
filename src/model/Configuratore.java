@@ -24,28 +24,6 @@ public class Configuratore extends Utente{
         return l;
     }
 
-    public void creaVolontario(String[] dati){
-
-        try{
-            String username = dati[0];
-            String password = dati[1];
-            UserFactory.creaVolontario(username, password);
-        }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("Errore nella creazione del volontario: " + e.getMessage());
-        }
-    }
-
-    public void creaConfiguratore(String[] dati){
-
-        try{
-            String username = dati[0];
-            String password = dati[1];
-            UserFactory.creaConfiguratore(username, password);
-        }catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("Errore nella creazione del configuratore: " + e.getMessage());
-        }
-    }
-
     public void creaTipoVisita(
             String titolo,
             String descrizione,

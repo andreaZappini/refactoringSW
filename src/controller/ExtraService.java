@@ -7,6 +7,7 @@ import model.DatiCondivisi;
 import model.Giorni;
 import model.Luogo;
 import model.TipoVisita;
+import model.UserFactory;
 import model.Volontario;
 import printer.FormatterRegister;
 import view.IView;
@@ -249,7 +250,9 @@ public class ExtraService {
 
         try{
             String[] dati = view.creaUtente("volontario");
-            configuratore.creaVolontario(dati);
+            String username = dati[0];
+            String password = dati[1];
+            UserFactory.creaVolontario(username, password);
     
             return (Volontario)DatiCondivisi.getElencoUtenti().getElementByKey(dati[0]);
         }catch(Exception e){
