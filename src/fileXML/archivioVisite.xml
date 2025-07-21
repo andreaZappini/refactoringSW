@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <visite>
     <visita>
+        <dataVisita>2025-07-14</dataVisita>
+        <stato>EFFETTUATA</stato>
+        <tipo>cavallo</tipo>
+        <iscritti>4</iscritti>
+        <iscrizioni>
+            <iscrizione>
+                <fruitore>Mario</fruitore>
+                <numPersone>4</numPersone>
+                <codice>a20</codice>
+            </iscrizione>
+        </iscrizioni>
+    </visita>
+    <visita>
         <dataVisita>2025-07-19</dataVisita>
         <stato>EFFETTUATA</stato>
         <tipo>monte</tipo>
@@ -15,19 +28,6 @@
                 <fruitore>Anna</fruitore>
                 <numPersone>6</numPersone>
                 <codice>a13</codice>
-            </iscrizione>
-        </iscrizioni>
-    </visita>
-    <visita>
-        <dataVisita>2025-07-14</dataVisita>
-        <stato>EFFETTUATA</stato>
-        <tipo>cavallo</tipo>
-        <iscritti>4</iscritti>
-        <iscrizioni>
-            <iscrizione>
-                <fruitore>Mario</fruitore>
-                <numPersone>4</numPersone>
-                <codice>a20</codice>
             </iscrizione>
         </iscrizioni>
     </visita>

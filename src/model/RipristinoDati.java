@@ -197,10 +197,17 @@ public class RipristinoDati {
 
         NodeList visiteNodes = elemento.getElementsByTagName("visite");
         for (int i = 0; i < visiteNodes.getLength(); i++) {
-            String nomeVisita = visiteNodes.item(i).getTextContent().trim();
-            TipoVisita t = visite.getElementByKey(nomeVisita);
-            if (t != null) {
-                l.aggiungiAElencoVisite(t);
+            Element visiteElem = (Element) visiteNodes.item(i);
+            NodeList nomeVisite = visiteElem.getElementsByTagName("elemento");
+            for (int j = 0; j < nomeVisite.getLength(); j++) {
+                String nomeVisita = nomeVisite.item(j).getTextContent().trim();
+                if (nomeVisita.isEmpty()) continue;
+                try {
+                    TipoVisita t = visite.getElementByKey(nomeVisita);
+                    l.aggiungiAElencoVisite(t);
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Visita '" + nomeVisita + "' non trovata per il luogo " + codiceLuogo);
+                }
             }
         }
         return l;

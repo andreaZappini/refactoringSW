@@ -6,8 +6,8 @@ import model.GestoreFruitori;
 import model.GestoreVisite;
 import model.Utente;
 import model.Visita;
-import model.Prenotazione;
 import printer.FormatterRegister;
+import model.Prenotazione;
 import view.IView;
 
 public class FruitoreService {

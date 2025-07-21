@@ -1,8 +1,8 @@
 package controller;
 
 import model.*;
-import view.*;
 import printer.*;
+import view.*;
 
 public class ControllerConfiguratore {
 

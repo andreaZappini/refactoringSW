@@ -8,7 +8,6 @@ import model.GestoreVisite;
 import model.Prenotazione;
 import model.Visita;
 import model.Volontario;
-
 import printer.FormatterRegister;
 import view.IView;
 

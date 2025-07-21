@@ -4,19 +4,6 @@
         <chiave>0</chiave>
         <visite>
             <visita>
-                <dataVisita>2025-07-23</dataVisita>
-                <stato>CONFERMATA</stato>
-                <tipo>cantina</tipo>
-                <iscritti>5</iscritti>
-                <iscrizioni>
-                    <iscrizione>
-                        <fruitore>Luigi</fruitore>
-                        <numPersone>5</numPersone>
-                        <codice>a1</codice>
-                    </iscrizione>
-                </iscrizioni>
-            </visita>
-            <visita>
                 <dataVisita>2025-07-24</dataVisita>
                 <stato>CONFERMATA</stato>
                 <tipo>monte</tipo>
@@ -41,14 +28,14 @@
             </visita>
             <visita>
                 <dataVisita>2025-07-23</dataVisita>
-                <stato>CANCELLATA</stato>
-                <tipo>cavallo</tipo>
-                <iscritti>1</iscritti>
+                <stato>CONFERMATA</stato>
+                <tipo>cantina</tipo>
+                <iscritti>5</iscritti>
                 <iscrizioni>
                     <iscrizione>
                         <fruitore>Luigi</fruitore>
-                        <numPersone>1</numPersone>
-                        <codice>a5</codice>
+                        <numPersone>5</numPersone>
+                        <codice>a1</codice>
                     </iscrizione>
                 </iscrizioni>
             </visita>
@@ -58,19 +45,6 @@
                 <tipo>cavallo</tipo>
                 <iscritti>0</iscritti>
                 <iscrizioni/>
-            </visita>
-            <visita>
-                <dataVisita>2025-07-30</dataVisita>
-                <stato>PROPOSTA</stato>
-                <tipo>cantina</tipo>
-                <iscritti>2</iscritti>
-                <iscrizioni>
-                    <iscrizione>
-                        <fruitore>Luigi</fruitore>
-                        <numPersone>2</numPersone>
-                        <codice>a6</codice>
-                    </iscrizione>
-                </iscrizioni>
             </visita>
             <visita>
                 <dataVisita>2025-08-02</dataVisita>
@@ -98,6 +72,19 @@
                 <tipo>cantina</tipo>
                 <iscritti>0</iscritti>
                 <iscrizioni/>
+            </visita>
+            <visita>
+                <dataVisita>2025-07-30</dataVisita>
+                <stato>PROPOSTA</stato>
+                <tipo>cantina</tipo>
+                <iscritti>2</iscritti>
+                <iscrizioni>
+                    <iscrizione>
+                        <fruitore>Luigi</fruitore>
+                        <numPersone>2</numPersone>
+                        <codice>a6</codice>
+                    </iscrizione>
+                </iscrizioni>
             </visita>
         </visite>
     </ListaVisite>

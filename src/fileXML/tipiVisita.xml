@@ -16,7 +16,6 @@
         <maxPartecipanti>12</maxPartecipanti>
         <elencoVolontari>
             <elemento>volo1</elemento>
-            <elemento>volo2</elemento>
         </elencoVolontari>
         <elencoLuoghi>
             <elemento>luogo1</elemento>
