@@ -30,8 +30,9 @@ public class GestoreVisite {
 
                     boolean cond1 = volo.getElencoDisponibilita().contiene(giorno.toString());
                     boolean cond2 = tipo.getGiorniDisponibili().contains(Giorni.traduci(giorno));
+                    boolean cond3 = DatiCondivisi.getVisite().getElementByKey("0").getVisite().contiene(tipo+"-"+giorno.toString());
 
-                    if(cond1 && cond2){
+                    if(cond1 && cond2 && !cond3){
                         Visita visita = new Visita(giorno, tipo);
                         DatiCondivisi.aggiungiVisitaMese1(visita);
                         break ciclotipoVisita; 
@@ -45,11 +46,11 @@ public class GestoreVisite {
     public LocalDate[] intervallo(){
         if(DatiCondivisi.getRaccoltaDisponibilitaMese1() == DatiCondivisi.StatiRaccoltaDisponibilita.APERTA &&
             DatiCondivisi.getRaccoltaDisponibilitaMese2() == DatiCondivisi.StatiRaccoltaDisponibilita.CHIUSA)
-            return GestioneTempo.getInstance().intervalloDate(0);
+            return GestioneTempo.getInstance().intervalloDate(1);
 
         else if(DatiCondivisi.getRaccoltaDisponibilitaMese1() == DatiCondivisi.StatiRaccoltaDisponibilita.CHIUSA &&
             DatiCondivisi.getRaccoltaDisponibilitaMese2() == DatiCondivisi.StatiRaccoltaDisponibilita.APERTA)
-            return GestioneTempo.getInstance().intervalloDate(1);
+            return GestioneTempo.getInstance().intervalloDate(2);
 
         else{
             return null;

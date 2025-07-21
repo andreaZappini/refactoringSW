@@ -42,10 +42,11 @@ public class VolontarioService {
                     view.stampaMessaggio("giorno disponibile -> " + d.toString());;
                 }
                 
-                s = view.sceltaString("inserisci la data oppure 'x' per terminare");
+                s = view.sceltaString("inserisci la data oppure 'x' per terminare").trim();
                 if (!s.equals("x")) {
                     try {
                         LocalDate dataGiorno = LocalDate.parse(s);
+                        System.out.println(dataGiorno);
                         if(dataGiorno != null){
                             if(!date.contains(dataGiorno))
                                 view.stampaMessaggio("Data non disponibile, si prega di riprovare");
