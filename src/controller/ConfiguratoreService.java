@@ -64,6 +64,7 @@ public class ConfiguratoreService {
                 view.stampaMessaggio("creazione piano visite avvenuta con successo");
                 LocalDate[] intervallo = DatiCondivisi.getIntervalloPianoVisite();
                 GestoreVisite.getInstance().creaPianoViste(intervallo[0], intervallo[1]);
+                DatiCondivisi.setPianoCreato(true);
             } else {
                 view.stampaMessaggio("ancora possibile la raccolta delle disponibilita da perte dei volontari");
             }

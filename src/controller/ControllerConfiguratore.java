@@ -78,12 +78,12 @@ public class ControllerConfiguratore {
                 action.visualizzaStatoVisite();
                 break;
             case 8:
-                if(DatiCondivisi.getRaccoltaDisponibilitaMese1() == DatiCondivisi.StatiRaccoltaDisponibilita.CHIUSA){
+                if(DatiCondivisi.isPianoCreato()){
                     ControllerExtra controllerExtra = new ControllerExtra(configuratore, view);
                     controllerExtra.start();
                 } else {
                     view.stampaMessaggio("impossibile accedere a questa funzionalita" +
-                    "(non è possibile apportare modifiche con la raccolta disponibilita aperta)");
+                    "(non è possibile apportare modifiche senza prima creare il piano visite)");
                 }
                 break;
             case 9:
@@ -93,7 +93,12 @@ public class ControllerConfiguratore {
                 action.creaPianoVisite();
                 break;
             case 11:
-                action.apriDipsonibilitaMese2();
+                if(DatiCondivisi.isPianoCreato()){
+                    action.apriDipsonibilitaMese2();
+                    DatiCondivisi.setPianoCreato(false);
+                } else {
+                    view.stampaMessaggio("piano visite non ancora creato");
+                }
                 break;
             case 12:
                 action.visualizzaArchivio();

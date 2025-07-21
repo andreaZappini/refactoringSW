@@ -14,6 +14,15 @@ public class DatiCondivisi {
     private static int numeroMassimoIscrittiFruitore = 0;
     private static LocalDate dataUltimaEsecuzione;
     private static LocalDate[] intervalloPianoVisite;
+    private static boolean pianoCreato = false;
+
+    public static void setPianoCreato(boolean stato) {
+        pianoCreato = stato;
+    }
+
+    public static boolean isPianoCreato() {
+        return pianoCreato;
+    }
 
     public static Elenco<Visita> getArchivio() {
         return archivioVisite;

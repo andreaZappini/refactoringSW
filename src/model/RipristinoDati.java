@@ -40,10 +40,11 @@ public class RipristinoDati {
                          String.valueOf(DatiCondivisi.getNumeroMassimoIscrittiFruitore()),
                          DatiCondivisi.getRaccoltaDisponibilitaMese1().toString(),
                          DatiCondivisi.getRaccoltaDisponibilitaMese2().toString(),
-                         GestioneTempo.getInstance().getDataCorrente().toString()
+                         GestioneTempo.getInstance().getDataCorrente().toString(),
+                         DatiCondivisi.isPianoCreato() ? "true" : "false"
                         };
         String[] campi = {"primaConfigurazione", "ambitoTerritoriale", "numeroMassimoIscritti", 
-        "raccoltaDisponibilitaMese1", "raccoltaDisponibilitaMese2", "dataUltimaEsecuzione"};
+        "raccoltaDisponibilitaMese1", "raccoltaDisponibilitaMese2", "dataUltimaEsecuzione", "pianoCreato"};
         XMLUtilities.scriviXML(new File("src/fileXML/datiExtra.xml"), dati, campi, "datiDiConfigurazione");
     }
 
@@ -251,6 +252,7 @@ public class RipristinoDati {
                 DatiCondivisi.chiudiRaccoltaDisponibilitaMese2();
             }
             DatiCondivisi.setDataUltimaEsecuzione(LocalDate.parse(dati[5]));
+            DatiCondivisi.setPianoCreato(Boolean.parseBoolean(dati[6]));
         }
         return Boolean.parseBoolean(dati[0]);
     }

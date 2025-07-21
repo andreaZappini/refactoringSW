@@ -2,8 +2,9 @@
 <datiDiConfigurazione>
   <primaConfigurazione>false</primaConfigurazione>
   <ambitoTerritoriale>montagna</ambitoTerritoriale>
-  <numeroMassimoIscritti>6</numeroMassimoIscritti>
-  <raccoltaDisponibilitaMese1>APERTA</raccoltaDisponibilitaMese1>
-  <raccoltaDisponibilitaMese2>CHIUSA</raccoltaDisponibilitaMese2>
+  <numeroMassimoIscritti>8</numeroMassimoIscritti>
+  <raccoltaDisponibilitaMese1>CHIUSA</raccoltaDisponibilitaMese1>
+  <raccoltaDisponibilitaMese2>APERTA</raccoltaDisponibilitaMese2>
   <dataUltimaEsecuzione>2025-07-21</dataUltimaEsecuzione>
+  <pianoCreato>false</pianoCreato>
 </datiDiConfigurazione>

@@ -10,14 +10,14 @@
                 <iscritti>9</iscritti>
                 <iscrizioni>
                     <iscrizione>
-                        <fruitore>Luigi</fruitore>
-                        <numPersone>5</numPersone>
-                        <codice>a6</codice>
-                    </iscrizione>
-                    <iscrizione>
                         <fruitore>Mario</fruitore>
                         <numPersone>4</numPersone>
                         <codice>a5</codice>
+                    </iscrizione>
+                    <iscrizione>
+                        <fruitore>Luigi</fruitore>
+                        <numPersone>5</numPersone>
+                        <codice>a6</codice>
                     </iscrizione>
                 </iscrizioni>
             </visita>

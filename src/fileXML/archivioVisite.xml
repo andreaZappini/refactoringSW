@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<visite/>
+<visite>
+    <visita>
+        <dataVisita>2025-07-19</dataVisita>
+        <stato>EFFETTUATA</stato>
+        <tipo>t</tipo>
+        <iscritti>6</iscritti>
+        <iscrizioni>
+            <iscrizione>
+                <fruitore>Luigi</fruitore>
+                <numPersone>6</numPersone>
+                <codice>a12</codice>
+            </iscrizione>
+        </iscrizioni>
+    </visita>
+</visite>

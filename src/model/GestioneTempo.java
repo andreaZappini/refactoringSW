@@ -38,6 +38,7 @@ public class GestioneTempo {
         if (conteggio > 0) {
             DatiCondivisi.apriRaccoltaDisponibilitaMese1();
             DatiCondivisi.chiudiRaccoltaDisponibilitaMese2();
+            DatiCondivisi.setPianoCreato(false);
         }
         aggiornaDatePrecluseMese(conteggio);
         GestoreVisite.getInstance().aggiornaVisiteMese(conteggio);
@@ -95,17 +96,18 @@ public class GestioneTempo {
         }
     }
 
+    //ALT
     
     public LocalDate[] intervalloDate(int n) {
         LocalDate[] res = new LocalDate[2];
         LocalDate oggi = getDataCorrente();
     
         if (oggi.getDayOfMonth() < 15) {
+            res[0] = oggi.plusMonths(n -1).withDayOfMonth(16);
+            res[1] = oggi.plusMonths(n).withDayOfMonth(15);
+        } else {
             res[0] = oggi.plusMonths(n).withDayOfMonth(16);
             res[1] = oggi.plusMonths(n + 1).withDayOfMonth(15);
-        } else {
-            res[0] = oggi.plusMonths(n + 1).withDayOfMonth(16);
-            res[1] = oggi.plusMonths(n + 2).withDayOfMonth(15);
         }
     
         return res;

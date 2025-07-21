@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Utente>
     <Configuratore>
+        <username>c3</username>
+        <password>3</password>
+        <primoAccesso>true</primoAccesso>
+    </Configuratore>
+    <Configuratore>
         <username>c</username>
         <password>1</password>
         <primoAccesso>false</primoAccesso>
@@ -14,6 +19,7 @@
             <elemento>2025-07-23</elemento>
             <elemento>2025-07-21</elemento>
             <elemento>2025-07-26</elemento>
+            <elemento>2025-08-16</elemento>
             <elemento>2025-07-24</elemento>
             <elemento>2025-07-25</elemento>
         </elencoDisponibilita>
