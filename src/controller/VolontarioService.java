@@ -1,6 +1,7 @@
 package controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import model.GestoreVisite;
@@ -39,7 +40,7 @@ public class VolontarioService {
                 ArrayList<LocalDate> date = new ArrayList<>(volontario.elencaDisponibilita(intervallo[0], intervallo[1]));
                 
                 for(LocalDate d : date){
-                    view.stampaMessaggio("giorno disponibile -> " + d.toString());;
+                    view.stampaMessaggio("giorno disponibile -> " + d.toString());
                 }
                 
                 s = view.sceltaString("inserisci la data oppure 'x' per terminare").trim();
@@ -56,8 +57,10 @@ public class VolontarioService {
                         }else{
                             view.stampaMessaggio("giorno non valido");
                         }
-                    } catch (Exception e) {
-                        view.stampaMessaggio("Formato data non valido");
+                    }catch (DateTimeParseException e) {
+                        view.stampaMessaggio("Formato data non valido. Usa il formato yyyy-MM-dd.");
+                    }catch (Exception e) {
+                        view.stampaMessaggio("Raccolta data non avvenuta: " + e.getMessage());
                     }
                 }
             }

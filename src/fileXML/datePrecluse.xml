@@ -14,8 +14,6 @@
     </ListaDate>
     <ListaDate>
         <chiave>3</chiave>
-        <date>
-            <elemento>2025-10-31</elemento>
-        </date>
+        <date/>
     </ListaDate>
 </Date>

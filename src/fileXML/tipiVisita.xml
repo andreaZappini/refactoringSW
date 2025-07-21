@@ -1,23 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <TipiVisita>
     <TipoVisita>
-        <titolo>t</titolo>
-        <descrizione>t</descrizione>
-        <puntoIncontro>t</puntoIncontro>
-        <periodoAnno>t</periodoAnno>
+        <titolo>monte</titolo>
+        <descrizione>Passeggiata panoramica nella natura del Mont'Orfano</descrizione>
+        <puntoIncontro>Chiesa Santo Stefano</puntoIncontro>
+        <periodoAnno>Tutto l'anno</periodoAnno>
         <giorniDisponibili>
             <elemento>SABATO</elemento>
+            <elemento>GIOVEDI</elemento>
         </giorniDisponibili>
-        <oraInizio>5.0</oraInizio>
-        <durata>6</durata>
-        <bigliettoNecessario>S</bigliettoNecessario>
+        <oraInizio>16.0</oraInizio>
+        <durata>180</durata>
+        <bigliettoNecessario>N</bigliettoNecessario>
         <minPartecipanti>8</minPartecipanti>
-        <maxPartecipanti>9</maxPartecipanti>
+        <maxPartecipanti>12</maxPartecipanti>
+        <elencoVolontari>
+            <elemento>volo1</elemento>
+            <elemento>volo2</elemento>
+        </elencoVolontari>
+        <elencoLuoghi>
+            <elemento>luogo1</elemento>
+        </elencoLuoghi>
+    </TipoVisita>
+    <TipoVisita>
+        <titolo>cantina</titolo>
+        <descrizione>Percorso di degustazione nelle cantine più famose della Franciacorta</descrizione>
+        <puntoIncontro>Oratorio di Erbusco</puntoIncontro>
+        <periodoAnno>Tutto l'anno</periodoAnno>
+        <giorniDisponibili>
+            <elemento>MERCOLEDI</elemento>
+        </giorniDisponibili>
+        <oraInizio>18.0</oraInizio>
+        <durata>120</durata>
+        <bigliettoNecessario>S</bigliettoNecessario>
+        <minPartecipanti>4</minPartecipanti>
+        <maxPartecipanti>6</maxPartecipanti>
         <elencoVolontari>
             <elemento>volo1</elemento>
         </elencoVolontari>
         <elencoLuoghi>
-            <elemento>p</elemento>
+            <elemento>luogo2</elemento>
+        </elencoLuoghi>
+    </TipoVisita>
+    <TipoVisita>
+        <titolo>cavallo</titolo>
+        <descrizione>Gita a cavallo tra le vigne della Franciacorta</descrizione>
+        <puntoIncontro>Cascina Bel Vedere</puntoIncontro>
+        <periodoAnno>Tutto l'anno</periodoAnno>
+        <giorniDisponibili>
+            <elemento>LUNEDI</elemento>
+            <elemento>MERCOLEDI</elemento>
+        </giorniDisponibili>
+        <oraInizio>16.0</oraInizio>
+        <durata>90</durata>
+        <bigliettoNecessario>S</bigliettoNecessario>
+        <minPartecipanti>2</minPartecipanti>
+        <maxPartecipanti>5</maxPartecipanti>
+        <elencoVolontari>
+            <elemento>volo2</elemento>
+        </elencoVolontari>
+        <elencoLuoghi>
+            <elemento>luogo2</elemento>
         </elencoLuoghi>
     </TipoVisita>
 </TipiVisita>

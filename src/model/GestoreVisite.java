@@ -19,9 +19,14 @@ public class GestoreVisite {
     public void creaPianoViste(LocalDate inizio, LocalDate fine) {
         for(LocalDate giorno = inizio; giorno.isBefore(fine); giorno = giorno.plusDays(1)){
             
-            if(DatiCondivisi.getDatePrecluse().contiene(giorno.toString())) 
-                continue;
+            boolean continua = false;
+            for(ListaDate ld : DatiCondivisi.getDatePrecluse().getElenco().values()){
+                if(ld.getDate().contains(giorno)) 
+                    continua = true;
+            }
 
+            if(continua) continue;
+              
             ciclotipoVisita:
             for(TipoVisita tipo : DatiCondivisi.getElencoTipiVisita().getElenco().values()){
                 
@@ -30,8 +35,12 @@ public class GestoreVisite {
 
                     boolean cond1 = volo.getElencoDisponibilita().contiene(giorno.toString());
                     boolean cond2 = tipo.getGiorniDisponibili().contains(Giorni.traduci(giorno));
-                    boolean cond3 = DatiCondivisi.getVisite().getElementByKey("0").getVisite().contiene(tipo+"-"+giorno.toString());
-
+                    boolean cond3 = false;
+                    try{
+                        cond3 = DatiCondivisi.getVisite().getElementByKey("0").getVisite().contiene(tipo+"-"+giorno.toString());
+                    }catch (Exception e) {
+                        cond3 = false;
+                    }
                     if(cond1 && cond2 && !cond3){
                         Visita visita = new Visita(giorno, tipo);
                         DatiCondivisi.aggiungiVisitaMese1(visita);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <datiDiConfigurazione>
   <primaConfigurazione>false</primaConfigurazione>
-  <ambitoTerritoriale>montagna</ambitoTerritoriale>
-  <numeroMassimoIscritti>8</numeroMassimoIscritti>
+  <ambitoTerritoriale>Franciacorta</ambitoTerritoriale>
+  <numeroMassimoIscritti>6</numeroMassimoIscritti>
   <raccoltaDisponibilitaMese1>APERTA</raccoltaDisponibilitaMese1>
   <raccoltaDisponibilitaMese2>CHIUSA</raccoltaDisponibilitaMese2>
   <dataUltimaEsecuzione>2025-07-21</dataUltimaEsecuzione>

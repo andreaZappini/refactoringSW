@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Luoghi>
     <Luogo>
-        <codiceLuogo>p</codiceLuogo>
-        <descrizione>o</descrizione>
-        <collocazioneGeografica>i</collocazioneGeografica>
+        <codiceLuogo>luogo1</codiceLuogo>
+        <descrizione>Paese della Franciacorta famoso per il suo monte</descrizione>
+        <collocazioneGeografica>Rovato-Mont'Orfano</collocazioneGeografica>
+        <visite>
+            <elemento>t</elemento>
+        </visite>
+    </Luogo>
+    <Luogo>
+        <codiceLuogo>luogo2</codiceLuogo>
+        <descrizione>Paese della Franciacorta famoso per le vigne</descrizione>
+        <collocazioneGeografica>Erbusco</collocazioneGeografica>
         <visite>
             <elemento>t</elemento>
         </visite>

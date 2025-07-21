@@ -3,13 +3,31 @@
     <visita>
         <dataVisita>2025-07-19</dataVisita>
         <stato>EFFETTUATA</stato>
-        <tipo>t</tipo>
-        <iscritti>6</iscritti>
+        <tipo>monte</tipo>
+        <iscritti>10</iscritti>
         <iscrizioni>
             <iscrizione>
                 <fruitore>Luigi</fruitore>
                 <numPersone>6</numPersone>
                 <codice>a12</codice>
+            </iscrizione>
+            <iscrizione>
+                <fruitore>Anna</fruitore>
+                <numPersone>6</numPersone>
+                <codice>a13</codice>
+            </iscrizione>
+        </iscrizioni>
+    </visita>
+    <visita>
+        <dataVisita>2025-07-14</dataVisita>
+        <stato>EFFETTUATA</stato>
+        <tipo>cavallo</tipo>
+        <iscritti>4</iscritti>
+        <iscrizioni>
+            <iscrizione>
+                <fruitore>Mario</fruitore>
+                <numPersone>4</numPersone>
+                <codice>a20</codice>
             </iscrizione>
         </iscrizioni>
     </visita>

@@ -3,7 +3,7 @@
     <Configuratore>
         <username>c3</username>
         <password>3</password>
-        <primoAccesso>true</primoAccesso>
+        <primoAccesso>false</primoAccesso>
     </Configuratore>
     <Configuratore>
         <username>c</username>
@@ -12,21 +12,34 @@
     </Configuratore>
     <Volontario>
         <elencoTipiVisita>
-            <elemento>t</elemento>
+            <elemento>monte</elemento>
+            <elemento>cantina</elemento>
         </elencoTipiVisita>
         <elencoDisponibilita>
-            <elemento>2025-07-22</elemento>
             <elemento>2025-07-23</elemento>
-            <elemento>2025-09-13</elemento>
-            <elemento>2025-07-21</elemento>
-            <elemento>2025-07-26</elemento>
-            <elemento>2025-08-16</elemento>
             <elemento>2025-07-24</elemento>
-            <elemento>2025-07-25</elemento>
+            <elemento>2025-07-30</elemento>
+            <elemento>2025-08-06</elemento>
+            <elemento>2025-08-02</elemento>
+            <elemento>2025-07-19</elemento>
         </elencoDisponibilita>
         <username>volo1</username>
         <password>1</password>
         <primoAccesso>false</primoAccesso>
+    </Volontario>
+    <Volontario>
+        <elencoTipiVisita>
+            <elemento>cavallo</elemento>
+        </elencoTipiVisita>
+        <elencoDisponibilita>
+            <elemento>2025-07-23</elemento>
+            <elemento>2025-07-28</elemento>
+            <elemento>2025-08-04</elemento>
+            <elemento>2025-07-14</elemento>
+        </elencoDisponibilita>
+        <username>volo2</username>
+        <password>2</password>
+        <primoAccesso>true</primoAccesso>
     </Volontario>
     <Fruitore>
         <username>Luigi</username>
