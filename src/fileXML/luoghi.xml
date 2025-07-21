@@ -5,7 +5,7 @@
         <descrizione>Paese della Franciacorta famoso per il suo monte</descrizione>
         <collocazioneGeografica>Rovato-Mont'Orfano</collocazioneGeografica>
         <visite>
-            <elemento>t</elemento>
+            <elemento>monte</elemento>
         </visite>
     </Luogo>
     <Luogo>
@@ -13,7 +13,8 @@
         <descrizione>Paese della Franciacorta famoso per le vigne</descrizione>
         <collocazioneGeografica>Erbusco</collocazioneGeografica>
         <visite>
-            <elemento>t</elemento>
+            <elemento>cantina</elemento>
+            <elemento>cavallo</elemento>
         </visite>
     </Luogo>
 </Luoghi>

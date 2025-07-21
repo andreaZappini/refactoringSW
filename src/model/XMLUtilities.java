@@ -40,7 +40,7 @@ public class XMLUtilities {
                 try {
                     elenco.aggiungi(parser.apply(elemento));
                 } catch (Exception e) {
-                    System.err.println("ERRORE nel parsing dell'elemento: " + e.getMessage());
+                    System.err.println("ERRORE nel parsing dell'elemento: " + e.getMessage() + elemento.toString() + nodo.getTextContent());
                 }
             }
         }
